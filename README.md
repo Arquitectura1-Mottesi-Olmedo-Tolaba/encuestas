@@ -11,4 +11,7 @@ mvn jetty:run
 Por ejemplo  asumiendo que corremos en 8080:
 
 Si quisiera ver los usuarios registrados podria hacer algo asi...
+
 http://localhost:8080/services/users/all
+
+APP backend: 
