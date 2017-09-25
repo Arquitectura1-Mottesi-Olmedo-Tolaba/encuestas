@@ -34,7 +34,7 @@ public class BrandPersistenceTest {
 	
 	@Test
 	public void test_PersistANewBrand() {
-		Long idToFind = new Long(1);
+		Long idToFind = new Long(3);
 		Brand fetchedBrand = service.find(idToFind);
 		System.out.println(fetchedBrand.getName());
 		System.out.println(fetchedBrand.getId());

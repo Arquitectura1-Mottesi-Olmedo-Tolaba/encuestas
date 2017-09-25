@@ -1,0 +1,36 @@
+package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "periods")
+public class Period extends PersistenceEntity {
+
+    private Integer year;
+    private Integer quarter;
+
+    public Period() {
+    }
+
+    public Period(Integer year, Integer quarter) {
+        this.year = year;
+        this.quarter = quarter;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getQuarter() {
+        return quarter;
+    }
+
+    public void setQuarter(Integer quarter) {
+        this.quarter = quarter;
+    }
+}
