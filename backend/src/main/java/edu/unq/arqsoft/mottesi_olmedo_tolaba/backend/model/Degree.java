@@ -22,17 +22,13 @@ public class Degree extends PersistenceEntity {
 
 	private String name;
         
-    @OneToMany(mappedBy="degree", cascade=CascadeType.ALL, 
-    	fetch=FetchType.EAGER)
+    @OneToMany(cascade=CascadeType.ALL)
 	@Fetch(FetchMode.JOIN)
-	@LazyCollection(LazyCollectionOption.FALSE)    
-    private List<Subject> subjects = new LinkedList<Subject>();
+    private List<Subject> subjects;
     
-    @OneToMany(mappedBy="degree", cascade=CascadeType.ALL, 
-        	fetch=FetchType.EAGER)
-    	@Fetch(FetchMode.JOIN)
-    	@LazyCollection(LazyCollectionOption.FALSE) 
-    private List<AcademicOffer> academicOffers = new LinkedList<AcademicOffer>();
+    @OneToMany(cascade=CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    private List<AcademicOffer> academicOffers;
 
     public Degree(String name, List<Subject> subjects, List<AcademicOffer> academicOffers) {
         this.name = name;

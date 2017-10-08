@@ -1,27 +1,20 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "courses")
 public class Course extends PersistenceEntity {
 
-	@OneToOne(mappedBy = "course", cascade = CascadeType.ALL, 
-            fetch = FetchType.LAZY, optional = false)
+	@OneToOne(mappedBy = "course", cascade = CascadeType.ALL)
     private Professor professor;
     
-	@OneToOne(mappedBy = "course", cascade = CascadeType.ALL, 
-            fetch = FetchType.LAZY, optional = false)
+	@OneToOne(cascade = CascadeType.ALL)
     private Subject subject;
     
-    
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Timeline> timelines;
 
     public Course() {

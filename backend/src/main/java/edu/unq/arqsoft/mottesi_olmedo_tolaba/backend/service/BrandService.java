@@ -4,14 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Brand;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.BrandRepository;
 
 
 @Transactional
 @Service
-public class BrandService extends GenericService<Brand> {
-
+public class BrandService /*extends GenericService<Brand>*/ {
+/*
 	@Autowired
 	private BrandRepository repository;
 	
@@ -71,5 +70,5 @@ public class BrandService extends GenericService<Brand> {
 		super.save(brand);
 		throw new RuntimeException("Exception thrown on purpose for transactional testing");
 	}
-
+*/
 }

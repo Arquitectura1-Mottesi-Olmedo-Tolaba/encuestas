@@ -10,7 +10,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Brand;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.BrandService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.provider.BrandFactory;
 
@@ -18,7 +17,7 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.provider.BrandFacto
 @ActiveProfiles(profiles = "test")
 @ContextConfiguration({ "/META-INF/spring-persistence-context.xml", "/META-INF/spring-services-context.xml" })
 public class TransactionalTest {
-
+/*
 	@Autowired
 	private BrandService brandService;
 	
@@ -49,5 +48,5 @@ public class TransactionalTest {
 			assertTrue(brandFetchedFromDatabase != null);
 		}
 	}
-
+*/
 }

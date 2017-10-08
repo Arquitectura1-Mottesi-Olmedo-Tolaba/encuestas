@@ -1,14 +1,6 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.hibernate.annotations.LazyCollection;
@@ -22,26 +14,18 @@ public class AcademicOffer extends PersistenceEntity {
 
 	private static final long serialVersionUID = 358926861833214321L;
 	
-	
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Course> courses;
-	
 
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "period_id")
+	@OneToOne
     private Period period;
-    
-    @ManyToOne(cascade=CascadeType.MERGE)
-	@JsonBackReference
-	private Degree degree;
-
 
 	public AcademicOffer() {
     }
 
-    public AcademicOffer(List<Course> courses, Period period, Degree degree) {
+    public AcademicOffer(List<Course> courses, Period period) {
         this.courses = courses;
         this.period = period;
-        this.degree = degree;
     }
 
     public List<Course> getCourses() {
@@ -60,15 +44,8 @@ public class AcademicOffer extends PersistenceEntity {
         this.period = period;
     }
 
-	public Degree getDegree() {
-		return degree;
-	}
-
-	public void setDegree(Degree degree) {
-		this.degree = degree;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 }

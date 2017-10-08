@@ -28,6 +28,5 @@ public class StudentService extends GenericService<Student> {
 	public Student findByStudentId(Integer studentId) {
 		return this.repository.findByStudentId(studentId);
 	}
-	
 
 }

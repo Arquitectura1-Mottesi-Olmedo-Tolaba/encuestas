@@ -1,5 +1,6 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.test;
 
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.StudentService;
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "test")
@@ -29,14 +29,15 @@ public class StudentPersistenceTest {
 		studentId = 24888;
 		student = new Student("Homer", "Simpson", studentId, "homer.simpson@gmail.com");
 		service.save(student);
-		//System.out.println(savedBrand.getId());
 	}
 	
 	@Test
 	public void test_PersistANewStudent() {
 		Student elem = service.findByStudentId(studentId);
-		System.out.println(elem.getName());
-		System.out.println(elem.getId());
+		assertEquals(elem.getName(), "Homer");
+		assertEquals(elem.getLastName(), "Simpson");
+		assertEquals(elem.getStudentID(), studentId);
+		assertEquals(elem.getEmail(), "homer.simpson@gmail.com");
 	}
 	
 }

@@ -1,34 +1,18 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.webservice;
 
-
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Brand;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.BrandService;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.GenericService;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.ResponseGenerator;
 
 
 @Service
 @Produces("application/json")
 @Consumes("application/json")
 @Path("/brands")
-public class BrandRest extends GenericRest<Brand> {
-
+public class BrandRest {
+/*
 	@Autowired
 	private ResponseGenerator responseGenerator;
 	
@@ -82,5 +66,5 @@ public class BrandRest extends GenericRest<Brand> {
 	public Response delete(@PathParam("id") final Long id) {
 		return super.delete(id);
 	}
-
+*/
 }

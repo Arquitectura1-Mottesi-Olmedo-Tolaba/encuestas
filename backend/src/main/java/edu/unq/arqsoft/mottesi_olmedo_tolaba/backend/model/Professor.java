@@ -12,8 +12,7 @@ public class Professor extends PersistenceEntity {
 
     private String name;
     
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_id")
+    @OneToOne
     private Course course;
 
     public Professor() {

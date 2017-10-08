@@ -1,17 +1,11 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Brand;
 
 @Repository
 @SuppressWarnings("unchecked")
-public class BrandRepository extends HibernateGenericDAO<Brand> implements GenericRepository<Brand> {
-
+public class BrandRepository /*extends HibernateGenericDAO<Brand> implements GenericRepository<Brand> */{
+/*
 	private static final long serialVersionUID = -4425722631916607857L;
 
 	private List<Brand> brands;
@@ -39,5 +33,5 @@ public class BrandRepository extends HibernateGenericDAO<Brand> implements Gener
 	public void setBrands(List<Brand> brands) {
 		this.brands = brands;
 	}
-
+*/
 }
