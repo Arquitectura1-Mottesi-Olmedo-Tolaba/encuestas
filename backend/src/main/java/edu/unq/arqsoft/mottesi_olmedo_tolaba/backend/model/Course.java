@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "courses")
 public class Course extends PersistenceEntity {
 
-	@OneToOne(mappedBy = "course", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
     private Professor professor;
     
 	@OneToOne(cascade = CascadeType.ALL)

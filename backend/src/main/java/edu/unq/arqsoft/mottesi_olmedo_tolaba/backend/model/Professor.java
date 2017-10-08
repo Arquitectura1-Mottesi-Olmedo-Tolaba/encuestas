@@ -11,18 +11,10 @@ import javax.persistence.Table;
 public class Professor extends PersistenceEntity {
 
     private String name;
-    
-    @OneToOne
-    private Course course;
 
     public Professor() {
     }
     
-    public Professor(String name, Course course) {
-    	this.setCourse(course);
-        this.name = name;
-    }
-
     public Professor(String name) {
         this.name = name;
     }
@@ -35,11 +27,4 @@ public class Professor extends PersistenceEntity {
         this.name = name;
     }
 
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
-	}
 }
