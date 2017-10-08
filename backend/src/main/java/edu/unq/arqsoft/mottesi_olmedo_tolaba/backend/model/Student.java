@@ -8,7 +8,9 @@ import javax.persistence.Table;
 @Table(name = "students")
 public class Student extends PersistenceEntity {
 
-    private Integer studentID;
+	private static final long serialVersionUID = 5345964965231083586L;
+	
+	private Integer studentID;
     private String name;
     private String lastName;
     private String email;

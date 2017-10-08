@@ -1,7 +1,11 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -9,8 +13,15 @@ import java.util.List;
 @Table(name = "courses")
 public class Course extends PersistenceEntity {
 
+	@OneToOne(mappedBy = "course", cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY, optional = false)
     private Professor professor;
+    
+	@OneToOne(mappedBy = "course", cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY, optional = false)
     private Subject subject;
+    
+    
     private List<Timeline> timelines;
 
     public Course() {

@@ -1,17 +1,38 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "degrees")
 public class Degree extends PersistenceEntity {
 
-    private String name;
-    private List<Subject> subjects;
-    private List<AcademicOffer> academicOffers;
+	private static final long serialVersionUID = 6591632026675920348L;
+
+	private String name;
+        
+    @OneToMany(mappedBy="degree", cascade=CascadeType.ALL, 
+    	fetch=FetchType.EAGER)
+	@Fetch(FetchMode.JOIN)
+	@LazyCollection(LazyCollectionOption.FALSE)    
+    private List<Subject> subjects = new LinkedList<Subject>();
+    
+    @OneToMany(mappedBy="degree", cascade=CascadeType.ALL, 
+        	fetch=FetchType.EAGER)
+    	@Fetch(FetchMode.JOIN)
+    	@LazyCollection(LazyCollectionOption.FALSE) 
+    private List<AcademicOffer> academicOffers = new LinkedList<AcademicOffer>();
 
     public Degree(String name, List<Subject> subjects, List<AcademicOffer> academicOffers) {
         this.name = name;

@@ -17,7 +17,7 @@ public class BrandRepository extends HibernateGenericDAO<Brand> implements Gener
 	private List<Brand> brands;
 	
 	public BrandRepository() {
-		this.brands = new LinkedList<Brand>();
+		this.setBrands(new LinkedList<Brand>());
 	}
 	
 	@Transactional
@@ -30,6 +30,14 @@ public class BrandRepository extends HibernateGenericDAO<Brand> implements Gener
 	@Override
 	public Class<Brand> getDomainClass() {
 		return Brand.class;
+	}
+
+	public List<Brand> getBrands() {
+		return brands;
+	}
+
+	public void setBrands(List<Brand> brands) {
+		this.brands = brands;
 	}
 
 }

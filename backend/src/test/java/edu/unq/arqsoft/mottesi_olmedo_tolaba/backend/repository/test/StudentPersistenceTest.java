@@ -8,36 +8,35 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Brand;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.BrandService;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.StudentService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "test")
 @ContextConfiguration({ "/META-INF/spring-persistence-context.xml", "/META-INF/spring-services-context.xml" })
-public class BrandPersistenceTest {
+public class StudentPersistenceTest {
 
 	@Autowired
-	private BrandService service;
+	private StudentService service;
 	
-	private Brand aBrand;
-	private Long idToQuery;
+	private Student student;
+
+	private Integer studentId;
 	
 	@Before
 	public void setup() {
-		aBrand = new Brand();
-		aBrand.setName("bagley");
-		
-		// Brand savedBrand =
-		idToQuery = service.save(aBrand).getId();
+		studentId = 24888;
+		student = new Student("Homer", "Simpson", studentId, "homer.simpson@gmail.com");
+		service.save(student);
 		//System.out.println(savedBrand.getId());
 	}
 	
 	@Test
-	public void test_PersistANewBrand() {
-		Brand fetchedBrand = service.find(idToQuery);
-		System.out.println(fetchedBrand.getName());
-		System.out.println(fetchedBrand.getId());
+	public void test_PersistANewStudent() {
+		Student elem = service.findByStudentId(studentId);
+		System.out.println(elem.getName());
+		System.out.println(elem.getId());
 	}
 	
 }

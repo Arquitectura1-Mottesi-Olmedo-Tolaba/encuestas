@@ -16,7 +16,7 @@ public class AcademicOfferTest {
     public void testAccessing(){
         Period period = mock(Period.class);
         List<Course> courses = mock(List.class);
-        AcademicOffer academicOffer = new AcademicOffer(courses, period);
+        AcademicOffer academicOffer = new AcademicOffer(courses, period, null);
         assertEquals(academicOffer.getCourses(), courses);
         assertEquals(academicOffer.getPeriod(), period);
     }

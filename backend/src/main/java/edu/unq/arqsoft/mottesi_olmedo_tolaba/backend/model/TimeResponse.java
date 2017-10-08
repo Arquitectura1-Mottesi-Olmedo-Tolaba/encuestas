@@ -2,9 +2,21 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.JSONDateDeserialize;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.JSONDateSerialize;
+
+
 public class TimeResponse {
 
+	@JsonSerialize(using = JSONDateSerialize.class)
+	@JsonDeserialize(using = JSONDateDeserialize.class)
 	private Date reservationTime;
+	
+	@JsonSerialize(using = JSONDateSerialize.class)
+	@JsonDeserialize(using = JSONDateDeserialize.class)
 	private Date responseTime;
 
 	public TimeResponse(Date reservationTime, Date responseTime) {
@@ -28,7 +40,6 @@ public class TimeResponse {
 		this.responseTime = responseTime;
 	}
 	
-	//TODO: Refac using Joda-Time
 	public Date attentionTime(){
 		return new Date();
 	}
