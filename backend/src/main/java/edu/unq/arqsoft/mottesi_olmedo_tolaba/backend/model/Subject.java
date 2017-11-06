@@ -36,6 +36,5 @@ public class Subject extends PersistenceEntity {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 }
 

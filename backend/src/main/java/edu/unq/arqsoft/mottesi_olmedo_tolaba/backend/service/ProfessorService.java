@@ -39,5 +39,9 @@ public class ProfessorService extends GenericService<Professor> {
 		return super.save(model);
 	}
 	
+	public Professor newProfessor(String name) {
+		Professor newProfessor = new Professor(name);
+		return this.save(newProfessor);
+	}
 
 }

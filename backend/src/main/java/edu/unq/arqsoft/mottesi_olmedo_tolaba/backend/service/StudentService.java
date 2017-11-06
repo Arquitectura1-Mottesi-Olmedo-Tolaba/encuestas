@@ -29,4 +29,17 @@ public class StudentService extends GenericService<Student> {
 		return this.repository.findByStudentId(studentId);
 	}
 
+	public Student newStudent(String name, String lastName, Integer studentID, String email) {
+		Student newStudent = new Student(name, lastName, studentID, email);
+		return this.save(newStudent);
+	}
+	
+	public Student updateStudent(Long idStudent, String name, String lastName, Integer studentID, String email) {
+		Student studentToUpdate = this.getRepository().findById(idStudent);
+		studentToUpdate.setName(name);
+		studentToUpdate.setLastName(lastName);
+		studentToUpdate.setStudentID(studentID);
+		studentToUpdate.setEmail(email);
+		return this.update(studentToUpdate);
+	}
 }

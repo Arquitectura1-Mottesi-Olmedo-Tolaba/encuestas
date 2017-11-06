@@ -3,7 +3,7 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.joda.time.LocalTime;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Timeline;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.TimelineRepository;
 
@@ -39,5 +39,9 @@ public class TimelineService extends GenericService<Timeline> {
 		return super.save(model);
 	}
 	
-
+	public Timeline newTimeline(String day, LocalTime start, LocalTime end) {
+		Timeline newTimeline = new Timeline(day, start, end);
+		return this.save(newTimeline);
+	}
+	
 }

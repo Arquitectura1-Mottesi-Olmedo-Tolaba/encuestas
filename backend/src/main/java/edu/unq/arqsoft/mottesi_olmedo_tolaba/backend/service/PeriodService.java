@@ -39,5 +39,13 @@ public class PeriodService extends GenericService<Period> {
 		return super.save(model);
 	}
 	
+	@Transactional
+	public Period newPeriod(Integer year, Integer quarter) {
+		Period newPeriod = new Period(year, quarter);
+		return this.save(newPeriod);
+	}
+	
+	
+	
 
 }
