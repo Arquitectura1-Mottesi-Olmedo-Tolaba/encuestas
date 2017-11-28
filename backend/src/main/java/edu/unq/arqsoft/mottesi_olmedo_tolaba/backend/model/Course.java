@@ -10,19 +10,15 @@ public class Course extends PersistenceEntity {
 
 	@OneToOne(cascade = CascadeType.ALL)
     private Professor professor;
-    
-	@OneToOne(cascade = CascadeType.ALL)
-    private Subject subject;
-    
-    @OneToMany(cascade = CascadeType.ALL)
+        
+    @ManyToMany() //cascade = CascadeType.MERGE, orphanRemoval = true
     private List<Timeline> timelines;
 
     public Course() {
     }
 
-    public Course(Professor professor, Subject subject, List<Timeline> timelines) {
+    public Course(Professor professor, List<Timeline> timelines) {
         this.professor = professor;
-        this.subject = subject;
         this.timelines = timelines;
     }
 
@@ -32,14 +28,6 @@ public class Course extends PersistenceEntity {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
     }
 
     public List<Timeline> getTimelines() {

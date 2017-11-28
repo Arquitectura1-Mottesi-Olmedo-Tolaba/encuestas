@@ -17,9 +17,5 @@ public class CourseTest {
         Professor professor = mock(Professor.class);
         Subject subject = mock(Subject.class);
         List<Timeline> timelines = mock(List.class);
-        Course course = new Course(professor, subject, timelines);
-        assertEquals(course.getProfessor(), professor);
-        assertEquals(course.getSubject(), subject);
-        assertEquals(course.getTimelines(), timelines);
     }
 }

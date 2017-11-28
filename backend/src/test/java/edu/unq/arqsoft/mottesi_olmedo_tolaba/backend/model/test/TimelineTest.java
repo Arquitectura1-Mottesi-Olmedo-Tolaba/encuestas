@@ -10,11 +10,9 @@ public class TimelineTest {
 
     @Test
     public void testAccessing(){
-        LocalTime starts = LocalTime.parse("15:00:00");
-        LocalTime ends = LocalTime.parse("20:00:00");
-        Timeline timeline = new Timeline("Monday", starts, ends);
-        assertEquals(timeline.getDay(), "Monday");
-        assertEquals(timeline.getStart(), starts);
-        assertEquals(timeline.getEnd(), ends);
+        Timeline timeline = new Timeline("Monday", "15:00", "20:00");
+        assertEquals(timeline.getDayTime(), "Monday");
+        assertEquals(timeline.getStartTime(), "15:00");
+        assertEquals(timeline.getEndTime(), "20:00");
     }
 }

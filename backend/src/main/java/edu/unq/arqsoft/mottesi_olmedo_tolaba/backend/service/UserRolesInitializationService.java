@@ -20,6 +20,9 @@ public class UserRolesInitializationService {
 	@Autowired
 	private RoleService roleService;
 	
+	@Autowired 
+	private AcademicOfferFactoryService academicOfferFactoryService;
+	
 	@PostConstruct
 	private void initialize() {
 		List<Role> roles = new LinkedList<Role>();
@@ -30,6 +33,7 @@ public class UserRolesInitializationService {
 		UserCredential adminUser = new UserCredential("admin", "admin");
 		adminUser.addRoles(roles);
 		userService.save(adminUser);
+		academicOfferFactoryService.initialize();
 	}
 	
 }

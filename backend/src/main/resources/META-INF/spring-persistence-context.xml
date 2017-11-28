@@ -82,8 +82,9 @@
 	     <list>
 
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course</value>
+	       
+	       
+	       
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree</value>
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period</value>
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor</value>
@@ -94,6 +95,10 @@
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserCredential</value>
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserData</value>
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserProfile</value>
+	       
+	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course</value>
+	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer</value>
+	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer</value>
 	     </list>
 	   </property>
 		

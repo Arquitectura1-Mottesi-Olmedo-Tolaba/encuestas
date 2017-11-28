@@ -1,24 +1,29 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Timeline;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.CourseRepository;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.OfferRepository;
 
 
 @Transactional
 @Service
-public class CourseService extends GenericService<Course> {
+public class OfferService extends GenericService<Offer> {
 
 	@Autowired
-	private CourseRepository repository;
+	private OfferRepository repository;
+	
+	@Autowired
+	private CourseService courseService;
 	
 	@Autowired
 	private ProfessorService professorService;
@@ -34,17 +39,17 @@ public class CourseService extends GenericService<Course> {
 		this.subjectService = subjectService;
 	}
 
-	public CourseService() {}
+	public OfferService() {}
 	
-	public CourseService(CourseRepository repo) {
+	public OfferService(OfferRepository repo) {
 		this.setRepository(repo);
 	}
 
-	public CourseRepository getRepository() {
+	public OfferRepository getRepository() {
 		return repository;
 	}
 
-	public void setRepository(CourseRepository repository) {
+	public void setRepository(OfferRepository repository) {
 		this.repository = repository;
 	}
 	
@@ -57,30 +62,35 @@ public class CourseService extends GenericService<Course> {
 	}
 	
 	@Transactional
-	public Course update(Course newBrand) {
-		return super.update(newBrand);
+	public Offer update(Offer offer) {
+		return super.update(offer);
 	}
 	
 	@Transactional
-	public Course save(Course model) {
+	public Offer save(Offer model) {
 		return super.save(model);
 	}
 	
 	@Transactional
-	public Course newCourseWithSubjectAndProfessor( Long idProfessor, List<Timeline> timelines) {
+	public Offer newCourseWithSubjectAndProfessor(Long idSubject, Long idProfessor, List<Timeline> timelines) {
 		Professor professor = this.getProfessorService().find(idProfessor);
+		Subject subject = this.getSubjectService().find(idSubject);
 		
 		Course newCourse = new Course(professor, timelines);
-		return this.save(newCourse);
+		Offer offer = new Offer(subject,Arrays.asList(newCourse));
+		return this.save(offer);
 	}
 
 	@Transactional
-	public Course updateCourse(Long idCourse,  Long idProfessor, List<Timeline> timelines) {
-		Course courseToUpdate = this.getRepository().findById(idCourse);
+	public Offer updateOffer(Long idOffer, Long idCourse, Long idSubject, Long idProfessor, List<Timeline> timelines) {
+		Offer offerToUpdate = this.getRepository().findById(idOffer);
+		Course courseToUpdate = courseService.find(idCourse);
 		Professor professor = this.getProfessorService().find(idProfessor);
+		Subject subject = this.getSubjectService().find(idSubject);
 		courseToUpdate.setProfessor(professor);
+		offerToUpdate.setSubject(subject);
 		courseToUpdate.setTimelines(timelines);
-		return this.update(courseToUpdate);
+		this.courseService.update(courseToUpdate);
+		return this.update(offerToUpdate);
 	}
-
 }

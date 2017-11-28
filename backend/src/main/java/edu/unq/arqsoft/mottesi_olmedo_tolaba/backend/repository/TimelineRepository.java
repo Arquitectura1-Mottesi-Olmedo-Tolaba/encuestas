@@ -1,9 +1,10 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Timeline;
 
 @Repository
@@ -20,7 +21,7 @@ public class TimelineRepository extends HibernateGenericDAO<Timeline> implements
 	}
 
 	public TimelineRepository() {
-		this.setTimelines(new LinkedList<Timeline>());
+		this.setTimelines(new ArrayList<Timeline>());
 	}
 
 	@Override

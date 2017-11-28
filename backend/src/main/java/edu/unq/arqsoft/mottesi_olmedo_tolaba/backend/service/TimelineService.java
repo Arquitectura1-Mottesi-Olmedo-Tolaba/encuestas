@@ -39,9 +39,5 @@ public class TimelineService extends GenericService<Timeline> {
 		return super.save(model);
 	}
 	
-	public Timeline newTimeline(String day, LocalTime start, LocalTime end) {
-		Timeline newTimeline = new Timeline(day, start, end);
-		return this.save(newTimeline);
-	}
 	
 }

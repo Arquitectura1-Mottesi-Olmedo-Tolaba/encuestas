@@ -15,25 +15,28 @@ public class AcademicOffer extends PersistenceEntity {
 	private static final long serialVersionUID = 358926861833214321L;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Course> courses;
+	private List<Offer> offers;
 
 	@OneToOne
     private Period period;
+	
+	private String name;
 
 	public AcademicOffer() {
     }
-
-    public AcademicOffer(List<Course> courses, Period period) {
-        this.courses = courses;
+	
+    public AcademicOffer(String name, List<Offer> offers, Period period) {
+        this.offers = offers;
         this.period = period;
+        this.setName(name);
     }
 
-    public List<Course> getCourses() {
-        return courses;
+    public List<Offer> getOffers() {
+        return offers;
     }
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 
     public Period getPeriod() {
@@ -46,6 +49,14 @@ public class AcademicOffer extends PersistenceEntity {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

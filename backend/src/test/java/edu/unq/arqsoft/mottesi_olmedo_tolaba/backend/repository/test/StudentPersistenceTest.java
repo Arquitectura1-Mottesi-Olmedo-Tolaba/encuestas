@@ -40,4 +40,13 @@ public class StudentPersistenceTest {
 		assertEquals(elem.getEmail(), "homer.simpson@gmail.com");
 	}
 	
+	@Test
+	public void test_FindANewStudent() {
+		Student elem = service.findByStudentId(studentId);
+		assertEquals(elem.getName(), "Homer");
+		assertEquals(elem.getLastName(), "Simpson");
+		assertEquals(elem.getStudentID(), studentId);
+		assertEquals(elem.getEmail(), "homer.simpson@gmail.com");
+	}
+	
 }
