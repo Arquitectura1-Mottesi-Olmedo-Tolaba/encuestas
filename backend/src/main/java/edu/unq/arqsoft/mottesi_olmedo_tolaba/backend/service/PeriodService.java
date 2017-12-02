@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.PeriodDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.PeriodRepository;
 
@@ -45,7 +46,13 @@ public class PeriodService extends GenericService<Period> {
 		return this.save(newPeriod);
 	}
 	
-	
+	public PeriodDTO periodToDTO(Period period) {
+		PeriodDTO periodDTO = new PeriodDTO();
+		periodDTO.setId(period.getId());
+		periodDTO.setYear(period.getYear());
+		periodDTO.setQuarter(period.getQuarter());
+		return periodDTO;
+	}
 	
 
 }

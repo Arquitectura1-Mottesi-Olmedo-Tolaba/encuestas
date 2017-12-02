@@ -1,5 +1,6 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.OfferDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor;
@@ -61,6 +63,14 @@ public class OfferService extends GenericService<Offer> {
 		this.professorService = profesorService;
 	}
 	
+	public CourseService getCourseService() {
+		return courseService;
+	}
+
+	public void setCourseService(CourseService courseService) {
+		this.courseService = courseService;
+	}
+
 	@Transactional
 	public Offer update(Offer offer) {
 		return super.update(offer);
@@ -92,5 +102,21 @@ public class OfferService extends GenericService<Offer> {
 		courseToUpdate.setTimelines(timelines);
 		this.courseService.update(courseToUpdate);
 		return this.update(offerToUpdate);
+	}
+	
+	public OfferDTO offerToDTO(Offer offer){
+		OfferDTO offerDTO = new OfferDTO();
+		offerDTO.setId(offer.getId());
+		offerDTO.setCourses(this.getCourseService().coursesToDTO(offer.getCourses()));
+		// OPTIONS
+		return offerDTO;
+	}
+	
+	public List<OfferDTO> getOffersDTO(List<Offer> offers){
+		List<OfferDTO> offersDTO = new ArrayList<OfferDTO>();
+		for(Offer each : offers) {
+			offersDTO.add(offerToDTO(each));
+		}
+		return offersDTO;
 	}
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SubjectDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.SubjectRepository;
@@ -43,5 +44,12 @@ public class SubjectService extends GenericService<Subject> {
 	public Subject newSubject(String name) {
 		Subject newSubject = new Subject(name);
 		return this.save(newSubject);
+	}
+	
+	public SubjectDTO subjectToDTO(Subject subject) {
+		SubjectDTO subjectDTO = new SubjectDTO();
+		subjectDTO.setId(subject.getId());
+		subjectDTO.setName(subject.getName());
+		return subjectDTO;
 	}
 }

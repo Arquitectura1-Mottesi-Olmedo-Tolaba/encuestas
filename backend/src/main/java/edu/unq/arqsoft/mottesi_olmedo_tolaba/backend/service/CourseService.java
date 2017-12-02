@@ -4,7 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.CourseDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.TimeLineDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor;
@@ -22,6 +26,9 @@ public class CourseService extends GenericService<Course> {
 	
 	@Autowired
 	private ProfessorService professorService;
+	
+	@Autowired
+	private TimelineService timelineService;
 	
 	@Autowired
 	private SubjectService subjectService;
@@ -56,6 +63,14 @@ public class CourseService extends GenericService<Course> {
 		this.professorService = profesorService;
 	}
 	
+	public TimelineService getTimelineService() {
+		return timelineService;
+	}
+
+	public void setTimelineService(TimelineService timelineService) {
+		this.timelineService = timelineService;
+	}
+
 	@Transactional
 	public Course update(Course newBrand) {
 		return super.update(newBrand);
@@ -83,4 +98,19 @@ public class CourseService extends GenericService<Course> {
 		return this.update(courseToUpdate);
 	}
 
+	public CourseDTO courseToDTO(Course course){
+    	CourseDTO courseDTO = new CourseDTO();
+    	courseDTO.setName(course.getName());
+    	courseDTO.setProfessor(this.getProfessorService().ProfessorToDTO(course.getProfessor()));
+    	courseDTO.setTimelines(this.getTimelineService().timeLinesToDTO(course.getTimelines()));
+    	return courseDTO;
+    }
+	
+	public List<CourseDTO> coursesToDTO(List<Course> courses){
+		List<CourseDTO> coursesDTO = new ArrayList<CourseDTO>();
+		for(Course each : courses) {
+			coursesDTO.add(courseToDTO(each));
+		}
+		return coursesDTO;
+	}
 }

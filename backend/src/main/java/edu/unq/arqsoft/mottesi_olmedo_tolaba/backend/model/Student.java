@@ -1,6 +1,9 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -15,7 +18,7 @@ public class Student extends PersistenceEntity {
     private String lastName;
     private String email;
 
-    public Student(String name, String lastName, Integer studentID, String email) {
+	public Student(String name, String lastName, Integer studentID, String email) {
         this.name = name;
         this.lastName = lastName;
         this.studentID = studentID;
@@ -56,4 +59,6 @@ public class Student extends PersistenceEntity {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    
 }

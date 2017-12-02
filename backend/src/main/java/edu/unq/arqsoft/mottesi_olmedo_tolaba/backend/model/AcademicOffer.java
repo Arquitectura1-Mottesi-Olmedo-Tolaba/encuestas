@@ -38,7 +38,7 @@ public class AcademicOffer extends PersistenceEntity {
     public void setOffers(List<Offer> offers) {
         this.offers = offers;
     }
-
+    
     public Period getPeriod() {
         return period;
     }

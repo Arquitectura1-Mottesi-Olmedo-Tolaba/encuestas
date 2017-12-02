@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.StudentRepository;
 
@@ -15,8 +16,19 @@ public class StudentService extends GenericService<Student> {
 	@Autowired
 	private StudentRepository repository;
 	
+	@Autowired
+	private SubjectService subjectService;
+	
 	public StudentRepository getRepository() {
 		return repository;
+	}
+	
+	public SubjectService getSubjectService() {
+		return subjectService;
+	}
+
+	public void setSubjectService(SubjectService subjectService) {
+		this.subjectService = subjectService;
 	}
 
 	public void setRepository(StudentRepository repository) {
@@ -41,5 +53,13 @@ public class StudentService extends GenericService<Student> {
 		studentToUpdate.setStudentID(studentID);
 		studentToUpdate.setEmail(email);
 		return this.update(studentToUpdate);
+	}
+	
+	public StudentDTO StudentToDTO(Student student) {
+		StudentDTO studentDTO = new StudentDTO();
+		studentDTO.setId(student.getId());
+		studentDTO.setName(student.getName());
+		//studentDTO.setApprovedSubjects(this.getSubjectService().subjectsToDTO());
+		return studentDTO;
 	}
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.ProfessorDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.ProfessorRepository;
 
@@ -44,4 +45,10 @@ public class ProfessorService extends GenericService<Professor> {
 		return this.save(newProfessor);
 	}
 
+	public ProfessorDTO ProfessorToDTO(Professor professor) {
+		ProfessorDTO professorDTO = new ProfessorDTO();
+		professorDTO.setId(professor.getId());
+		professorDTO.setName(professor.getName());
+		return professorDTO;
+	}
 }
