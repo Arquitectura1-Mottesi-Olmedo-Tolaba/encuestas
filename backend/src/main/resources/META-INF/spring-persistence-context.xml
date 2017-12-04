@@ -99,6 +99,7 @@
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course</value>
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer</value>
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer</value>
+	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Option</value>
 	     </list>
 	   </property>
 		

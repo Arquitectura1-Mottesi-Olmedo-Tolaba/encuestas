@@ -33,6 +33,9 @@ public class OfferService extends GenericService<Offer> {
 	@Autowired
 	private SubjectService subjectService;
 	
+	@Autowired
+	private OptionService optionService;
+	
 	public SubjectService getSubjectService() {
 		return subjectService;
 	}
@@ -69,6 +72,14 @@ public class OfferService extends GenericService<Offer> {
 
 	public void setCourseService(CourseService courseService) {
 		this.courseService = courseService;
+	}
+
+	public OptionService getOptionService() {
+		return optionService;
+	}
+
+	public void setOptionService(OptionService optionService) {
+		this.optionService = optionService;
 	}
 
 	@Transactional
@@ -108,7 +119,8 @@ public class OfferService extends GenericService<Offer> {
 		OfferDTO offerDTO = new OfferDTO();
 		offerDTO.setId(offer.getId());
 		offerDTO.setCourses(this.getCourseService().coursesToDTO(offer.getCourses()));
-		// OPTIONS
+		offerDTO.setOptions(this.getOptionService().optionsToDTO(offer.getOptions()));
+		offerDTO.setSelectedOption(this.getOptionService().optionToDTO(offer.getSelectedOption()));
 		return offerDTO;
 	}
 	

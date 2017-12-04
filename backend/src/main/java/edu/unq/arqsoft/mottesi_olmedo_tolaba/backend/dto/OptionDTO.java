@@ -4,33 +4,24 @@ import java.io.Serializable;
 
 public class OptionDTO implements Serializable{
 	
-	private Long id;
-    private int year;
-    private int quarter;
+	private String id;
+    private String description;
 
     public OptionDTO(){}
     
-    public Long getId() {
+    public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getYear() {
-		return year;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
-	}
-
-	public int getQuarter() {
-		return quarter;
-	}
-
-	public void setQuarter(int quarter) {
-		this.quarter = quarter;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

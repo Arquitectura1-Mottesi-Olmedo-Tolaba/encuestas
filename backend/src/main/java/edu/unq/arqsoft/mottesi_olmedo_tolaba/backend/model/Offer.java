@@ -14,6 +14,11 @@ public class Offer extends PersistenceEntity {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Course> courses;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Option> options;
+    
+    private Option selectedOption;
+    
     public Offer() {
     }
 
@@ -38,5 +43,19 @@ public class Offer extends PersistenceEntity {
         this.subject = subject;
     }
 
+	public List<Option> getOptions() {
+		return options;
+	}
 
+	public void setOptions(List<Option> options) {
+		this.options = options;
+	}
+
+	public Option getSelectedOption() {
+		return selectedOption;
+	}
+
+	public void setSelectedOption(Option selectedOption) {
+		this.selectedOption = selectedOption;
+	}
 }
