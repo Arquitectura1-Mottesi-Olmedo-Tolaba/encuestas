@@ -7,6 +7,8 @@ public class AcademicOfferDTO implements Serializable{
 	
 	private Long id;
     private String name;
+    private String endDate;
+    private boolean active;
     private PeriodDTO period;
     private StudentDTO student;
     private List<OfferDTO> offers;
@@ -27,6 +29,14 @@ public class AcademicOfferDTO implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	public PeriodDTO getPeriod() {
@@ -51,5 +61,13 @@ public class AcademicOfferDTO implements Serializable{
 
 	public void setOffers(List<OfferDTO> offers) {
 		this.offers = offers;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 }

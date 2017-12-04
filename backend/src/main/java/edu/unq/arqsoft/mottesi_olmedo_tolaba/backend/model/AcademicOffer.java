@@ -21,6 +21,10 @@ public class AcademicOffer extends PersistenceEntity {
     private Period period;
 	
 	private String name;
+	
+	private String endDate;
+	
+	private boolean active;
 
 	public AcademicOffer() {
     }
@@ -59,4 +63,19 @@ public class AcademicOffer extends PersistenceEntity {
 		this.name = name;
 	}
 
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

@@ -95,6 +95,8 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 		AcademicOfferDTO academicOfferDTO = new AcademicOfferDTO();
 		academicOfferDTO.setId(academicOffer.getId());
 		academicOfferDTO.setName(academicOffer.getName());
+		academicOfferDTO.setEndDate(academicOffer.getEndDate());
+		academicOfferDTO.setActive(academicOffer.isActive());
 		academicOfferDTO.setPeriod(getPeriodService().periodToDTO(academicOffer.getPeriod()));
 		academicOfferDTO.setOffers(getOfferService().getOffersDTO(academicOffer.getOffers()));
 		return academicOfferDTO;
