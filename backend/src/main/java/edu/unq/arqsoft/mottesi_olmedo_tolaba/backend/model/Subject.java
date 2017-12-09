@@ -1,14 +1,9 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonBackReference;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SubjectDTO;
 
 @Entity
 @Table(name = "subjects")
@@ -20,6 +15,19 @@ public class Subject extends PersistenceEntity {
 
     public Subject() {
     }
+    
+	public SubjectDTO toSubjectDTO(){
+		SubjectDTO dto = new SubjectDTO();
+		dto.setId(this.id);
+		dto.setName(this.name);
+		return dto;
+	}
+	
+	public Subject fromSubjectDTO(SubjectDTO dto){
+		Subject subject = new Subject();
+		subject.setName(dto.getName());
+		return subject;
+	}
 
     public Subject(String name) {
         this.name = name;

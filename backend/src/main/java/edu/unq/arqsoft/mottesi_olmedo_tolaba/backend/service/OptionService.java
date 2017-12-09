@@ -54,19 +54,11 @@ public class OptionService extends GenericService<Option> {
 		newOption.setDescription(description);
 		return this.save(newOption);
 	}
-	
-	public OptionDTO optionToDTO(Option option) {
-		OptionDTO optionDTO = new OptionDTO();
-		optionDTO.setId(option.getDescription());
-		optionDTO.setDescription(option.getDescription());
 		
-		return optionDTO;
-	}
-	
 	public List<OptionDTO> optionsToDTO(List<Option> options){
 		List<OptionDTO> optionsDTO = new ArrayList<OptionDTO>();
-		for(Option each : options) {
-			optionsDTO.add(optionToDTO(each));
+		for(Option option : options) {
+			optionsDTO.add(option.toOptionDTO());
 		}
 		return optionsDTO;
 	}
