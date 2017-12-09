@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.SurveyMatch;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.SurveyRepository;
@@ -17,6 +19,9 @@ public class SurveyService extends GenericService<Survey> {
 
 	@Autowired
 	private SurveyRepository repository;
+	
+	@Autowired
+	private SurveyMatchService surveyMatchService;
 	
 	public SurveyService() {}
 	
@@ -46,6 +51,15 @@ public class SurveyService extends GenericService<Survey> {
 		Survey elem = new Survey();
 		elem.setSurveyMatches(surveyMatches);
 		return this.save(elem);
+	}
+
+	public Survey createSurveyFromDto(SurveyDTO surveyDTO) {
+		Survey survey = new Survey();
+		for (SurveyMatchDTO smDTO : surveyDTO.surveyMatches){
+			SurveyMatch sm = surveyMatchService.createSurveyMatchFromDTO(smDTO);
+			survey.addSurveyMatch(sm);
+		}		
+		return this.save(survey);
 	}
 	
 }

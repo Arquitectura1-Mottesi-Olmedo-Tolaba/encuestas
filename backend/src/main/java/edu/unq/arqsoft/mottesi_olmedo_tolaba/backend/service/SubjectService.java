@@ -52,4 +52,9 @@ public class SubjectService extends GenericService<Subject> {
 		subjectDTO.setName(subject.getName());
 		return subjectDTO;
 	}
+
+	public Subject createSubjectFromDTO(SubjectDTO dto) {
+		Subject subject = Subject.fromSubjectDTO(dto);
+		return this.save(subject);
+	}
 }

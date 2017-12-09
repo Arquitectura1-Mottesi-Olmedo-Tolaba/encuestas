@@ -1,6 +1,8 @@
-package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.connections.test;
+package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.integrations.test;
 
 import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +12,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.OptionDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SubjectDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Option;
@@ -24,7 +28,7 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.SurveyService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "test")
 @ContextConfiguration({ "/META-INF/spring-persistence-context.xml", "/META-INF/spring-services-context.xml" })
-public class SurveyConversionTest {
+public class SurveyIntegrationsTest {
 
 	@Autowired
 	private SurveyService surveyService;
@@ -38,24 +42,18 @@ public class SurveyConversionTest {
 	@Autowired
 	private SubjectService subjectService;
 	
-	private Subject elem;
+	private Subject subject;
 	private Option option;
-	private SurveyMatch surveyMatch;	
-	
+	private SurveyMatch surveyMatch;		
 	
 	@Before
 	public void setup() {
-		
-		elem = new Subject("Matematica 1");
-		subjectService.save(elem);
-
+		subject = new Subject("Matematica 1");
+		subjectService.save(subject);
 		option = new Option("Todavia no curso");
-		optionService.save(option);
-		
-		surveyMatch = new SurveyMatch(option, elem);
-		surveyMatchService.save(surveyMatch);
-		
-		
+		optionService.save(option);		
+		surveyMatch = new SurveyMatch(option, subject);
+		surveyMatchService.save(surveyMatch);	
 	}
     
     @Test
@@ -82,24 +80,19 @@ public class SurveyConversionTest {
    		assertEquals(dto.surveyMatches.get(0).option.getDescription(), "Todavia no curso");
    	}
 	
-	/*
-	@Test
-	public void test_PersistANewStudent() {
-		Student elem = service.findByStudentId(studentId);
-		assertEquals(elem.getName(), "Homer");
-		assertEquals(elem.getLastName(), "Simpson");
-		assertEquals(elem.getStudentID(), studentId);
-		assertEquals(elem.getEmail(), "homer.simpson@gmail.com");
-	}
+    @Test
+   	public void test_SurveyServiceSave() {
+    	OptionDTO optionDTO = option.toOptionDTO();
+    	SubjectDTO subjectDTO = subjectService.subjectToDTO(subject);
+    	SurveyMatchDTO surveyMatchDTO = new SurveyMatchDTO(subjectDTO, optionDTO);
+    	SurveyDTO surveyDTO = new SurveyDTO(Arrays.asList(surveyMatchDTO));
+    	
+    	Survey survey = surveyService.createSurveyFromDto(surveyDTO);
+    	
+    	assertEquals(survey.getSurveyMatches().get(0).getSubject().getId(),subject.getId());
+   		assertEquals(survey.getSurveyMatches().get(0).getSubject().getName(), "Matematica 1");
+   		assertEquals(survey.getSurveyMatches().get(0).getOption().getDescription(), "Todavia no curso");
+   	}
 	
-	@Test
-	public void test_FindANewStudent() {
-		Student elem = service.findByStudentId(studentId);
-		assertEquals(elem.getName(), "Homer");
-		assertEquals(elem.getLastName(), "Simpson");
-		assertEquals(elem.getStudentID(), studentId);
-		assertEquals(elem.getEmail(), "homer.simpson@gmail.com");
-	}
-	*/
 	
 }

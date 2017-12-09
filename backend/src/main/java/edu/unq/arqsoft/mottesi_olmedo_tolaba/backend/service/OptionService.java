@@ -62,6 +62,10 @@ public class OptionService extends GenericService<Option> {
 		}
 		return optionsDTO;
 	}
+
+	public Option createOptionFromDTO(OptionDTO option) {
+		return this.save(new Option(option.getDescription()));
+	}
 	
 
 }

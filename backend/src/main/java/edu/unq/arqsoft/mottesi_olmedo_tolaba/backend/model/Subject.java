@@ -23,7 +23,7 @@ public class Subject extends PersistenceEntity {
 		return dto;
 	}
 	
-	public Subject fromSubjectDTO(SubjectDTO dto){
+	public static Subject fromSubjectDTO(SubjectDTO dto){
 		Subject subject = new Subject();
 		subject.setName(dto.getName());
 		return subject;

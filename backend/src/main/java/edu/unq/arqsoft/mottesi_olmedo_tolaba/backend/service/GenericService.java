@@ -2,8 +2,12 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 
 import java.util.List;
 
+import javax.ws.rs.core.Response;
+
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.GenericRepository;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.pagination.PageRequest;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.pagination.PageRequestBuilder;
@@ -55,5 +59,6 @@ public abstract class GenericService<T> {
 				.build();
 		return getRepository().findByPage(pageRequest);
 	}
+
 
 }
