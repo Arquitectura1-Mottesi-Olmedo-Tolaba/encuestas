@@ -8,13 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.OptionDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.PeriodDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.TimeLineDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Option;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Timeline;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.OptionRepository;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.PeriodRepository;
 
 
 @Transactional

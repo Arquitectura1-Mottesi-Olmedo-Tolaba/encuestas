@@ -1,17 +1,13 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.joda.time.LocalTime;
-
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.OfferDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.TimeLineDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Timeline;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.TimelineRepository;
 
