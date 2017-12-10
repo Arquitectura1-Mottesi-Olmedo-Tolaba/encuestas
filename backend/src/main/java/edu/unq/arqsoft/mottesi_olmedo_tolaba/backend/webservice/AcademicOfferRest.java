@@ -15,9 +15,10 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.AcademicOfferDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.GenericService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.AcademicOfferService;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.GenericService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.ResponseGenerator;
 
 @Service
@@ -71,5 +72,17 @@ public class AcademicOfferRest  extends GenericRest<AcademicOffer> {
 	public Response delete(@Context HttpServletRequest request, @PathParam("id") final Long id) {
 		return super.delete(id);
 	}
+	
+	@GET
+	@Path("/first")
+	public Response getFirst() {
+		try {
+			AcademicOfferDTO dto = this.academicOfferService.getFirstAcademicOfferDTO();
+			return responseGenerator.buildSuccessResponse(dto);
+		} catch (Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
+	}
+	
 
 }

@@ -157,6 +157,8 @@ public class AcademicOfferFactoryService {
 		System.out.println(academicOffer);
 		System.out.println("------------------");
 		System.out.println("------------------");
+		
+		
 	}
 	
 	

@@ -70,7 +70,6 @@ public class SurveyRest  extends GenericRest<Survey> {
 	@POST
 	@Path("/save")
 	public Response create(@Context HttpServletRequest request, SurveyDTO surveyDTO) {
-		//return subjectService.createSurveyFromDto();
 		try {
 			Survey survey = subjectService.createSurveyFromDto(surveyDTO);
 			return responseGenerator.buildSuccessResponse(survey);

@@ -91,6 +91,11 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 		return super.save(model);
 	}
 	
+	public AcademicOfferDTO getFirstAcademicOfferDTO(){
+		AcademicOffer academicOffer = this.find((long) 1);
+		return this.AcademicOfferToDTO(academicOffer);
+	}
+	
 	public AcademicOfferDTO AcademicOfferToDTO(AcademicOffer academicOffer) {
 		AcademicOfferDTO academicOfferDTO = new AcademicOfferDTO();
 		academicOfferDTO.setId(academicOffer.getId());
