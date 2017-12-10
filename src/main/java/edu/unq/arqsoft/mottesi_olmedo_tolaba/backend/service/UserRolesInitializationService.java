@@ -27,8 +27,8 @@ public class UserRolesInitializationService {
 	private void initialize() {
 		List<Role> roles = new LinkedList<Role>();
 		roles.add(roleService.save(new Role("ADMIN")));
-		roles.add(roleService.save(new Role("CLIENT")));
-		roles.add(roleService.save(new Role("CASHIER")));
+		roles.add(roleService.save(new Role("DIRECTOR")));
+		roles.add(roleService.save(new Role("STUDENT")));
 		
 		UserCredential adminUser = new UserCredential("admin", "admin");
 		adminUser.addRoles(roles);

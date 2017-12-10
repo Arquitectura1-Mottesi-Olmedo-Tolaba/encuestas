@@ -71,7 +71,7 @@ public class AcademicOfferFactoryService {
 		Option thirdOption = new Option("Cursaria en comision 1");
 		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption));
 		
-		offer = offerService.save(offer);
+		//offer = offerService.save(offer);
 		return offer;
 	}
 	
@@ -100,7 +100,7 @@ public class AcademicOfferFactoryService {
 		Option thirdOption = new Option("Cursaria en comision 1");
 		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption));
 		
-		offer = offerService.save(offer);
+		//offer = offerService.save(offer);
 		return offer;
 	}
 	
@@ -146,7 +146,7 @@ public class AcademicOfferFactoryService {
 		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption,fourthOption));
 				
 		
-		offer = offerService.save(offer);
+		//offer = offerService.save(offer);
 		return offer;
 	}
 	
@@ -154,17 +154,20 @@ public class AcademicOfferFactoryService {
 	public void initialize() {
 		
 		AcademicOffer academicOffer = new AcademicOffer();
+		
+		// TODO: SET DEGREE, STUDENT ??? EL NAME ES EL NOMBRE DEL DEGREE ...
 		academicOffer.setName("Tecnicatura Universitaria en Programación Informática");
 		Integer quarter = 1;
 		Period period = new Period(2017,quarter);
 		periodService.save(period);
-		
-		// TODO: SET DEGREE, STUDENT ???
+				
 		Student student = new Student();
 		student.setName("Homero");
 		student.setLastName("Simpson");
 		studentService.save(student);
 		// MATERIAS APROBADAS ???
+		
+		
 		academicOffer.setPeriod(period);
 		academicOffer = academicOfferService.save(academicOffer);
 		
@@ -175,7 +178,7 @@ public class AcademicOfferFactoryService {
 		Offer offerOrga = createOrgaOffer();
 		
 		academicOffer.setOffers(Arrays.asList(offerMatematica,offerIntro, offerOrga));
-		academicOffer = academicOfferService.save(academicOffer);
+		academicOffer = academicOfferService.update(academicOffer);
 		System.out.println("------------------");
 		System.out.println("------------------");
 		AcademicOfferDTO dto = this.academicOfferService.AcademicOfferToDTO(academicOffer);

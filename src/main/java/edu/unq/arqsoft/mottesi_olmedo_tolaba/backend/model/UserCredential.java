@@ -29,6 +29,7 @@ public class UserCredential extends PersistenceEntity {
 	private String password;
 	private String email;
 	
+	
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name="users_roles", 
 		joinColumns={@JoinColumn(name="user_id")}, 

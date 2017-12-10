@@ -30,6 +30,7 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.SurveyService;
 @ContextConfiguration({ "/META-INF/spring-persistence-context.xml", "/META-INF/spring-services-context.xml" })
 public class SurveyIntegrationsTest {
 
+
 	@Autowired
 	private SurveyService surveyService;
 	

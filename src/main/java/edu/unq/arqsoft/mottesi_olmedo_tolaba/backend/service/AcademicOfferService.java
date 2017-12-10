@@ -29,43 +29,6 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 	
 	public AcademicOfferService() {}
 	
-	
-	
-	public PeriodService getPeriodService() {
-		return periodService;
-	}
-
-
-
-	public void setPeriodService(PeriodService periodService) {
-		this.periodService = periodService;
-	}
-
-
-
-	public StudentService getStudentService() {
-		return studentService;
-	}
-
-
-
-	public void setStudentService(StudentService studentService) {
-		this.studentService = studentService;
-	}
-
-
-
-	public OfferService getOfferService() {
-		return offerService;
-	}
-
-
-
-	public void setOfferService(OfferService offerService) {
-		this.offerService = offerService;
-	}
-
-
 
 	public AcademicOfferService(AcademicOfferRepository repo) {
 		this.setRepository(repo);
@@ -107,16 +70,16 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 		academicOfferDTO.setName(academicOffer.getName());
 		academicOfferDTO.setEndDate(academicOffer.getEndDate());
 		academicOfferDTO.setActive(academicOffer.isActive());
-		academicOfferDTO.setPeriod(getPeriodService().periodToDTO(academicOffer.getPeriod()));
-		academicOfferDTO.setOffers(getOfferService().getOffersDTO(academicOffer.getOffers()));
+		academicOfferDTO.setPeriod(periodService.periodToDTO(academicOffer.getPeriod()));
+		academicOfferDTO.setOffers(offerService.getOffersDTO(academicOffer.getOffers()));
 		return academicOfferDTO;
 	}
 	
 	public AcademicOfferDTO AcademicOfferToDTOForStudent(Long idAcademicOffer, Long idStudent){
 		AcademicOffer academicOffer = this.getRepository().findById(idAcademicOffer);
-		Student student = this.getStudentService().find(idStudent);
+		Student student = studentService.find(idStudent);
 		AcademicOfferDTO academicOfferDTO = this.AcademicOfferToDTO(academicOffer);
-		academicOfferDTO.setStudent(getStudentService().StudentToDTO(student));
+		academicOfferDTO.setStudent(studentService.StudentToDTO(student));
 		return academicOfferDTO;
 	}
 
