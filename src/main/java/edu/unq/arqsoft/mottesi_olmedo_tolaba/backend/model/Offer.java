@@ -2,6 +2,10 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import java.util.List;
 
 @Entity
@@ -11,10 +15,12 @@ public class Offer extends PersistenceEntity {
 	@OneToOne(cascade = CascadeType.ALL)
     private Subject subject;
     
-    @OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@LazyCollection(LazyCollectionOption.FALSE)
     private List<Course> courses;
 
-    @OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@LazyCollection(LazyCollectionOption.FALSE)
     private List<Option> options;
         
     public Offer() {

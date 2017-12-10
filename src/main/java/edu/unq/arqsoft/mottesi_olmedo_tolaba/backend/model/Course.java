@@ -3,6 +3,9 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.CourseDTO;
 
 import java.util.List;
@@ -17,9 +20,9 @@ public class Course extends PersistenceEntity {
     private Professor professor;
         
     @ManyToMany() //cascade = CascadeType.MERGE, orphanRemoval = true
+	@LazyCollection(LazyCollectionOption.FALSE)
     private List<Timeline> timelines;
 
-    
     
     public String getName() {
 		return name;
