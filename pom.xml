@@ -305,7 +305,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>desApp-groupA-backend</finalName>
+		<finalName>arqsoft-mottesi-olmedo</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

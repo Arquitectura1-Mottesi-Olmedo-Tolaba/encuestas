@@ -55,9 +55,18 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 	<jaxrs:server id="businessServiceJaxRs" address="/"  > 
 		
 		<jaxrs:serviceBeans>
-			<ref bean="brandRest" />
 			<ref bean="userProfileRest" />
 			<ref bean="userRest" />
+			<ref bean="academicOfferRest" />
+			<ref bean="courseRest" />
+			<ref bean="degreeRest" />
+			<ref bean="offerRest" />
+			<ref bean="optionRest" />
+			<ref bean="periodRest" />
+			<ref bean="professorRest" />
+			<ref bean="studentRest" />
+			<ref bean="surveyRest" />
+			
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />
