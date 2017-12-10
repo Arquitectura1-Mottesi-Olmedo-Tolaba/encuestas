@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class OfferDTO implements Serializable{
-	
+
+	private static final long serialVersionUID = 6477268411333321005L;
 	private Long id;
     private List<CourseDTO> courses;
     private OptionDTO selectedOption;
