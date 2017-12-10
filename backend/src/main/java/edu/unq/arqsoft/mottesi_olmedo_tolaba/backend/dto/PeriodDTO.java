@@ -33,4 +33,5 @@ public class PeriodDTO implements Serializable{
 	public void setQuarter(int quarter) {
 		this.quarter = quarter;
 	}
+
 }

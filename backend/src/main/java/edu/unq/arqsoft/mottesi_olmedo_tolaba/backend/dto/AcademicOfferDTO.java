@@ -3,6 +3,8 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 public class AcademicOfferDTO implements Serializable{
 	
 	private Long id;
@@ -70,4 +72,10 @@ public class AcademicOfferDTO implements Serializable{
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
+	public String prettyPrint() {
+		Gson gson = new Gson();
+		return gson.toJson(this).toString();
+	}
+
 }

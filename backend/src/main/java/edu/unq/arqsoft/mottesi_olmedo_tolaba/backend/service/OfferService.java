@@ -120,10 +120,10 @@ public class OfferService extends GenericService<Offer> {
 		offerDTO.setId(offer.getId());
 		offerDTO.setCourses(this.getCourseService().coursesToDTO(offer.getCourses()));
 		offerDTO.setOptions(this.getOptionService().optionsToDTO(offer.getOptions()));
-		offerDTO.setSelectedOption(offer.getSelectedOption().toOptionDTO());
+		offerDTO.setSelectedOption(offer.getFirstOption().toOptionDTO());
 		return offerDTO;
 	}
-	
+
 	public List<OfferDTO> getOffersDTO(List<Offer> offers){
 		List<OfferDTO> offersDTO = new ArrayList<OfferDTO>();
 		for(Offer each : offers) {

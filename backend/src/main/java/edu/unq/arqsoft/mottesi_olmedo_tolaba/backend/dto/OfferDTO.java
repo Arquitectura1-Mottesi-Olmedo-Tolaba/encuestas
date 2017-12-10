@@ -43,4 +43,5 @@ public class OfferDTO implements Serializable{
 	public void setOptions(List<OptionDTO> options) {
 		this.options = options;
 	}
+
 }

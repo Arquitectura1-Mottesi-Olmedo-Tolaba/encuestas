@@ -18,8 +18,13 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 	@Autowired
 	private AcademicOfferRepository repository;
 	
+	@Autowired
 	private PeriodService periodService;
+	
+	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
 	private OfferService offerService;
 	
 	public AcademicOfferService() {}

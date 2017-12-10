@@ -3,12 +3,16 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.AcademicOfferDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Option;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
@@ -61,6 +65,12 @@ public class AcademicOfferFactoryService {
 		subjectService.save(subject);
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada));
+		
+		Option firstOption = new Option("Todavia no voy a cursarla");
+		Option secondOption = new Option("Ya la curse");
+		Option thirdOption = new Option("Cursaria en comision 1");
+		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption));
+		
 		offer = offerService.save(offer);
 		return offer;
 	}
@@ -84,6 +94,12 @@ public class AcademicOfferFactoryService {
 		subjectService.save(subject);
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada));
+		
+		Option firstOption = new Option("Todavia no voy a cursarla");
+		Option secondOption = new Option("Ya la curse");
+		Option thirdOption = new Option("Cursaria en comision 1");
+		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption));
+		
 		offer = offerService.save(offer);
 		return offer;
 	}
@@ -122,6 +138,14 @@ public class AcademicOfferFactoryService {
 		subjectService.save(subject);
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada,cursada2));
+		
+		Option firstOption = new Option("Todavia no voy a cursarla");
+		Option secondOption = new Option("Ya la curse");
+		Option thirdOption = new Option("Cursaria en comision 1");
+		Option fourthOption = new Option("Cursaria en comision 2");
+		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption,fourthOption));
+				
+		
 		offer = offerService.save(offer);
 		return offer;
 	}
@@ -144,7 +168,7 @@ public class AcademicOfferFactoryService {
 		academicOffer.setPeriod(period);
 		academicOffer = academicOfferService.save(academicOffer);
 		
-		
+		System.out.println(academicOffer.getPeriod());
 		
 		Offer offerMatematica = createMatematicaOffer();
 		Offer offerIntro = createIntroOffer();
@@ -154,7 +178,8 @@ public class AcademicOfferFactoryService {
 		academicOffer = academicOfferService.save(academicOffer);
 		System.out.println("------------------");
 		System.out.println("------------------");
-		System.out.println(academicOffer);
+		AcademicOfferDTO dto = this.academicOfferService.AcademicOfferToDTO(academicOffer);
+		System.out.println(dto.prettyPrint());
 		System.out.println("------------------");
 		System.out.println("------------------");
 		
