@@ -103,6 +103,9 @@
 	       
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.SurveyMatch</value>
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey</value>
+	       
+	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Director</value>
+	       
 	     </list>
 	   </property>
 		

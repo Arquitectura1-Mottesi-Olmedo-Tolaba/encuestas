@@ -65,11 +65,12 @@ public class Degree extends PersistenceEntity {
 
 	public DegreeDTO toDTO() {
 		// TODO Auto-generated method stub
+		
 		List<SubjectDTO> subjectsDTO = new ArrayList<SubjectDTO>();
 		for(Subject subject : this.subjects ){
 			subjectsDTO.add(subject.toSubjectDTO());
 		}
 		
-		return new DegreeDTO(this.name,subjectsDTO);
+		return new DegreeDTO(this.id,this.name,subjectsDTO);
 	}
 }

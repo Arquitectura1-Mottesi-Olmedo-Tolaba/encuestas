@@ -86,7 +86,8 @@ public class SurveyIntegrationsTest {
     	OptionDTO optionDTO = option.toOptionDTO();
     	SubjectDTO subjectDTO = subjectService.subjectToDTO(subject);
     	SurveyMatchDTO surveyMatchDTO = new SurveyMatchDTO(subjectDTO, optionDTO);
-    	SurveyDTO surveyDTO = new SurveyDTO(Arrays.asList(surveyMatchDTO));
+    	SurveyDTO surveyDTO = new SurveyDTO();
+    	surveyDTO.surveyMatches = Arrays.asList(surveyMatchDTO);
     	
     	Survey survey = surveyService.createSurveyFromDto(surveyDTO);
     	
