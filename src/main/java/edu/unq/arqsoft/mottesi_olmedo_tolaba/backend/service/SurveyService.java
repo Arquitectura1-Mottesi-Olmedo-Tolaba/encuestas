@@ -85,6 +85,7 @@ public class SurveyService extends GenericService<Survey> {
 
 	public StudentSurveyDTO getDTO(AcademicOffer academicOffer) {
 		StudentSurveyDTO academicOfferDTO = new StudentSurveyDTO();
+		academicOfferDTO.setName("TPI");
 		academicOfferDTO.setId(academicOffer.getId());
 		academicOfferDTO.setEndDate(academicOffer.getEndDate());
 		academicOfferDTO.setActive(academicOffer.isActive());

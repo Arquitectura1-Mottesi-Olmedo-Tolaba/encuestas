@@ -10,6 +10,7 @@ public class OfferDTO implements Serializable{
     private List<CourseDTO> courses;
     private OptionDTO selectedOption;
     private List<OptionDTO> options;
+    private SubjectDTO subject;
 
     public OfferDTO(){}
     
@@ -45,4 +46,11 @@ public class OfferDTO implements Serializable{
 		this.options = options;
 	}
 
+	public SubjectDTO getSubject() {
+		return subject;
+	}
+
+	public void setSubject(SubjectDTO subject) {
+		this.subject = subject;
+	}
 }

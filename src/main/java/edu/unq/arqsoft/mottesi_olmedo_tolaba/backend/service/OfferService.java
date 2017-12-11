@@ -122,7 +122,7 @@ public class OfferService extends GenericService<Offer> {
 		offerDTO.setCourses(this.courseService.coursesToDTO(offer.getCourses()));
 		
 		List<OptionDTO> options = this.optionService.optionsForCourses(offer.getCourses());
-		
+		offerDTO.setSubject(this.getSubjectService().subjectToDTO(offer.getSubject()));
 		offerDTO.setOptions(options);
 		offerDTO.setSelectedOption(options.get(0));
 		return offerDTO;
