@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.AcademicOfferDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.AcademicOfferRepository;
@@ -58,15 +58,14 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 		return super.save(model);
 	}
 	
-	public AcademicOfferDTO getAcademicOfferDTOById(Long id){
+	public StudentSurveyDTO getAcademicOfferDTOById(Long id){
 		AcademicOffer academicOffer = this.find(id);
 		return this.AcademicOfferToDTO(academicOffer);
 	}
 	
-	public AcademicOfferDTO AcademicOfferToDTO(AcademicOffer academicOffer) {
-		AcademicOfferDTO academicOfferDTO = new AcademicOfferDTO();
+	public StudentSurveyDTO AcademicOfferToDTO(AcademicOffer academicOffer) {
+		StudentSurveyDTO academicOfferDTO = new StudentSurveyDTO();
 		academicOfferDTO.setId(academicOffer.getId());
-		academicOfferDTO.setName(academicOffer.getName());
 		academicOfferDTO.setEndDate(academicOffer.getEndDate());
 		academicOfferDTO.setActive(academicOffer.isActive());
 		academicOfferDTO.setPeriod(periodService.periodToDTO(academicOffer.getPeriod()));
@@ -76,20 +75,11 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 		return academicOfferDTO;
 	}
 	
-	public AcademicOfferDTO AcademicOfferToDTOForStudent(Long idStudent){
-		//TODO: Refac to get active
-		AcademicOffer academicOffer = this.getRepository().findById((long)1);
-		Student student = studentService.find(idStudent);
-		AcademicOfferDTO academicOfferDTO = this.AcademicOfferToDTO(academicOffer);
-		academicOfferDTO.setStudent(studentService.StudentToDTO(student));
-		return academicOfferDTO;
-	}
-	
-	public AcademicOfferDTO AcademicOfferToDTOForStudent(Long idAcademicOffer, Long idStudent){
+	public StudentSurveyDTO AcademicOfferToDTOForStudent(Long idAcademicOffer, Long idStudent){
 		
 		AcademicOffer academicOffer = this.getRepository().findById(idAcademicOffer);
 		Student student = studentService.find(idStudent);
-		AcademicOfferDTO academicOfferDTO = this.AcademicOfferToDTO(academicOffer);
+		StudentSurveyDTO academicOfferDTO = this.AcademicOfferToDTO(academicOffer);
 		academicOfferDTO.setStudent(studentService.StudentToDTO(student));
 		return academicOfferDTO;
 	}

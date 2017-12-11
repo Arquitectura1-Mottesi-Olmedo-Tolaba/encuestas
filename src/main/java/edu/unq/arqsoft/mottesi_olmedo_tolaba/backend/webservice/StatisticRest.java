@@ -64,7 +64,6 @@ public class StatisticRest  extends GenericRest<Statistic> {
 	}
 
 	
-	
 	@GET
 	@Path("/{id}")
 	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {

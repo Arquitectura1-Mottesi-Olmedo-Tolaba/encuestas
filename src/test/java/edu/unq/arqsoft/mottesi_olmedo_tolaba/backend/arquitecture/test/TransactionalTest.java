@@ -10,7 +10,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.BrandService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.provider.BrandFactory;
 
 //@RunWith(SpringJUnit4ClassRunner.class)

@@ -3,6 +3,7 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository;
 import java.io.Serializable;
 import java.util.List;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.pagination.PageRequest;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.pagination.PageResponse;
 
@@ -27,5 +28,6 @@ public interface GenericRepository<T> {
 	PageResponse<T> findByPage(PageRequest<T> pageRequest);
 	
 	Class<T> getDomainClass();
+
 	
 }

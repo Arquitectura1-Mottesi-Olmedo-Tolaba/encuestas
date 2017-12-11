@@ -26,8 +26,6 @@ public class AcademicOffer extends PersistenceEntity {
 	@OneToOne
     private Period period;
 	
-	private String name;
-	
 	private String endDate;
 	
 	private boolean active;
@@ -38,7 +36,6 @@ public class AcademicOffer extends PersistenceEntity {
     public AcademicOffer(String name, List<Offer> offers, Period period) {
         this.offers = offers;
         this.period = period;
-        this.setName(name);
     }
 
     public List<Offer> getOffers() {
@@ -59,14 +56,6 @@ public class AcademicOffer extends PersistenceEntity {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getEndDate() {

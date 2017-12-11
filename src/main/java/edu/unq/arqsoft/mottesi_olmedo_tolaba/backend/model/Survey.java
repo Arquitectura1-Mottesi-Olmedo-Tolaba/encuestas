@@ -3,10 +3,12 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
@@ -19,11 +21,51 @@ public class Survey extends PersistenceEntity {
 	private static final long serialVersionUID = 9159344780394535641L;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<SurveyMatch> surveyMatches = new LinkedList<SurveyMatch>();	
+	private List<SurveyMatch> surveyMatches = new LinkedList<SurveyMatch>();
+	
+	private String code;
+	
+	private Boolean wasAnswered;
+	
+	private String message;
+	
+	@OneToOne
+	private Student student;
+	
+	@OneToOne
+	private AcademicOffer academicOffer;
+	
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public AcademicOffer getAcademicOffer() {
+		return academicOffer;
+	}
+
+	public void setAcademicOffer(AcademicOffer academicOffer) {
+		this.academicOffer = academicOffer;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public Survey() {
     }
 	
+	public Survey(Student student, AcademicOffer academicOffer) {
+		this.student = student;
+		this.academicOffer = academicOffer;
+		this.code = UUID.randomUUID().toString();
+		this.wasAnswered = false;
+	}
+
 	public SurveyDTO toSurveyDTO() {
 		SurveyDTO dto = new SurveyDTO();
 		List<SurveyMatchDTO> surveyMatchesDTO = new LinkedList<SurveyMatchDTO>();
@@ -45,5 +87,29 @@ public class Survey extends PersistenceEntity {
 	
 	public void addSurveyMatch(SurveyMatch surveyMatch){
 		this.surveyMatches.add(surveyMatch);
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Boolean getWasAnswered() {
+		return wasAnswered;
+	}
+
+	public void setWasAnswered(Boolean wasAnswered) {
+		this.wasAnswered = wasAnswered;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

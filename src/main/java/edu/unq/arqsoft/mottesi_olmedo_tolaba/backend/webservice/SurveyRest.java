@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.GenericService;
@@ -31,12 +32,12 @@ public class SurveyRest  extends GenericRest<Survey> {
 	private ResponseGenerator responseGenerator;
 	
 	@Autowired
-	private SurveyService subjectService;
+	private SurveyService surveyService;
 	
 
 	@Override
 	public GenericService<Survey> getService() {
-		return subjectService;
+		return surveyService;
 	}
 
 	@GET
@@ -67,11 +68,23 @@ public class SurveyRest  extends GenericRest<Survey> {
 		return super.update(survey);
 	}
 	
+	@GET
+	@Path("/getByCode/{code}")
+	public Response getByCode(@Context HttpServletRequest request,@PathParam("code") String code) {
+		try {
+			StudentSurveyDTO surveyDTO = this.surveyService.makeDTOFrom(code);
+			return responseGenerator.buildSuccessResponse(surveyDTO);
+		} catch (Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
+	}
+	
+	
 	@POST
 	@Path("/save")
 	public Response create(@Context HttpServletRequest request, SurveyDTO surveyDTO) {
 		try {
-			Survey survey = subjectService.createSurveyFromDto(surveyDTO);
+			Survey survey = surveyService.createSurveyFromDto(surveyDTO);
 			return responseGenerator.buildSuccessResponse(survey);
 		} catch (Exception e) {
 			return responseGenerator.buildErrorResponse(e);

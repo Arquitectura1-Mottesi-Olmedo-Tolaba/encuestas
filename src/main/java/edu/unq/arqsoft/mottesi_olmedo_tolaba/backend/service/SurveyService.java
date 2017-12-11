@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.SurveyMatch;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.SurveyRepository;
@@ -19,6 +22,15 @@ public class SurveyService extends GenericService<Survey> {
 
 	@Autowired
 	private SurveyRepository repository;
+	
+	@Autowired
+	private PeriodService periodService;
+		
+	@Autowired
+	private StudentService studentService;
+	
+	@Autowired
+	private OfferService offerService;
 	
 	@Autowired
 	private SurveyMatchService surveyMatchService;
@@ -60,6 +72,35 @@ public class SurveyService extends GenericService<Survey> {
 			survey.addSurveyMatch(sm);
 		}		
 		return this.save(survey);
+	}
+
+	public Survey createSurvey(Student student, AcademicOffer academicOffer) {
+		Survey survey = new Survey(student,academicOffer);
+		return this.save(survey);
+	}
+	
+	public Survey getByCode(String code) {
+		return this.repository.getByCode(code);
+	}
+
+	public StudentSurveyDTO getDTO(AcademicOffer academicOffer) {
+		StudentSurveyDTO academicOfferDTO = new StudentSurveyDTO();
+		academicOfferDTO.setId(academicOffer.getId());
+		academicOfferDTO.setEndDate(academicOffer.getEndDate());
+		academicOfferDTO.setActive(academicOffer.isActive());
+		academicOfferDTO.setPeriod(periodService.periodToDTO(academicOffer.getPeriod()));
+		
+		//Ver como ponderar elecciones pasadas...
+		academicOfferDTO.setOffers(offerService.getOffersDTO(academicOffer.getOffers()));
+		return academicOfferDTO;
+	}
+	
+	
+	public StudentSurveyDTO makeDTOFrom(String code) {
+		Survey survey = getByCode(code);
+		StudentSurveyDTO dto = this.getDTO(survey.getAcademicOffer());
+		dto.setStudent(studentService.StudentToDTO(survey.getStudent()));
+		return dto;
 	}
 	
 }

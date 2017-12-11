@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
-public class AcademicOfferDTO implements Serializable{
+public class StudentSurveyDTO implements Serializable{
 	
 	private Long id;
     private String name;
@@ -15,7 +15,7 @@ public class AcademicOfferDTO implements Serializable{
     private StudentDTO student;
     private List<OfferDTO> offers;
 
-    public AcademicOfferDTO(){}
+    public StudentSurveyDTO(){}
     
     public Long getId() {
 		return id;

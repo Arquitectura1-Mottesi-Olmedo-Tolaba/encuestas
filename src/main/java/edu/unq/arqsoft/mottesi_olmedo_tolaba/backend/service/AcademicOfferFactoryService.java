@@ -14,6 +14,7 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Timeline;
 @Transactional
 @Service
@@ -36,6 +37,9 @@ public class AcademicOfferFactoryService {
 	
 	@Autowired
 	private TimelineService timelineService;
+	
+	@Autowired
+	private SurveyService surveyService;
 	
 	@Transactional
 	public Offer createOrgaOffer(Subject subject){
@@ -130,7 +134,6 @@ public class AcademicOfferFactoryService {
 		AcademicOffer academicOffer = new AcademicOffer();
 		academicOffer.setActive(true);
 		// TODO: SET DEGREE, STUDENT ??? EL NAME ES EL NOMBRE DEL DEGREE ...
-		academicOffer.setName(nameDegree);
 		Integer quarter = 1;
 		Period period = new Period(2017,quarter);
 		periodService.save(period);
@@ -150,7 +153,21 @@ public class AcademicOfferFactoryService {
 		
 		academicOffer.setOffers(Arrays.asList(offerMatematica, offerOrga,offerIntro));
 		academicOffer = academicOfferService.update(academicOffer);
+		
+		Survey survey = surveyService.createSurvey(student,academicOffer);
 				
+		System.out.println("---------------------");
+		System.out.println("---------------------");
+		System.out.println("---------------------");
+		System.out.println("---------------------");
+		System.out.println("---------------------");
+		System.out.println(survey.getCode());
+		System.out.println("---------------------");
+		System.out.println("---------------------");
+		System.out.println("---------------------");
+		System.out.println("---------------------");
+		System.out.println("---------------------");
+		
 		return academicOffer;
 	}
 	

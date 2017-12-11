@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 
@@ -37,6 +39,14 @@ public class SurveyRepository extends HibernateGenericDAO<Survey> implements Gen
 	public void setSurveys(List<Survey> surveys) {
 		this.surveys = surveys;
 	}
+
+	public Survey getByCode(String code) {
+		String query = "SELECT survey FROM " + this.persistentClass.getName() + " survey "
+				+ "WHERE survey.code = ? ";
+		List<Survey> surveys = (List<Survey>) this.getHibernateTemplate().find(query, code);
+		return surveys.isEmpty() ? null : surveys.get(0);
+	}
+	
 
 
 }
