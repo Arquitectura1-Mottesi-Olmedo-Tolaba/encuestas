@@ -48,9 +48,9 @@ public class AcademicOfferFactoryService {
 	public Offer createOrgaOffer(Subject subject){
 		Offer offer = new Offer();
 		Course cursada = new Course();
-		Professor hortensia = new Professor("Hortensia");
-		hortensia = professorService.save(hortensia);
-		cursada.setProfessor(hortensia);
+		Professor mara = new Professor("Mara Dalponte");
+		mara = professorService.save(mara);
+		cursada.setProfessor(mara);
 		
 		Timeline lunes = new Timeline("Lunes","18:00","22:00");
 		Timeline miercoles = new Timeline("Miercoles","18:00","22:00");
@@ -62,11 +62,13 @@ public class AcademicOfferFactoryService {
 		
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada));
-		
+				
+		/*
 		Option firstOption = new Option("Todavia no voy a cursarla");
 		Option secondOption = new Option("Ya la curse");
 		Option thirdOption = new Option("Cursaria en comision 1");
 		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption));
+		*/
 		
 		//offer = offerService.save(offer);
 		return offer;
@@ -76,9 +78,9 @@ public class AcademicOfferFactoryService {
 	public Offer createIntroOffer(Subject subject){
 		Offer offer = new Offer();
 		Course cursada = new Course();
-		Professor hortensia = new Professor("Hortensia");
-		hortensia = professorService.save(hortensia);
-		cursada.setProfessor(hortensia);
+		Professor eduardo = new Professor("Eduardo Bonelli");
+		eduardo = professorService.save(eduardo);
+		cursada.setProfessor(eduardo);
 		
 		Timeline lunes = new Timeline("Lunes","18:00","22:00");
 		Timeline miercoles = new Timeline("Miercoles","18:00","22:00");
@@ -91,10 +93,12 @@ public class AcademicOfferFactoryService {
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada));
 		
+		/*
 		Option firstOption = new Option("Todavia no voy a cursarla");
 		Option secondOption = new Option("Ya la curse");
 		Option thirdOption = new Option("Cursaria en comision 1");
 		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption));
+		*/
 		
 		//offer = offerService.save(offer);
 		return offer;
@@ -134,12 +138,13 @@ public class AcademicOfferFactoryService {
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada,cursada2));
 		
+		/*
 		Option firstOption = new Option("Todavia no voy a cursarla");
 		Option secondOption = new Option("Ya la curse");
 		Option thirdOption = new Option("Cursaria en comision 1");
 		Option fourthOption = new Option("Cursaria en comision 2");
 		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption,fourthOption));
-				
+		*/	
 		
 		//offer = offerService.save(offer);
 		return offer;

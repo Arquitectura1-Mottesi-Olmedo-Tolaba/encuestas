@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.OptionDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Option;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.OptionRepository;
 
@@ -61,6 +62,20 @@ public class OptionService extends GenericService<Option> {
 	public Option createOptionFromDTO(OptionDTO option) {
 		return this.save(new Option(option.getDescription()));
 	}
+	
+	public List<OptionDTO> optionsForCourses(List<Course> courses){
+		List<OptionDTO> optionsDTO = new ArrayList<OptionDTO>();
+		optionsDTO.add(new OptionDTO("Todavia no voy a  cursarla"));
+		optionsDTO.add(new OptionDTO("Ya la curse"));
+		for(Course course : courses) {
+			OptionDTO optionDTO = new OptionDTO();
+			optionDTO.setDescription(course.getName());
+			optionsDTO.add(optionDTO);
+		}
+		
+		return optionsDTO;
+	}
+	
 	
 
 }

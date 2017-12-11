@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.OfferDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.OptionDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor;
@@ -118,11 +119,16 @@ public class OfferService extends GenericService<Offer> {
 	public OfferDTO offerToDTO(Offer offer){
 		OfferDTO offerDTO = new OfferDTO();
 		offerDTO.setId(offer.getId());
-		offerDTO.setCourses(this.getCourseService().coursesToDTO(offer.getCourses()));
-		offerDTO.setOptions(this.getOptionService().optionsToDTO(offer.getOptions()));
-		offerDTO.setSelectedOption(offer.getFirstOption().toOptionDTO());
+		offerDTO.setCourses(this.courseService.coursesToDTO(offer.getCourses()));
+		
+		List<OptionDTO> options = this.optionService.optionsForCourses(offer.getCourses());
+		
+		offerDTO.setOptions(options);
+		//offerDTO.setOptions(this.getOptionService().optionsToDTO(offer.getOptions()));
+		offerDTO.setSelectedOption(options.get(0));
 		return offerDTO;
 	}
+	
 
 	public List<OfferDTO> getOffersDTO(List<Offer> offers){
 		List<OfferDTO> offersDTO = new ArrayList<OfferDTO>();

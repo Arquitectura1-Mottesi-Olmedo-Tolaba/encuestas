@@ -19,9 +19,11 @@ public class Offer extends PersistenceEntity {
 	@LazyCollection(LazyCollectionOption.FALSE)
     private List<Course> courses;
 
+	/*
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@LazyCollection(LazyCollectionOption.FALSE)
     private List<Option> options;
+    */
         
     public Offer() {
     }
@@ -47,6 +49,7 @@ public class Offer extends PersistenceEntity {
         this.subject = subject;
     }
 
+    /*
 	public List<Option> getOptions() {
 		return options;
 	}
@@ -58,5 +61,6 @@ public class Offer extends PersistenceEntity {
 	public Option getFirstOption() {
 		return this.options.get(0);
 	}
+	*/
 
 }

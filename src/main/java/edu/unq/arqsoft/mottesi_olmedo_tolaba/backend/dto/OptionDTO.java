@@ -9,7 +9,11 @@ public class OptionDTO implements Serializable{
 
     public OptionDTO(){}
     
-    public String getId() {
+    public OptionDTO(String description) {
+		this.description = description;
+	}
+
+	public String getId() {
 		return id;
 	}
 
