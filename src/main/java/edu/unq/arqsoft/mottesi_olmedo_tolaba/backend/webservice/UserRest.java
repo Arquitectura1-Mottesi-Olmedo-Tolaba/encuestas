@@ -69,18 +69,6 @@ public class UserRest  extends GenericRest<UserCredential> {
 		return super.create(user);
 	}
 	
-	@GET
-	@Path("/getDirector")
-	public Response offers(@Context HttpServletRequest request) {
-		try {
-			DirectorDTO director = directorService.getDirectorDTO();
-			return responseGenerator.buildSuccessResponse(director);
-		} catch (Exception e) {
-			return responseGenerator.buildErrorResponse(e);
-		}
-	}
-	
-
 	@POST
 	@Path("/signup")
 	public Response signup(@Context HttpServletRequest request, UserCredential user) {

@@ -52,8 +52,8 @@ public class DirectorService extends GenericService<Director> {
 		return this.save(director);
 	}
 
-	public DirectorDTO getDirectorDTO() {
-		Director director = this.find((long)1);
+	public DirectorDTO getDirectorDTO(Long id) {
+		Director director = this.find(id);
 		return new DirectorDTO(Arrays.asList(director.getDegree().toDTO()),director.getUser());
 	}
 
