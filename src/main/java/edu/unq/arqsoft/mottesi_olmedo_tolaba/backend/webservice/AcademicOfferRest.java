@@ -76,7 +76,7 @@ public class AcademicOfferRest  extends GenericRest<AcademicOffer> {
 			return responseGenerator.buildErrorResponse(e);
 		}
 	}
-	
+		
 	
 	@GET
 	public Response ok() {

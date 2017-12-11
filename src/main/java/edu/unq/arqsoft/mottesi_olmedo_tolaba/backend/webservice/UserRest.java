@@ -1,5 +1,7 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.webservice;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -15,8 +17,11 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.DirectorDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.UserAuthDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserCredential;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.DirectorService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.GenericService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.UserService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.ResponseGenerator;
@@ -32,6 +37,9 @@ public class UserRest  extends GenericRest<UserCredential> {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private DirectorService directorService;
 	
 
 	@Override
@@ -60,6 +68,18 @@ public class UserRest  extends GenericRest<UserCredential> {
 	public Response create(@Context HttpServletRequest request, UserCredential user) {
 		return super.create(user);
 	}
+	
+	@GET
+	@Path("/getDirector")
+	public Response offers(@Context HttpServletRequest request) {
+		try {
+			DirectorDTO director = directorService.getDirectorDTO();
+			return responseGenerator.buildSuccessResponse(director);
+		} catch (Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
+	}
+	
 
 	@POST
 	@Path("/signup")

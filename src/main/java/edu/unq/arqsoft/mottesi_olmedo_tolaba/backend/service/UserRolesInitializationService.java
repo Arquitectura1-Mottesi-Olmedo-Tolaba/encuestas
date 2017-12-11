@@ -5,13 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Director;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Role;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserCredential;
@@ -33,17 +33,20 @@ public class UserRolesInitializationService {
 	
 	@Autowired 
 	private AcademicOfferFactoryService academicOfferFactoryService;
+
+	@Autowired
+	private DirectorService directorService;
 	
 	@PostConstruct
 	private void initialize() {
 		List<Role> roles = new LinkedList<Role>();
 		
 		//Role admin = roleService.save(new Role("ADMIN"));
-		Role director = roleService.save(new Role("DIRECTOR"));
+		Role directorRole = roleService.save(new Role("DIRECTOR"));
 		Role studentRole = roleService.save(new Role("STUDENT"));
 		
 		//roles.add(admin);
-		roles.add(director);
+		roles.add(directorRole);
 		//roles.add(student);
 		
 		UserCredential adminUser = new UserCredential("director", "director");
@@ -72,7 +75,7 @@ public class UserRolesInitializationService {
 		
 		Degree degree = degreeService.save(new Degree(nameDegree, materias, Arrays.asList(academicOffer)));
 		
-		
+		Director director = directorService.create(adminUser,degree);
 	}
 	
 }
