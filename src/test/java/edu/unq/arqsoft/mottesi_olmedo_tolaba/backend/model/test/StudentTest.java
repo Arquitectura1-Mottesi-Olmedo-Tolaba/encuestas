@@ -9,7 +9,7 @@ public class StudentTest {
 
     @Test
     public void testAccessing(){
-        Student student = new Student("Homer", "Simpson", 24888, "homer.simpson@gmail.com");
+        Student student = new Student("Homer", "Simpson", 24888, "homer.simpson@gmail.com", null);
         assertEquals(student.getName(), "Homer");
         assertEquals(student.getLastName(), "Simpson");
         assertEquals(student.getStudentID(), 24888, 0);

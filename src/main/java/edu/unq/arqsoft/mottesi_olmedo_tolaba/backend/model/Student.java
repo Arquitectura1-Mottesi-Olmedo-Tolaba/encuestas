@@ -1,11 +1,15 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "students")
@@ -17,15 +21,33 @@ public class Student extends PersistenceEntity {
     private String name;
     private String lastName;
     private String email;
+    
+    @ManyToMany() //cascade = CascadeType.MERGE, orphanRemoval = true
+	@LazyCollection(LazyCollectionOption.FALSE)
+    private List<Subject> approvedSubjects; 
 
-	public Student(String name, String lastName, Integer studentID, String email) {
+	public List<Subject> getApprovedSubjects() {
+		return approvedSubjects;
+	}
+
+	public void setApprovedSubjects(List<Subject> approvedSubjects) {
+		this.approvedSubjects = approvedSubjects;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Student(String name, String lastName, Integer studentID, String email, List<Subject> approvedSubjects ) {
         this.name = name;
         this.lastName = lastName;
         this.studentID = studentID;
         this.email = email;
+        this.approvedSubjects = approvedSubjects;
     }
 
     public Student() {
+    	this.approvedSubjects = new LinkedList<Subject>();
     }
 
     public Integer getStudentID() {
@@ -59,6 +81,10 @@ public class Student extends PersistenceEntity {
     public void setEmail(String email) {
         this.email = email;
     }
+
+	public void addAprovedSubject(Subject subject) {
+		this.approvedSubjects.add(subject);
+	}
     
     
 }

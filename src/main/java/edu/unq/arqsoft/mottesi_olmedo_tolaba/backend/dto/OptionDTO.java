@@ -9,7 +9,8 @@ public class OptionDTO implements Serializable{
 
     public OptionDTO(){}
     
-    public OptionDTO(String description) {
+    public OptionDTO(String id, String description) {
+    	this.id = id;
 		this.description = description;
 	}
 

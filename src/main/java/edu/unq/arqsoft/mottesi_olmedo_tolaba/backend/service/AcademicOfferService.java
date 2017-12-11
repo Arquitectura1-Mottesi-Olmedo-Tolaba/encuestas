@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.AcademicOfferDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.AcademicOfferRepository;
 
@@ -59,8 +58,8 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 		return super.save(model);
 	}
 	
-	public AcademicOfferDTO getFirstAcademicOfferDTO(){
-		AcademicOffer academicOffer = this.find((long) 1);
+	public AcademicOfferDTO getAcademicOfferDTOById(Long id){
+		AcademicOffer academicOffer = this.find(id);
 		return this.AcademicOfferToDTO(academicOffer);
 	}
 	
@@ -71,11 +70,23 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 		academicOfferDTO.setEndDate(academicOffer.getEndDate());
 		academicOfferDTO.setActive(academicOffer.isActive());
 		academicOfferDTO.setPeriod(periodService.periodToDTO(academicOffer.getPeriod()));
+		
+		//Ver como ponderar elecciones pasadas...
 		academicOfferDTO.setOffers(offerService.getOffersDTO(academicOffer.getOffers()));
 		return academicOfferDTO;
 	}
 	
+	public AcademicOfferDTO AcademicOfferToDTOForStudent(Long idStudent){
+		//TODO: Refac to get active
+		AcademicOffer academicOffer = this.getRepository().findById((long)1);
+		Student student = studentService.find(idStudent);
+		AcademicOfferDTO academicOfferDTO = this.AcademicOfferToDTO(academicOffer);
+		academicOfferDTO.setStudent(studentService.StudentToDTO(student));
+		return academicOfferDTO;
+	}
+	
 	public AcademicOfferDTO AcademicOfferToDTOForStudent(Long idAcademicOffer, Long idStudent){
+		
 		AcademicOffer academicOffer = this.getRepository().findById(idAcademicOffer);
 		Student student = studentService.find(idStudent);
 		AcademicOfferDTO academicOfferDTO = this.AcademicOfferToDTO(academicOffer);

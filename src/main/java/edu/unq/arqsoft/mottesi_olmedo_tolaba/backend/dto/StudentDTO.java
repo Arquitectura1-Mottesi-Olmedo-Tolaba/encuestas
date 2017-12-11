@@ -7,7 +7,7 @@ public class StudentDTO implements Serializable{
 	
 	private Long id;
     private String name;
-    private List<String> approvedSubjects;
+    private List<SubjectDTO> approvedSubjects;
 
     public StudentDTO(){}
     
@@ -27,11 +27,11 @@ public class StudentDTO implements Serializable{
 		this.name = name;
 	}
 
-	public List<String> getApprovedSubjects() {
+	public List<SubjectDTO> getApprovedSubjects() {
 		return approvedSubjects;
 	}
 
-	public void setApprovedSubjects(List<String> approvedSubjects) {
+	public void setApprovedSubjects(List<SubjectDTO> approvedSubjects) {
 		this.approvedSubjects = approvedSubjects;
 	}
 }

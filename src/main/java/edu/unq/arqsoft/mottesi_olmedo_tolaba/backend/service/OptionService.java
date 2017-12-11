@@ -65,10 +65,11 @@ public class OptionService extends GenericService<Option> {
 	
 	public List<OptionDTO> optionsForCourses(List<Course> courses){
 		List<OptionDTO> optionsDTO = new ArrayList<OptionDTO>();
-		optionsDTO.add(new OptionDTO("Todavia no voy a  cursarla"));
-		optionsDTO.add(new OptionDTO("Ya la curse"));
+		optionsDTO.add(new OptionDTO("Todavia no voy a  cursarla","Todavia no voy a  cursarla"));
+		optionsDTO.add(new OptionDTO("Ya la curse","Ya la curse"));
 		for(Course course : courses) {
 			OptionDTO optionDTO = new OptionDTO();
+			optionDTO.setId(String.valueOf(course.getId()));
 			optionDTO.setDescription(course.getName());
 			optionsDTO.add(optionDTO);
 		}

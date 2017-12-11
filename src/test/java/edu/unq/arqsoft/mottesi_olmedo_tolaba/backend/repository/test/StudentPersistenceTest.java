@@ -27,7 +27,11 @@ public class StudentPersistenceTest {
 	@Before
 	public void setup() {
 		studentId = 24888;
-		student = new Student("Homer", "Simpson", studentId, "homer.simpson@gmail.com");
+		student = new Student();
+		student.setId((long)studentId);
+		student.setName("Homer");
+		student.setLastName("Simpson");
+		student.setEmail("homer.simpson@gmail.com");
 		service.save(student);
 	}
 	

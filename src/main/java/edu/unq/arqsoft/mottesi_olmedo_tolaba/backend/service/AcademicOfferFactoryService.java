@@ -50,25 +50,21 @@ public class AcademicOfferFactoryService {
 		Course cursada = new Course();
 		Professor mara = new Professor("Mara Dalponte");
 		mara = professorService.save(mara);
-		cursada.setProfessor(mara);
+		
 		
 		Timeline lunes = new Timeline("Lunes","18:00","22:00");
 		Timeline miercoles = new Timeline("Miercoles","18:00","22:00");
 		lunes = timelineService.save(lunes);
 		miercoles = timelineService.save(miercoles);
+		
+		cursada.setProfessor(mara);
+		cursada.setName("Comision 1");
 		cursada.setTimelines(Arrays.asList(lunes, miercoles));
 
 		courseService.save(cursada);
 		
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada));
-				
-		/*
-		Option firstOption = new Option("Todavia no voy a cursarla");
-		Option secondOption = new Option("Ya la curse");
-		Option thirdOption = new Option("Cursaria en comision 1");
-		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption));
-		*/
 		
 		//offer = offerService.save(offer);
 		return offer;
@@ -80,6 +76,8 @@ public class AcademicOfferFactoryService {
 		Course cursada = new Course();
 		Professor eduardo = new Professor("Eduardo Bonelli");
 		eduardo = professorService.save(eduardo);
+		
+		cursada.setName("Comision 1");
 		cursada.setProfessor(eduardo);
 		
 		Timeline lunes = new Timeline("Lunes","18:00","22:00");
@@ -92,14 +90,6 @@ public class AcademicOfferFactoryService {
 		
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada));
-		
-		/*
-		Option firstOption = new Option("Todavia no voy a cursarla");
-		Option secondOption = new Option("Ya la curse");
-		Option thirdOption = new Option("Cursaria en comision 1");
-		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption));
-		*/
-		
 		//offer = offerService.save(offer);
 		return offer;
 	}
@@ -125,9 +115,11 @@ public class AcademicOfferFactoryService {
 		Professor jano = new Professor("Jano");
 		jano = professorService.save(jano);
 		
+		cursada.setName("Comision 1");
 		cursada.setProfessor(hortensia);
 		cursada.setTimelines(Arrays.asList(lunes, miercoles));
 		
+		cursada2.setName("Comision 2");
 		cursada2.setProfessor(jano);
 		cursada2.setTimelines(Arrays.asList(lunes1, miercoles1));
 
@@ -138,14 +130,6 @@ public class AcademicOfferFactoryService {
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada,cursada2));
 		
-		/*
-		Option firstOption = new Option("Todavia no voy a cursarla");
-		Option secondOption = new Option("Ya la curse");
-		Option thirdOption = new Option("Cursaria en comision 1");
-		Option fourthOption = new Option("Cursaria en comision 2");
-		offer.setOptions(Arrays.asList(firstOption,secondOption,thirdOption,fourthOption));
-		*/	
-		
 		//offer = offerService.save(offer);
 		return offer;
 	}
@@ -154,7 +138,7 @@ public class AcademicOfferFactoryService {
 	public AcademicOffer initialize(String nameDegree, List<Subject> subjects) {
 		
 		AcademicOffer academicOffer = new AcademicOffer();
-		
+		academicOffer.setActive(true);
 		// TODO: SET DEGREE, STUDENT ??? EL NAME ES EL NOMBRE DEL DEGREE ...
 		academicOffer.setName(nameDegree);
 		Integer quarter = 1;
@@ -164,7 +148,9 @@ public class AcademicOfferFactoryService {
 		Student student = new Student();
 		student.setName("Homero");
 		student.setLastName("Simpson");
+		student.addAprovedSubject(subjects.get(0));
 		studentService.save(student);
+		
 		// MATERIAS APROBADAS ???
 		
 		
@@ -182,6 +168,7 @@ public class AcademicOfferFactoryService {
 		System.out.println("------------------");
 		System.out.println("------------------");
 		AcademicOfferDTO dto = this.academicOfferService.AcademicOfferToDTO(academicOffer);
+		dto.setStudent(studentService.StudentToDTO(student));
 		System.out.println(dto.prettyPrint());
 		System.out.println("------------------");
 		System.out.println("------------------");

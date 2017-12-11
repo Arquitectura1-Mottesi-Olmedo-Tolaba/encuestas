@@ -1,7 +1,5 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.webservice;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.AcademicOfferDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.AcademicOfferService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.GenericService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.ResponseGenerator;
@@ -47,19 +44,12 @@ public class AcademicOfferRest  extends GenericRest<AcademicOffer> {
 	public Response findAll() {
 		return super.findAll();
 	}
-
 	
 	@GET
-	@Path("/{id}")
-	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
-		return super.find(id);
-	}
-	
-	@GET
-	@Path("/first")
-	public Response getFirst(@Context HttpServletRequest request) {
+	@Path("/forStudent/{idStudent}")
+	public Response forStudent(@Context HttpServletRequest request, @PathParam("idStudent") final Long idStudent) {
 		try {
-			AcademicOfferDTO dto = this.academicOfferService.getFirstAcademicOfferDTO();
+			AcademicOfferDTO dto = this.academicOfferService.AcademicOfferToDTOForStudent(idStudent);
 			return responseGenerator.buildSuccessResponse(dto);
 		} catch (Exception e) {
 			return responseGenerator.buildErrorResponse(e);
@@ -67,17 +57,17 @@ public class AcademicOfferRest  extends GenericRest<AcademicOffer> {
 	}
 	
 	@GET
-	@Path("/offersFromFirst")
-	public Response offers(@Context HttpServletRequest request) {
+	@Path("/{id}")
+	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
 		try {
-			List<Offer> offers = this.academicOfferService.find((long) 1).getOffers();
-			return responseGenerator.buildSuccessResponse(offers);
+			AcademicOfferDTO dto = this.academicOfferService.getAcademicOfferDTOById(id);
+			return responseGenerator.buildSuccessResponse(dto);
 		} catch (Exception e) {
 			return responseGenerator.buildErrorResponse(e);
 		}
 	}
-		
 	
+		
 	@GET
 	public Response ok() {
 		return responseGenerator.responseOK("OK");

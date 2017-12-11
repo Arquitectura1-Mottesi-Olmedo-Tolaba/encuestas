@@ -1,11 +1,16 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SubjectDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.StudentRepository;
 
 
@@ -42,7 +47,10 @@ public class StudentService extends GenericService<Student> {
 	}
 
 	public Student newStudent(String name, String lastName, Integer studentID, String email) {
-		Student newStudent = new Student(name, lastName, studentID, email);
+		Student newStudent = new Student();
+		newStudent.setEmail(email);
+		newStudent.setName(name);
+		newStudent.setLastName(lastName);
 		return this.save(newStudent);
 	}
 	
@@ -55,11 +63,24 @@ public class StudentService extends GenericService<Student> {
 		return this.update(studentToUpdate);
 	}
 	
-	public StudentDTO StudentToDTO(Student student) {
+	public StudentDTO minimumStudentToDTO(Student student) {
 		StudentDTO studentDTO = new StudentDTO();
 		studentDTO.setId(student.getId());
-		studentDTO.setName(student.getName());
-		//studentDTO.setApprovedSubjects(this.getSubjectService().subjectsToDTO());
+		studentDTO.setName(student.getName());		
+		return studentDTO;
+	}
+	
+	private List<SubjectDTO> getApprovedSubjectsDTO(Student student){
+		List<SubjectDTO> dtos = new ArrayList<SubjectDTO>();
+		for (Subject subject : student.getApprovedSubjects()){
+			dtos.add(this.subjectService.subjectToDTO(subject));
+		}
+		return dtos;
+	}
+	
+	public StudentDTO StudentToDTO(Student student){
+		StudentDTO studentDTO = minimumStudentToDTO(student);
+		studentDTO.setApprovedSubjects(getApprovedSubjectsDTO(student));
 		return studentDTO;
 	}
 }
