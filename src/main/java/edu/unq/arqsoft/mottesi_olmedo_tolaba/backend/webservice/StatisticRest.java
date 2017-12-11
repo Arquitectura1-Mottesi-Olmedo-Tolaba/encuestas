@@ -1,5 +1,7 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.webservice;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -15,8 +17,8 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StatisticDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.GenericService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.StatisticService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.ResponseGenerator;
@@ -31,24 +33,47 @@ public class StatisticRest  extends GenericRest<Statistic> {
 	private ResponseGenerator responseGenerator;
 	
 	@Autowired
-	private StatisticService subjectService;
+	private StatisticService statisticService;
 	
 
 	@Override
 	public GenericService<Statistic> getService() {
-		return subjectService;
+		return statisticService;
 	}
 
+	@GET
+	@Path("/findByAcademicOffer/{id}")
+	public Response findByAcademicOffer(@Context HttpServletRequest request, @PathParam("id") final Long id) {
+		try {
+			List<StatisticDTO> dtos = this.statisticService.findDTOByAcademicOffer(id);
+			return responseGenerator.buildSuccessResponse(dtos);
+		} catch (Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
+	}
+	
 	@GET
 	@Path("/all")
 	public Response findAll() {
-		return super.findAll();
+		try {
+			List<StatisticDTO> dtos = this.statisticService.findAllDTO();
+			return responseGenerator.buildSuccessResponse(dtos);
+		} catch (Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
 	}
 
+	
+	
 	@GET
 	@Path("/{id}")
 	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
-		return super.find(id);
+		try {
+			StatisticDTO dto = this.statisticService.findDTO(id);
+			return responseGenerator.buildSuccessResponse(dto);
+		} catch (Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
 	}
 	
 	@GET

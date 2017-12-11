@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.OptionCounter;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic;
 
 @Repository
@@ -35,6 +34,17 @@ public class StatisticRepository extends HibernateGenericDAO<Statistic> implemen
 
 	public void setStatistics(List<Statistic> statistics) {
 		this.statistics = statistics;
+	}
+
+	public List<Statistic> findByAcademicOffer(Long id) {
+		String query = "SELECT statistic FROM " + persistentClass.getName() + " statistic "
+				+ "WHERE statistic.academicOffer.id = ? ";
+		List<Statistic> statistics = (List<Statistic>) this.getHibernateTemplate().find(query, id);
+		if (statistics.isEmpty()) {
+			return null;
+		} else {
+			return statistics;
+		}
 	}
 
 	

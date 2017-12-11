@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.OptionCounter;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject;
@@ -18,7 +19,7 @@ public class StatisticsFactoryService {
 	@Autowired
 	private StatisticService statisticService;
 
-	public void initialize(String nameDegree, List<Subject> basicMaterias) {
+	public void initialize(String nameDegree, List<Subject> basicMaterias, AcademicOffer academicOffer) {
 			
 		//PREPARAR STATS PARA MATERIAS BASICAS...
 		
@@ -28,7 +29,7 @@ public class StatisticsFactoryService {
 		OptionCounter comision1Lectura = new OptionCounter("Comision 1",13,60);
 
 		Statistic statLectura = statisticService.newStatistic(lectura,
-				Arrays.asList(comision1Lectura,laquisieraLectura));
+				Arrays.asList(comision1Lectura,laquisieraLectura), academicOffer);
 		statisticService.save(statLectura);
 		/*
 		{
@@ -54,7 +55,7 @@ public class StatisticsFactoryService {
 		OptionCounter comision1Mate =	new OptionCounter("Comision 1",8,11);
 
 		Statistic statMate = statisticService.newStatistic(mate,
-				Arrays.asList(comision1Mate,laquisieraMate));
+				Arrays.asList(comision1Mate,laquisieraMate), academicOffer);
 		
 		statisticService.save(statMate);
 		
@@ -83,7 +84,7 @@ public class StatisticsFactoryService {
 		OptionCounter laquisieraElementos = new OptionCounter("la quisiera cursar...",274);
 
 		Statistic statElementos = statisticService.newStatistic(elementos,
-				Arrays.asList(comision1Elementos,laquisieraElementos));
+				Arrays.asList(comision1Elementos,laquisieraElementos), academicOffer);
 		
 		statisticService.save(statElementos);
 		/*
@@ -163,7 +164,7 @@ public class StatisticsFactoryService {
 		OptionCounter laquisieraObjetos1 = new OptionCounter("la quisiera cursar...",376);
 
 		Statistic statObjetos1 = statisticService.newStatistic(objetos1,
-				Arrays.asList(comision1Objetos1,laquisieraObjetos1));
+				Arrays.asList(comision1Objetos1,laquisieraObjetos1), academicOffer);
 		
 		statisticService.save(statObjetos1);
         /*
@@ -192,7 +193,7 @@ public class StatisticsFactoryService {
 		OptionCounter laquisieraBases = new OptionCounter("la quisiera cursar...",259);
 
 		Statistic statBases = statisticService.newStatistic(bases,
-				Arrays.asList(comision1Bases,comision2Bases, laquisieraBases));
+				Arrays.asList(comision1Bases,comision2Bases, laquisieraBases), academicOffer);
 		
 		statisticService.save(statBases);
 		/*
@@ -224,7 +225,7 @@ public class StatisticsFactoryService {
 		OptionCounter laquisieraEst = new OptionCounter("la quisiera cursar...",147);
 
 		Statistic statEst = statisticService.newStatistic(estD,
-				Arrays.asList(comision1Est, laquisieraEst));
+				Arrays.asList(comision1Est, laquisieraEst), academicOffer);
 		
 		statisticService.save(statEst);
 
@@ -252,7 +253,7 @@ public class StatisticsFactoryService {
 		OptionCounter laquisieraObj2 = new OptionCounter("la quisiera cursar...",361);
 
 		Statistic statObj2 = statisticService.newStatistic(objetos2,
-				Arrays.asList(comision1Obj2, laquisieraObj2));
+				Arrays.asList(comision1Obj2, laquisieraObj2), academicOffer);
 		
 		statisticService.save(statObj2);
 		/*
@@ -281,7 +282,7 @@ public class StatisticsFactoryService {
 		OptionCounter laquisieraRedes = new OptionCounter("la quisiera cursar...",48);
 
 		Statistic statRedes = statisticService.newStatistic(redes,
-				Arrays.asList(comision1Redes,comision2Redes, laquisieraRedes));
+				Arrays.asList(comision1Redes,comision2Redes, laquisieraRedes), academicOffer);
 		
 		statisticService.save(statRedes);
 		/*
@@ -313,7 +314,7 @@ public class StatisticsFactoryService {
 		OptionCounter laquisieraSo = new OptionCounter("la quisiera cursar...",40);
 
 		Statistic statSo = statisticService.newStatistic(so,
-				Arrays.asList(comision1So, laquisieraSo));
+				Arrays.asList(comision1So, laquisieraSo), academicOffer);
 		
 		statisticService.save(statSo);
 		/*
@@ -342,7 +343,7 @@ public class StatisticsFactoryService {
 		OptionCounter laquisieraConc = new OptionCounter("la quisiera cursar...",290);
 
 		Statistic statConc = statisticService.newStatistic(pconc,
-				Arrays.asList(comision1Conc,comision2Conc, laquisieraConc));
+				Arrays.asList(comision1Conc,comision2Conc, laquisieraConc), academicOffer);
 		
 		statisticService.save(statConc);
 

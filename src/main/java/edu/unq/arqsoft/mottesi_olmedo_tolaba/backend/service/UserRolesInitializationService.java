@@ -74,7 +74,7 @@ public class UserRolesInitializationService {
 		List<Subject> materias = Arrays.asList(mate1,orga,intro);
 		AcademicOffer academicOffer = academicOfferFactoryService.initialize(nameDegree, materias);
 		
-		statisticsFactoryService.initialize(nameDegree,materias);
+		statisticsFactoryService.initialize(nameDegree,materias,academicOffer);
 		
 		/*
 		Degree degree = degreeFactoryService.initiliaze(nameDegree,materias);
