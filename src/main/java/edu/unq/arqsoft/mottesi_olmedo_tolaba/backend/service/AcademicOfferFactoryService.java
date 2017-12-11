@@ -27,9 +27,7 @@ public class AcademicOfferFactoryService {
 	
 	@Autowired
 	private OfferService offerService;
-	
-	@Autowired
-	private SubjectService subjectService;
+
 	
 	@Autowired
 	private ProfessorService professorService;
@@ -47,7 +45,7 @@ public class AcademicOfferFactoryService {
 	private TimelineService timelineService;
 	
 	@Transactional
-	public Offer createOrgaOffer(){
+	public Offer createOrgaOffer(Subject subject){
 		Offer offer = new Offer();
 		Course cursada = new Course();
 		Professor hortensia = new Professor("Hortensia");
@@ -61,8 +59,7 @@ public class AcademicOfferFactoryService {
 		cursada.setTimelines(Arrays.asList(lunes, miercoles));
 
 		courseService.save(cursada);
-		Subject subject = new Subject("Organizacion de computadoras");
-		subjectService.save(subject);
+		
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada));
 		
@@ -76,7 +73,7 @@ public class AcademicOfferFactoryService {
 	}
 	
 	@Transactional
-	public Offer createIntroOffer(){
+	public Offer createIntroOffer(Subject subject){
 		Offer offer = new Offer();
 		Course cursada = new Course();
 		Professor hortensia = new Professor("Hortensia");
@@ -90,8 +87,7 @@ public class AcademicOfferFactoryService {
 		cursada.setTimelines(Arrays.asList(lunes, miercoles));
 
 		courseService.save(cursada);
-		Subject subject = new Subject("introduccion a la programacion");
-		subjectService.save(subject);
+		
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada));
 		
@@ -105,7 +101,7 @@ public class AcademicOfferFactoryService {
 	}
 	
 	@Transactional
-	public Offer createMatematicaOffer(){
+	public Offer createMatematicaOffer(Subject subject){
 		Offer offer = new Offer();
 		Course cursada = new Course();
 		Course cursada2 = new Course();
@@ -134,8 +130,7 @@ public class AcademicOfferFactoryService {
 		cursada = courseService.save(cursada);
 		cursada2 = courseService.save(cursada2);
 		
-		Subject subject = new Subject("Matematica 1");
-		subjectService.save(subject);
+		
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada,cursada2));
 		
@@ -151,12 +146,12 @@ public class AcademicOfferFactoryService {
 	}
 	
 	
-	public void initialize() {
+	public AcademicOffer initialize(String nameDegree, List<Subject> subjects) {
 		
 		AcademicOffer academicOffer = new AcademicOffer();
 		
 		// TODO: SET DEGREE, STUDENT ??? EL NAME ES EL NOMBRE DEL DEGREE ...
-		academicOffer.setName("Tecnicatura Universitaria en Programación Informática");
+		academicOffer.setName(nameDegree);
 		Integer quarter = 1;
 		Period period = new Period(2017,quarter);
 		periodService.save(period);
@@ -173,11 +168,11 @@ public class AcademicOfferFactoryService {
 		
 		System.out.println(academicOffer.getPeriod());
 		
-		Offer offerMatematica = createMatematicaOffer();
-		Offer offerIntro = createIntroOffer();
-		Offer offerOrga = createOrgaOffer();
+		Offer offerMatematica = createMatematicaOffer(subjects.get(0));
+		Offer offerOrga = createOrgaOffer(subjects.get(1));
+		Offer offerIntro = createIntroOffer(subjects.get(2));
 		
-		academicOffer.setOffers(Arrays.asList(offerMatematica,offerIntro, offerOrga));
+		academicOffer.setOffers(Arrays.asList(offerMatematica, offerOrga,offerIntro));
 		academicOffer = academicOfferService.update(academicOffer);
 		System.out.println("------------------");
 		System.out.println("------------------");
@@ -186,7 +181,7 @@ public class AcademicOfferFactoryService {
 		System.out.println("------------------");
 		System.out.println("------------------");
 		
-		
+		return academicOffer;
 	}
 	
 	

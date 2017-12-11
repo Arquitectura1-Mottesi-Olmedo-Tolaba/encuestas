@@ -95,15 +95,12 @@ public class UserCredential extends PersistenceEntity {
 	// Logic
 	/**
 	 * Adds the given Role to the Entity if not already added previously.
-	 * @param roleToAdd : The Role to add.
+	 * @param student : The Role to add.
 	 */
-	public void addRole(Role roleToAdd) {
-		for (Role role : roles) {
-			if (role.getId().equals(roleToAdd.getId())) {
-				return;
-			}
-		}
-		this.roles.add(roleToAdd);
+	
+	public void addRole(Role studentRole) {
+		this.roles.add(studentRole);
+		
 	}
 	
 	public void addRoles(Collection<Role> roles) {
@@ -115,5 +112,7 @@ public class UserCredential extends PersistenceEntity {
 	public Boolean isWellFormed() {
 		return StringValidator.isValidString(username) && StringValidator.isValidString(password);
 	}
+
+	
 
 }

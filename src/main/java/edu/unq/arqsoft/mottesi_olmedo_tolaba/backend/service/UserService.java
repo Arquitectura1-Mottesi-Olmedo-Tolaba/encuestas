@@ -88,12 +88,15 @@ public class UserService extends GenericService<UserCredential> {
 		UserCredential userCredential = new UserCredential(userParam.getUsername(), userParam.getPassword(), userParam.getEmail());
 		userCredential = super.save(userCredential);
 		userProfileService.createUserProfile(userCredential);
+		
+		/*
 		if (userCredential.getEmail().contains("olmedo.juanig")){
 			userCredential.addRole(fetchAdminRole());
 		}
 		else{
 			userCredential.addRole(fetchClientRole());
-		}		
+		}
+		*/		
 		return userCredential;
 	}
 

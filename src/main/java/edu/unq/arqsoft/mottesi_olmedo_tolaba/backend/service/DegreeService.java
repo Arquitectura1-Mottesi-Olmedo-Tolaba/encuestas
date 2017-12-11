@@ -38,6 +38,6 @@ public class DegreeService extends GenericService<Degree> {
 	public Degree save(Degree model) {
 		return super.save(model);
 	}
-	
+
 
 }
