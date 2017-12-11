@@ -66,11 +66,13 @@ public class SurveyService extends GenericService<Survey> {
 	}
 
 	public Survey createSurveyFromDto(SurveyDTO surveyDTO) {
-		Survey survey = new Survey();
+		
+		Survey survey = this.getByCode(surveyDTO.code);
 		for (SurveyMatchDTO smDTO : surveyDTO.surveyMatches){
 			SurveyMatch sm = surveyMatchService.createSurveyMatchFromDTO(smDTO);
 			survey.addSurveyMatch(sm);
 		}		
+		survey.setMessage(surveyDTO.message);
 		return this.save(survey);
 	}
 

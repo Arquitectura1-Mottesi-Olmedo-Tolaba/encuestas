@@ -8,13 +8,14 @@ public class SurveyDTO implements Serializable{
 
 	private static final long serialVersionUID = -4655259408872462825L;
 	public List<SurveyMatchDTO> surveyMatches = new LinkedList<SurveyMatchDTO>();
-	public Long id;
+	public String code;
+	public String message;
 	
 	public SurveyDTO(){	
 	}
 	
-	public SurveyDTO(Long id, List<SurveyMatchDTO> surveyMatches){
-		this.id = id;
+	public SurveyDTO(String code, List<SurveyMatchDTO> surveyMatches){
+		this.code = code;
 		this.surveyMatches = surveyMatches;
 	}
 	
