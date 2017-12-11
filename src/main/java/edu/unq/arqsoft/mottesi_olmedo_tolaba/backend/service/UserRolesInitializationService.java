@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Director;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Role;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserCredential;
@@ -33,6 +31,9 @@ public class UserRolesInitializationService {
 	
 	@Autowired 
 	private AcademicOfferFactoryService academicOfferFactoryService;
+	
+	@Autowired 
+	private StatisticsFactoryService statisticsFactoryService;
 
 	@Autowired
 	private DirectorService directorService;
@@ -73,9 +74,15 @@ public class UserRolesInitializationService {
 		List<Subject> materias = Arrays.asList(mate1,orga,intro);
 		AcademicOffer academicOffer = academicOfferFactoryService.initialize(nameDegree, materias);
 		
-		Degree degree = degreeService.save(new Degree(nameDegree, materias, Arrays.asList(academicOffer)));
+		statisticsFactoryService.initialize(nameDegree,materias);
+		
+		/*
+		Degree degree = degreeFactoryService.initiliaze(nameDegree,materias);
+		
+				.save(new Degree(nameDegree, materias, Arrays.asList(academicOffer)));
 		
 		Director director = directorService.create(adminUser,degree);
+		*/
 	}
 	
 }

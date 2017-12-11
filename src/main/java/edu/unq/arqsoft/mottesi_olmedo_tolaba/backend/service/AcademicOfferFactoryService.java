@@ -1,18 +1,15 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.AcademicOfferDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Option;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
@@ -24,11 +21,7 @@ public class AcademicOfferFactoryService {
 
 	@Autowired
 	private AcademicOfferService academicOfferService;
-	
-	@Autowired
-	private OfferService offerService;
-
-	
+		
 	@Autowired
 	private ProfessorService professorService;
 	
@@ -66,7 +59,6 @@ public class AcademicOfferFactoryService {
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada));
 		
-		//offer = offerService.save(offer);
 		return offer;
 	}
 	
@@ -90,7 +82,6 @@ public class AcademicOfferFactoryService {
 		
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada));
-		//offer = offerService.save(offer);
 		return offer;
 	}
 	
@@ -130,7 +121,6 @@ public class AcademicOfferFactoryService {
 		offer.setSubject(subject);
 		offer.setCourses(Arrays.asList(cursada,cursada2));
 		
-		//offer = offerService.save(offer);
 		return offer;
 	}
 	
@@ -150,14 +140,9 @@ public class AcademicOfferFactoryService {
 		student.setLastName("Simpson");
 		student.addAprovedSubject(subjects.get(0));
 		studentService.save(student);
-		
-		// MATERIAS APROBADAS ???
-		
-		
+				
 		academicOffer.setPeriod(period);
 		academicOffer = academicOfferService.save(academicOffer);
-		
-		System.out.println(academicOffer.getPeriod());
 		
 		Offer offerMatematica = createMatematicaOffer(subjects.get(0));
 		Offer offerOrga = createOrgaOffer(subjects.get(1));
@@ -165,14 +150,7 @@ public class AcademicOfferFactoryService {
 		
 		academicOffer.setOffers(Arrays.asList(offerMatematica, offerOrga,offerIntro));
 		academicOffer = academicOfferService.update(academicOffer);
-		System.out.println("------------------");
-		System.out.println("------------------");
-		AcademicOfferDTO dto = this.academicOfferService.AcademicOfferToDTO(academicOffer);
-		dto.setStudent(studentService.StudentToDTO(student));
-		System.out.println(dto.prettyPrint());
-		System.out.println("------------------");
-		System.out.println("------------------");
-		
+				
 		return academicOffer;
 	}
 	

@@ -24,6 +24,26 @@ public class Offer extends PersistenceEntity {
 	@LazyCollection(LazyCollectionOption.FALSE)
     private List<Option> options;
     */
+	
+	/*
+	
+	"info": [
+        {
+            "name": "Comision 1",
+            "capacity": 13,
+            "amount": 60
+        },
+        {
+            "name": "la quisiera cursar...",
+            "amount": 23
+        }
+    ]
+	*/
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@LazyCollection(LazyCollectionOption.FALSE)
+    private List<Statistic> statistic;
+	
         
     public Offer() {
     }

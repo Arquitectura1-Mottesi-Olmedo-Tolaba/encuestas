@@ -5,6 +5,7 @@ import java.util.List;
 
 public class StudentDTO implements Serializable{
 	
+	private static final long serialVersionUID = 6398518148191713691L;
 	private Long id;
     private String name;
     private List<SubjectDTO> approvedSubjects;

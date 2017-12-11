@@ -67,6 +67,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			<ref bean="studentRest" />
 			<ref bean="surveyRest" />
 			<ref bean="directorRest" />
+			<ref bean="statisticRest" />
 			
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
