@@ -29,7 +29,7 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.SurveyService;
 @ActiveProfiles(profiles = "test")
 @ContextConfiguration({ "/META-INF/spring-persistence-context.xml", "/META-INF/spring-services-context.xml" })
 public class SurveyIntegrationsTest {
-
+/*
 
 	@Autowired
 	private SurveyService surveyService;
@@ -96,5 +96,5 @@ public class SurveyIntegrationsTest {
    		assertEquals(survey.getSurveyMatches().get(0).getOption().getDescription(), "Todavia no curso");
    	}
 	
-	
+	*/
 }

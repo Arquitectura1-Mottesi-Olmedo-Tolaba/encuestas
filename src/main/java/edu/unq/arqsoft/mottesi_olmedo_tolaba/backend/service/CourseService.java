@@ -85,7 +85,7 @@ public class CourseService extends GenericService<Course> {
 	public Course newCourseWithSubjectAndProfessor( Long idProfessor, List<Timeline> timelines) {
 		Professor professor = this.getProfessorService().find(idProfessor);
 		
-		Course newCourse = new Course(professor, timelines);
+		Course newCourse = new Course("",professor, timelines);
 		return this.save(newCourse);
 	}
 

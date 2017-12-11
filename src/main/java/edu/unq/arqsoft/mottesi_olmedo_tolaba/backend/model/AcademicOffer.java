@@ -23,7 +23,7 @@ public class AcademicOffer extends PersistenceEntity {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Offer> offers = new LinkedList<Offer>();
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
     private Period period;
 	
 	private String endDate;
@@ -32,13 +32,15 @@ public class AcademicOffer extends PersistenceEntity {
 
 	public AcademicOffer() {
     }
-	
-    public AcademicOffer(String name, List<Offer> offers, Period period) {
-        this.offers = offers;
-        this.period = period;
-    }
 
-    public List<Offer> getOffers() {
+	public AcademicOffer(List<Offer> offers, Period period, String endDate, boolean active) {
+		this.offers = offers;
+		this.period = period;
+		this.endDate = endDate;
+		this.active = active;
+	}
+
+	public List<Offer> getOffers() {
         return offers;
     }
 
