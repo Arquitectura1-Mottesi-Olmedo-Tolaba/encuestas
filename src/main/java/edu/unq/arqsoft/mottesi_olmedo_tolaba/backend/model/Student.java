@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentDTO;
+
 @Entity
 @Table(name = "students")
 public class Student extends PersistenceEntity {
@@ -84,6 +86,13 @@ public class Student extends PersistenceEntity {
 
 	public void addAprovedSubject(Subject subject) {
 		this.approvedSubjects.add(subject);
+	}
+	
+	public StudentDTO minimumStudentToDTO() {
+		StudentDTO studentDTO = new StudentDTO();
+		studentDTO.setId(this.getId());
+		studentDTO.setName(this.getName());		
+		return studentDTO;
 	}
     
     

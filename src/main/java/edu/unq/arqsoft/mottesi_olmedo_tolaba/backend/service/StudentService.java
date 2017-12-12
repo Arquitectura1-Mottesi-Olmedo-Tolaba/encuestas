@@ -63,12 +63,6 @@ public class StudentService extends GenericService<Student> {
 		return this.update(studentToUpdate);
 	}
 	
-	public StudentDTO minimumStudentToDTO(Student student) {
-		StudentDTO studentDTO = new StudentDTO();
-		studentDTO.setId(student.getId());
-		studentDTO.setName(student.getName());		
-		return studentDTO;
-	}
 	
 	private List<SubjectDTO> getApprovedSubjectsDTO(Student student){
 		List<SubjectDTO> dtos = new ArrayList<SubjectDTO>();
@@ -79,7 +73,7 @@ public class StudentService extends GenericService<Student> {
 	}
 	
 	public StudentDTO StudentToDTO(Student student){
-		StudentDTO studentDTO = minimumStudentToDTO(student);
+		StudentDTO studentDTO = student.minimumStudentToDTO();
 		studentDTO.setApprovedSubjects(getApprovedSubjectsDTO(student));
 		return studentDTO;
 	}
