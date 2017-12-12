@@ -5,14 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "surveys")
@@ -20,7 +18,8 @@ public class Survey extends PersistenceEntity {
 
 	private static final long serialVersionUID = 9159344780394535641L;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch= FetchType.EAGER)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<SurveyMatch> surveyMatches = new LinkedList<SurveyMatch>();
 	
 	private String code;
