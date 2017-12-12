@@ -23,7 +23,9 @@ GET : URL + /services/academicOffers/forStudent/{idStudent} para obtener la ofer
 GET : URL + /services/directors/{id} para obtener informacion del director conjunto a las carreras.
 
 
+BACKEND HEROKU:
 
+https://arq-soft-unq.herokuapp.com/services/users/all
 
 APP frontend: 
 
