@@ -110,6 +110,9 @@
 	       
 	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Director</value>
 	       
+	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.DegreeStudent</value>
+	       
+	       
 	     </list>
 	   </property>
 		
