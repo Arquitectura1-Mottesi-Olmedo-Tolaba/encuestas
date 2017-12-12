@@ -82,7 +82,8 @@ public class SurveyService extends GenericService<Survey> {
 	}
 	
 	public Survey getByCode(String code) {
-		return this.repository.getByCode(code);
+		Survey survey = this.repository.getByCode(code);
+		return survey;
 	}
 
 	public StudentSurveyDTO getDTO(AcademicOffer academicOffer) {

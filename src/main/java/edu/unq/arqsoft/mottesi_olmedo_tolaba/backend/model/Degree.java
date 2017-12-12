@@ -73,4 +73,8 @@ public class Degree extends PersistenceEntity {
 		
 		return new DegreeDTO(this.id,this.name,subjectsDTO);
 	}
+
+	public void addAcademicOffer(AcademicOffer academicOffer) {
+		this.academicOffers.add(academicOffer);		
+	}
 }

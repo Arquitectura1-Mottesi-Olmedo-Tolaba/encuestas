@@ -76,6 +76,9 @@ public class UserRolesInitializationService {
 		
 		statisticsFactoryService.initialize(nameDegree,materias,academicOffer);
 		
+		
+		
+		
 		/*
 		Degree degree = degreeFactoryService.initiliaze(nameDegree,materias);
 		

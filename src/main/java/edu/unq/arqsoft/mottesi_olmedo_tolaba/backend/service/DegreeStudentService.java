@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.DegreeStudentDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.DegreeStudent;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.DegreeStudentRepository;
 
 
@@ -59,6 +61,10 @@ public class DegreeStudentService extends GenericService<DegreeStudent> {
 
 	public DegreeStudentDTO findByDTO(Long id) {
 		return this.find(id).toDTO();
+	}
+
+	public List<Student> searchStudentForDegree(Long idDegree) {
+		return this.repository.searchStudentForDegree(idDegree);
 	}
 
 
