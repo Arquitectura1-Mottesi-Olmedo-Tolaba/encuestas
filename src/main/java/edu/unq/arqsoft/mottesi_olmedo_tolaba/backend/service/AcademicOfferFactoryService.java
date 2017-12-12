@@ -92,7 +92,7 @@ public class AcademicOfferFactoryService {
 
 		AcademicOffer academicOffer =
 				new AcademicOffer(Arrays.asList(offerMatematica, offerOrga, offerIntro), period, "2017-01-01", true);
-        
+
 		academicOfferService.save(academicOffer);
 		
 		Survey survey = surveyService.createSurvey(student,academicOffer);
