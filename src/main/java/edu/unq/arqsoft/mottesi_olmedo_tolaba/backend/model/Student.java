@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -16,13 +17,13 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class Student extends PersistenceEntity {
 
 	private static final long serialVersionUID = 5345964965231083586L;
-	
+
 	private Integer studentID;
     private String name;
     private String lastName;
     private String email;
     
-    @ManyToMany() //cascade = CascadeType.MERGE, orphanRemoval = true
+    @OneToMany() //cascade = CascadeType.MERGE, orphanRemoval = true
 	@LazyCollection(LazyCollectionOption.FALSE)
     private List<Subject> approvedSubjects; 
 
