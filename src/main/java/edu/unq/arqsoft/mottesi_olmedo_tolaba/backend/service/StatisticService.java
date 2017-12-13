@@ -110,7 +110,6 @@ public class StatisticService extends GenericService<Statistic> {
 	}
 
 	private Statistic findBySubjectAndAcademicOffer(Long subjectId, Long academicOfferId) {
-		// TODO Auto-generated method stub
 		return this.repository.findBySubjectAndAcademicOffer(subjectId,academicOfferId);
 	}
 

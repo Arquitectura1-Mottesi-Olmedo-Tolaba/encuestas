@@ -49,8 +49,8 @@ public class StatisticRepository extends HibernateGenericDAO<Statistic> implemen
 
 	public Statistic findBySubjectAndAcademicOffer(Long subjectId, Long academicOfferId) {
 		String query = "SELECT statistic FROM " + persistentClass.getName() + " statistic "
-				+ "WHERE statistic.academicOffer.id = ?1 "
-				+ "AND statistic.subject.id = ?2";
+				+ "WHERE statistic.academicOffer.id = ? "
+				+ "AND statistic.subject.id = ?";
 		List<Statistic> statistics = (List<Statistic>) this.getHibernateTemplate().find(query, subjectId, academicOfferId );
 		if (statistics.isEmpty()) {
 			return null;
