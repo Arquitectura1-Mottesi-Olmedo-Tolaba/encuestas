@@ -98,7 +98,7 @@ public class OfferService extends GenericService<Offer> {
 		Professor professor = this.getProfessorService().find(idProfessor);
 		Subject subject = this.getSubjectService().find(idSubject);
 		
-		Course newCourse = new Course("",professor, timelines);
+		Course newCourse = new Course("",professor, timelines,25);
 		Offer offer = new Offer(subject,Arrays.asList(newCourse));
 		return this.save(offer);
 	}

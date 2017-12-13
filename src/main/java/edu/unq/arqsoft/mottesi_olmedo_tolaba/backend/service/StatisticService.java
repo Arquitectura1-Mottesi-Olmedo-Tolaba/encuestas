@@ -102,7 +102,7 @@ public class StatisticService extends GenericService<Statistic> {
 				Integer newAmount = op.getAmount() + 1;
 				Integer newCapacity = op.getCapacity() - 1;
 				op.setAmount(newAmount);
-				op.setCapacity(newCapacity);
+				//op.setCapacity(newCapacity);
 				optionCounterService.update(op);
 			}
 		}

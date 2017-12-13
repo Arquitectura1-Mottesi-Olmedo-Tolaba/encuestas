@@ -22,6 +22,8 @@ public class Course extends PersistenceEntity {
     @OneToMany(cascade = CascadeType.ALL) //cascade = CascadeType.MERGE, orphanRemoval = true
 	@LazyCollection(LazyCollectionOption.FALSE)
     private List<Timeline> timelines;
+    
+    private Integer quantity;
 
     
     public String getName() {
@@ -35,10 +37,11 @@ public class Course extends PersistenceEntity {
 	public Course() {
     }
 
-    public Course(String name, Professor professor, List<Timeline> timelines) {
+    public Course(String name, Professor professor, List<Timeline> timelines,Integer quantity) {
         this.name = name;
         this.professor = professor;
         this.timelines = timelines;
+        this.setQuantity(quantity);
     }
 
     public Professor getProfessor() {
@@ -56,4 +59,12 @@ public class Course extends PersistenceEntity {
     public void setTimelines(List<Timeline> timelines) {
         this.timelines = timelines;
     }
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 }

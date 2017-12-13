@@ -85,7 +85,7 @@ public class CourseService extends GenericService<Course> {
 	public Course newCourseWithSubjectAndProfessor( Long idProfessor, List<Timeline> timelines) {
 		Professor professor = this.getProfessorService().find(idProfessor);
 		
-		Course newCourse = new Course("",professor, timelines);
+		Course newCourse = new Course("",professor, timelines,25);
 		return this.save(newCourse);
 	}
 
@@ -101,6 +101,7 @@ public class CourseService extends GenericService<Course> {
 	public CourseDTO courseToDTO(Course course){
     	CourseDTO courseDTO = new CourseDTO();
     	courseDTO.setName(course.getName());
+    	courseDTO.setQuantity(course.getQuantity());
     	courseDTO.setProfessor(this.getProfessorService().ProfessorToDTO(course.getProfessor()));
     	courseDTO.setTimelines(this.getTimelineService().timeLinesToDTO(course.getTimelines()));
     	return courseDTO;

@@ -140,8 +140,8 @@ public class FakeData {
 
     private List<Course> createCourse(List<Professor> professors) {
         return Arrays.asList(
-                new Course("Comision 1", this.getProfessor(professors), this.getTimelines1()),
-                new Course("Comision 2", this.getProfessor(professors), this.getTimelines2())
+                new Course("Comision 1", this.getProfessor(professors), this.getTimelines1(),25),
+                new Course("Comision 2", this.getProfessor(professors), this.getTimelines2(),25)
         );
     }
 

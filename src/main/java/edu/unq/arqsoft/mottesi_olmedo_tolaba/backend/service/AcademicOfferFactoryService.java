@@ -42,7 +42,7 @@ public class AcademicOfferFactoryService {
 		Professor mara = new Professor("Mara Dalponte");
 		Timeline lunes = new Timeline("Lunes","18:00","22:00");
 		Timeline miercoles = new Timeline("Miercoles","18:00","22:00");
-		Course cursada = new Course("Comision 1", mara, Arrays.asList(lunes, miercoles));
+		Course cursada = new Course("Comision 1", mara, Arrays.asList(lunes, miercoles),25);
 
 		return new Offer(subject, Arrays.asList(cursada));
 	}
@@ -51,7 +51,7 @@ public class AcademicOfferFactoryService {
 		Professor eduardo = new Professor("Eduardo Bonelli");
 		Timeline lunes = new Timeline("Lunes","18:00","22:00");
 		Timeline miercoles = new Timeline("Miercoles","18:00","22:00");
-		Course cursada = new Course("Comision 1", eduardo, Arrays.asList(lunes, miercoles));
+		Course cursada = new Course("Comision 1", eduardo, Arrays.asList(lunes, miercoles),25);
 
 		return new Offer(subject, Arrays.asList(cursada));
 	}
@@ -65,8 +65,8 @@ public class AcademicOfferFactoryService {
 		Timeline lunes1 = new Timeline("Lunes","18:00","22:00");
 		Timeline miercoles1 = new Timeline("Miercoles","18:00","22:00");
 
-		Course cursada = new Course("Comision 1", hortensia, Arrays.asList(lunes, miercoles));
-		Course cursada1 = new Course("Comision 2", jano, Arrays.asList(lunes1, miercoles1));
+		Course cursada = new Course("Comision 1", hortensia, Arrays.asList(lunes, miercoles),25);
+		Course cursada1 = new Course("Comision 2", jano, Arrays.asList(lunes1, miercoles1),25);
 
 		return new Offer(subject, Arrays.asList(cursada, cursada1));
 	}

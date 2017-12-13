@@ -9,6 +9,7 @@ public class CourseDTO implements Serializable{
     private String name;
     private ProfessorDTO professor;
     private List<TimeLineDTO> timelines;
+    private Integer quantity;
 
     public CourseDTO(){}
     
@@ -42,6 +43,14 @@ public class CourseDTO implements Serializable{
 
 	public void setTimelines(List<TimeLineDTO> timelines) {
 		this.timelines = timelines;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 	
 	
