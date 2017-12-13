@@ -10,6 +10,7 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.SurveyMatch;
@@ -34,6 +35,9 @@ public class SurveyService extends GenericService<Survey> {
 	
 	@Autowired
 	private SurveyMatchService surveyMatchService;
+	
+	@Autowired
+	private StatisticService statisticService;
 	
 	public SurveyService() {}
 	
@@ -65,15 +69,19 @@ public class SurveyService extends GenericService<Survey> {
 		return this.save(elem);
 	}
 
-	public Survey createSurveyFromDto(SurveyDTO surveyDTO) {
+	public Survey updateSurveyFromDTO(SurveyDTO surveyDTO) {
 		
 		Survey survey = this.getByCode(surveyDTO.code);
 		for (SurveyMatchDTO smDTO : surveyDTO.surveyMatches){
 			SurveyMatch sm = surveyMatchService.createSurveyMatchFromDTO(smDTO);
 			survey.addSurveyMatch(sm);
+			
+			//Podria ser el mismo survey pero como no fue persistido ...
+			statisticService.updateFromSurvey(smDTO, survey.getAcademicOffer());
 		}		
 		survey.setMessage(surveyDTO.message);
-		return this.save(survey);
+		
+		return this.update(survey);
 	}
 
 	public Survey createSurvey(Student student, AcademicOffer academicOffer) {
@@ -100,11 +108,15 @@ public class SurveyService extends GenericService<Survey> {
 	}
 	
 	
-	public StudentSurveyDTO makeDTOFrom(String code) {
-		Survey survey = getByCode(code);
+	public StudentSurveyDTO makeDTO(Survey survey) {
 		StudentSurveyDTO dto = this.getDTO(survey.getAcademicOffer());
 		dto.setStudent(studentService.StudentToDTO(survey.getStudent()));
 		return dto;
+	}
+	
+	public StudentSurveyDTO makeDTOFrom(String code) {
+		Survey survey = getByCode(code);
+		return makeDTO(survey);
 	}
 	
 }

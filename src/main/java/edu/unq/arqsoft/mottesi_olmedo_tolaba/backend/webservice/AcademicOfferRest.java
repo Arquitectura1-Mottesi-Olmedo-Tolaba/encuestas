@@ -45,7 +45,6 @@ public class AcademicOfferRest  extends GenericRest<AcademicOffer> {
 		return super.findAll();
 	}
 	
-
 	
 	@GET
 	@Path("/{id}")

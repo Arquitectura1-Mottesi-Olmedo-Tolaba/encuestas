@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StatisticDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.OptionCounter;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic;
@@ -21,6 +22,9 @@ public class StatisticService extends GenericService<Statistic> {
 
 	@Autowired
 	private StatisticRepository repository;
+	
+	@Autowired
+	private OptionCounterService optionCounterService;
 	
 	public StatisticService() {}
 	
@@ -77,8 +81,37 @@ public class StatisticService extends GenericService<Statistic> {
 		return res;
 	}
 
-	private List<Statistic> findByAcademicOffer(Long id) {
+	public List<Statistic> findByAcademicOffer(Long id) {
 		return this.getRepository().findByAcademicOffer(id);
+	}
+
+	public void updateFromSurvey(SurveyMatchDTO smDTO, AcademicOffer academicOffer) {
+		/*
+		
+		Por cada subject de surveyMatch
+		Statistic stad = Le hago un find by academicOffer and subject
+		
+		Filtro la optionCounter con misma descripcion que el option(de sm o smDTO)
+		
+		Y a esa le hago amount ++  y capacity --
+		
+		*/
+		Statistic stat = this.findBySubjectAndAcademicOffer(smDTO.subject.getId(), academicOffer.getId());
+		for (OptionCounter op : stat.getOptionsCounter()){
+			if (op.getDescription().equals(smDTO.option.getDescription())){
+				Integer newAmount = op.getAmount() + 1;
+				Integer newCapacity = op.getCapacity() - 1;
+				op.setAmount(newAmount);
+				op.setCapacity(newCapacity);
+				optionCounterService.update(op);
+			}
+		}
+		
+	}
+
+	private Statistic findBySubjectAndAcademicOffer(Long subjectId, Long academicOfferId) {
+		// TODO Auto-generated method stub
+		return this.repository.findBySubjectAndAcademicOffer(subjectId,academicOfferId);
 	}
 
 

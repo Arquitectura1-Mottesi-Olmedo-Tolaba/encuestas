@@ -22,6 +22,7 @@ public class AcademicOffer extends PersistenceEntity {
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Offer> offers = new LinkedList<Offer>();
+		
 
 	@OneToOne(cascade = CascadeType.ALL)
     private Period period;

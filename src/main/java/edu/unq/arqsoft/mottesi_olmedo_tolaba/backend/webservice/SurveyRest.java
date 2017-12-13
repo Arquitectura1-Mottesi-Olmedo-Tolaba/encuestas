@@ -84,8 +84,8 @@ public class SurveyRest  extends GenericRest<Survey> {
 	@Path("/save")
 	public Response create(@Context HttpServletRequest request, SurveyDTO surveyDTO) {
 		try {
-			Survey survey = surveyService.createSurveyFromDto(surveyDTO);
-			return responseGenerator.buildSuccessResponse(survey);
+			surveyService.updateSurveyFromDTO(surveyDTO);
+			return responseGenerator.buildSuccessResponse(Response.ok());
 		} catch (Exception e) {
 			return responseGenerator.buildErrorResponse(e);
 		}

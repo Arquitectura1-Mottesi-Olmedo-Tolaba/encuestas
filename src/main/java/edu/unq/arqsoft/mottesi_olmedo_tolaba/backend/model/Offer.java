@@ -19,12 +19,7 @@ public class Offer extends PersistenceEntity {
 	@LazyCollection(LazyCollectionOption.FALSE)
     private List<Course> courses;
 
-	//PASAR A EXPLICAR
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@LazyCollection(LazyCollectionOption.FALSE)
-    private List<Statistic> statistic;
-	
-        
+	        
     public Offer() {
     }
 
