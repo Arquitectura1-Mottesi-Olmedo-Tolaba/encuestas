@@ -49,13 +49,9 @@ public class SurveyMatchService extends GenericService<SurveyMatch> {
 	}
 
 	public SurveyMatch createSurveyMatchFromDTO(SurveyMatchDTO smDTO) {
-		SurveyMatch sm = new SurveyMatch();
-		//TODO: GET BY ID !!
-		Option option = optionService.createOptionFromDTO(smDTO.option);
-		//Subject subject = subjectService.createSubjectFromDTO(smDTO.subject);
-		Subject subject = subjectService.find(smDTO.subject.getId());
-		sm.setOption(option);
-		sm.setSubject(subject);
+		Option newOption = Option.fromOptionDTO(smDTO.option);
+		Subject subject = subjectService.find(smDTO.subject.getId()); 
+		SurveyMatch sm = new SurveyMatch(newOption, subject);
 		return this.save(sm);
 	}
 	
