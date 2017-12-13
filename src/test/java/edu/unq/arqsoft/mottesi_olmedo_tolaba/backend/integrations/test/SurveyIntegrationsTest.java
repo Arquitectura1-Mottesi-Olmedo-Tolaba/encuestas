@@ -29,7 +29,6 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.SurveyService;
 @ActiveProfiles(profiles = "test")
 @ContextConfiguration({ "/META-INF/spring-persistence-context.xml", "/META-INF/spring-services-context.xml" })
 public class SurveyIntegrationsTest {
-/*
 
 	@Autowired
 	private SurveyService surveyService;
@@ -81,20 +80,19 @@ public class SurveyIntegrationsTest {
    		assertEquals(dto.surveyMatches.get(0).option.getDescription(), "Todavia no curso");
    	}
 	
-    @Test
-   	public void test_SurveyServiceSave() {
-    	OptionDTO optionDTO = option.toOptionDTO();
-    	SubjectDTO subjectDTO = subjectService.subjectToDTO(subject);
-    	SurveyMatchDTO surveyMatchDTO = new SurveyMatchDTO(subjectDTO, optionDTO);
-    	SurveyDTO surveyDTO = new SurveyDTO();
-    	surveyDTO.surveyMatches = Arrays.asList(surveyMatchDTO);
-    	
-    	Survey survey = surveyService.createSurveyFromDto(surveyDTO);
-    	
-    	assertEquals(survey.getSurveyMatches().get(0).getSubject().getId(),subject.getId());
-   		assertEquals(survey.getSurveyMatches().get(0).getSubject().getName(), "Matematica 1");
-   		assertEquals(survey.getSurveyMatches().get(0).getOption().getDescription(), "Todavia no curso");
-   	}
-	
-	*/
+//    @Test
+//   	public void test_SurveyServiceSave() {
+//    	OptionDTO optionDTO = option.toOptionDTO();
+//    	SubjectDTO subjectDTO = subjectService.subjectToDTO(subject);
+//    	SurveyMatchDTO surveyMatchDTO = new SurveyMatchDTO(subjectDTO, optionDTO);
+//    	SurveyDTO surveyDTO = new SurveyDTO();
+//    	surveyDTO.surveyMatches = Arrays.asList(surveyMatchDTO);
+//    	
+//    	Survey survey = surveyService.createSurveyFromDto(surveyDTO);
+//    	
+//    	assertEquals(survey.getSurveyMatches().get(0).getSubject().getId(),subject.getId());
+//   		assertEquals(survey.getSurveyMatches().get(0).getSubject().getName(), "Matematica 1");
+//   		assertEquals(survey.getSurveyMatches().get(0).getOption().getDescription(), "Todavia no curso");
+//   	}
+//	
 }

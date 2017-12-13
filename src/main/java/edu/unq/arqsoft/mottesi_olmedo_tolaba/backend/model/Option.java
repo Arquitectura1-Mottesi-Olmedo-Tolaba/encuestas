@@ -24,7 +24,7 @@ public class Option extends PersistenceEntity {
 		return dto;
 	}
 	
-	public Option fromOptionDTO(OptionDTO dto){
+	public static Option fromOptionDTO(OptionDTO dto){
 		Option option = new Option();		
 		option.setDescription(dto.getDescription());
 		return option;

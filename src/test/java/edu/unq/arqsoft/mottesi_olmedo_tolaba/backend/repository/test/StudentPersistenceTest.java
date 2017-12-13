@@ -1,6 +1,10 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.test;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.StudentService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,11 +32,7 @@ public class StudentPersistenceTest {
 	@Before
 	public void setup() {
 		studentId = 24888;
-		student = new Student();
-		student.setId((long)studentId);
-		student.setName("Homer");
-		student.setLastName("Simpson");
-		student.setEmail("homer.simpson@gmail.com");
+		student = new Student("Homer", "Simpson", 24888, "homer.simpson@gmail.com",new ArrayList<>());
 		service.save(student);
 	}
 	
