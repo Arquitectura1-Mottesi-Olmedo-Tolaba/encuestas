@@ -25,7 +25,7 @@ public class Student extends PersistenceEntity {
     private String lastName;
     private String email;
     
-    @OneToMany() //cascade = CascadeType.MERGE, orphanRemoval = true
+    @OneToMany()
 	@LazyCollection(LazyCollectionOption.FALSE)
     private List<Subject> approvedSubjects; 
 

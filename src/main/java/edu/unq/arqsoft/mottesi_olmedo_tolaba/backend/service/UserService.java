@@ -84,8 +84,9 @@ public class UserService extends GenericService<UserCredential> {
 	
 	@Transactional
 	public UserCredential obtainCredential(UserCredential userParam){
+		/*
 		validateCredentialsForSignup(userParam);
-		UserCredential userCredential = new UserCredential(userParam.getUsername(), userParam.getPassword(), userParam.getEmail());
+		UserCredential userCredential = new UserCredential(userParam.getUsername(), userParam.getPassword(), userParam.getEmail(), );
 		userCredential = super.save(userCredential);
 		userProfileService.createUserProfile(userCredential);
 		
@@ -97,7 +98,7 @@ public class UserService extends GenericService<UserCredential> {
 			userCredential.addRole(fetchClientRole());
 		}
 		*/		
-		return userCredential;
+		return null;
 	}
 
 	@Transactional

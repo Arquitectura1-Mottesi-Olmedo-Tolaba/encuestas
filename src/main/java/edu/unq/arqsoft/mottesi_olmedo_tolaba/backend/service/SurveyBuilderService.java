@@ -58,7 +58,7 @@ public class SurveyBuilderService {
 			for (Course course : offer.getCourses()){
 				options.add(new OptionCounter(course.getName(),0,0));
 			}
-			statisticService.save(new Statistic(offer.getSubject(),options,academicOffer));
+			statisticService.save(new Statistic(offer.getSubject(),options));
 		}
 		
 	}

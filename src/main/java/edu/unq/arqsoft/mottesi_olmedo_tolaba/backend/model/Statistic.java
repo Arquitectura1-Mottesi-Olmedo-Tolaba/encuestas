@@ -25,17 +25,6 @@ public class Statistic extends PersistenceEntity {
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<OptionCounter> optionsCounter;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private AcademicOffer academicOffer;
-
-	public AcademicOffer getAcademicOffer() {
-		return academicOffer;
-	}
-
-	public void setAcademicOffer(AcademicOffer academicOffer) {
-		this.academicOffer = academicOffer;
-	}
 
 	public Subject getSubject() {
 		return subject;
@@ -57,14 +46,11 @@ public class Statistic extends PersistenceEntity {
 		return serialVersionUID;
 	}
 
-	public Statistic(){}	
-	
-	public Statistic(Subject subject, List<OptionCounter> optionsCounter, AcademicOffer academicOffer) {
+	public Statistic(){}
+
+	public Statistic(Subject subject, List<OptionCounter> optionsCounter) {
 		this.subject = subject;
 		this.optionsCounter = optionsCounter;
-		this.academicOffer = academicOffer;
 	}
-	
-	
-	
+
 }

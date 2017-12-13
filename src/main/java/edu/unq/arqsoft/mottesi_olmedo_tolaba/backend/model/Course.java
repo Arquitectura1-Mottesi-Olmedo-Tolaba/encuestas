@@ -37,11 +37,11 @@ public class Course extends PersistenceEntity {
 	public Course() {
     }
 
-    public Course(String name, Professor professor, List<Timeline> timelines,Integer quantity) {
+    public Course(String name, Professor professor, List<Timeline> timelines, Integer quantity) {
         this.name = name;
         this.professor = professor;
         this.timelines = timelines;
-        this.setQuantity(quantity);
+        this.quantity = quantity;
     }
 
     public Professor getProfessor() {

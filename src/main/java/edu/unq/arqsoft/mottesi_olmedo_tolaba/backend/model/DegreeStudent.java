@@ -20,8 +20,31 @@ public class DegreeStudent extends PersistenceEntity {
 	
 	@OneToOne(cascade = CascadeType.ALL)	
 	private Degree degree;
-        
-  
+
+	public DegreeStudent() {
+	}
+
+	public DegreeStudent(Student student, Degree degree) {
+		this.student = student;
+		this.degree = degree;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Degree getDegree() {
+		return degree;
+	}
+
+	public void setDegree(Degree degree) {
+		this.degree = degree;
+	}
+
 	public DegreeStudentDTO toDTO() {
 		StudentDTO sDTO = this.student.minimumStudentToDTO();
 		DegreeDTO dDTO = this.degree.toDTO();

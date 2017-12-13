@@ -15,24 +15,29 @@ public class FakeData {
     public Degree degreeTPI(){
         List<Subject> subjects = this.subjects(this.subjectStringTpi());
         List<Professor> professors = this.professors();
-        List<Student> students = students(this.studentsStringTpi());
         List<AcademicOffer> academicOffers = this.academicOffers(subjects, professors);
         Degree degree = new Degree("Tecnicatura Universitaria en Programacion Informatica", subjects, academicOffers);
-        //academicOffers.stream().forEach(academicOffer -> degree.addAcademicOffer(academicOffer));
         return degree;
     }
 
     public Degree degreeLICBIO(){
         List<Subject> subjects = this.subjects(this.subjectStringLICBIO());
         List<Professor> professors = this.professors();
-        List<Student> students = students(this.studentsStringLICBIO());
         List<AcademicOffer> academicOffers = this.academicOffers(subjects, professors);
         Degree degree = new Degree("Licenciatura en Biotecnología", subjects, academicOffers);
-        //academicOffers.stream().forEach(academicOffer -> degree.addAcademicOffer(academicOffer));
         return degree;
     }
 
     /** STUDENTS **/
+
+    public List<Student> studentsTPI(){
+        return this.students(this.studentsStringTpi());
+    }
+
+    public List<Student> studentsLicBio(){
+        return this.students(this.studentsStringLICBIO());
+    }
+
     private List<Student> students(List<String> studentsString) {
 
         return studentsString.stream()
@@ -166,5 +171,25 @@ public class FakeData {
     public Integer getStudentIndex() {
         studentIndex++;
         return studentIndex;
+    }
+
+    public List<DegreeStudent> getDegreeStudentsOf(Degree degree, List<Student> students) {
+        return students.stream()
+                .map(student -> new DegreeStudent(student, degree))
+                .collect(Collectors.toList());
+    }
+
+    public List<Survey> surveysFor(List<DegreeStudent> degreeStudents) {
+        return degreeStudents.stream().map(degreeStudent -> this.surveyFor(degreeStudent))
+                .collect(Collectors.toList());
+    }
+
+    private Survey surveyFor(DegreeStudent degreeStudent){
+        AcademicOffer currentAcademicOffer =
+                degreeStudent.getDegree().getAcademicOffers().stream()
+                        .filter(AcademicOffer::isActive)
+                            .findFirst()
+                            .orElseThrow(() -> new RuntimeException("No se encontro ninguna activa"));
+        return new Survey(degreeStudent.getStudent(), currentAcademicOffer);
     }
 }

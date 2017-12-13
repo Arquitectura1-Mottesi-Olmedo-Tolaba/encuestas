@@ -9,16 +9,14 @@ public class StatisticDTO implements Serializable{
 	
 	private static final long serialVersionUID = 6398518148191713691L;
 	public Long id;
-    public Long academicOfferId;
     public SubjectDTO subject;
     public List<OptionCounter> optionsCounter;
 
     public StatisticDTO(){}
     
 
-	public StatisticDTO(Long id, Long academicOfferId, SubjectDTO subject, List<OptionCounter> optionsCounter) {
+	public StatisticDTO(Long id, SubjectDTO subject, List<OptionCounter> optionsCounter) {
 		this.id = id;
-		this.academicOfferId = academicOfferId;
 		this.subject = subject;
 		this.optionsCounter = optionsCounter;
 	}
