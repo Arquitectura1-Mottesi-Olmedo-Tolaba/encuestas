@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,11 @@ public class StatisticRest  extends GenericRest<Statistic> {
 		try {
 			List<StatisticDTO> dtos = this.statisticService.findDTOByAcademicOffer(id);
 			return responseGenerator.buildSuccessResponse(dtos);
-		} catch (Exception e) {
+		} 
+		catch (RuntimeException e) {
+            return responseGenerator.buildCustomErrorResponse(e.getMessage(), Status.BAD_REQUEST);
+        }
+		catch (Exception e) {
 			return responseGenerator.buildErrorResponse(e);
 		}
 	}

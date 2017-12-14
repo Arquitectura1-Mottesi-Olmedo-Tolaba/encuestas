@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StatisticDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.exceptions.EntityNotExistingException;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.OptionCounter;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic;
@@ -75,7 +76,11 @@ public class StatisticService extends GenericService<Statistic> {
 
 	public List<StatisticDTO> findDTOByAcademicOffer(Long id) {
 		List<StatisticDTO> res = new ArrayList<StatisticDTO>();
-		for (Statistic st : this.findByAcademicOffer(id)){
+		List<Statistic> stats = findByAcademicOffer(id);
+		if (stats == null){
+			throw new EntityNotExistingException("No existen estadisticas asociadas a esa oferta academica");
+		}
+		for (Statistic st : stats){
 			res.add(makeStatisticDTO(st));
 		}
 		return res;

@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,7 +75,11 @@ public class SurveyRest  extends GenericRest<Survey> {
 		try {
 			StudentSurveyDTO surveyDTO = this.surveyService.makeDTOFrom(code);
 			return responseGenerator.buildSuccessResponse(surveyDTO);
-		} catch (Exception e) {
+		} 
+		catch (RuntimeException e) {
+            return responseGenerator.buildCustomErrorResponse(e.getMessage(), Status.BAD_REQUEST);
+        }
+		catch (Exception e) {
 			return responseGenerator.buildErrorResponse(e);
 		}
 	}

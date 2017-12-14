@@ -2,14 +2,12 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 
 import java.util.Arrays;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToOne;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.DirectorDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.exceptions.EntityNotExistingException;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Director;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserCredential;
@@ -54,6 +52,9 @@ public class DirectorService extends GenericService<Director> {
 
 	public DirectorDTO getDirectorDTO(Long id) {
 		Director director = this.find(id);
+		if (director == null){
+			throw new EntityNotExistingException("No existe ese director");
+		}
 		return new DirectorDTO(Arrays.asList(director.getDegree().toDTO()),director.getUser());
 	}
 

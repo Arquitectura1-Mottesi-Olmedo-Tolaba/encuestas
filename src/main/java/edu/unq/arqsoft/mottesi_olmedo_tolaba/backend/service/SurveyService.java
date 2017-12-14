@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.exceptions.EntityNotExistingException;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.SurveyMatch;
@@ -116,6 +116,9 @@ public class SurveyService extends GenericService<Survey> {
 	
 	public StudentSurveyDTO makeDTOFrom(String code) {
 		Survey survey = getByCode(code);
+		if (survey == null){
+			throw new EntityNotExistingException("No existe esa encuesta");
+		}		
 		return makeDTO(survey);
 	}
 	

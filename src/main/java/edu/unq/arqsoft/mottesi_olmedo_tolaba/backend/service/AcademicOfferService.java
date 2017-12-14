@@ -61,7 +61,6 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 	
 	public StudentSurveyDTO getAcademicOfferDTOById(Long id){
 		AcademicOffer academicOffer = this.find(id);
-
 		if (academicOffer == null){
 			throw new EntityNotExistingException("No existe esa oferta academica");
 		}
