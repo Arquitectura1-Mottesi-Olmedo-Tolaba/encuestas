@@ -57,7 +57,6 @@ public class DegreeStudentService extends GenericService<DegreeStudent> {
 	public Integer studentsForDegree(Long idDegree) {
 		return this.repository.studentsForDegree(idDegree);
 	}
-	
 
 	public DegreeStudentDTO findByDTO(Long id) {
 		return this.find(id).toDTO();

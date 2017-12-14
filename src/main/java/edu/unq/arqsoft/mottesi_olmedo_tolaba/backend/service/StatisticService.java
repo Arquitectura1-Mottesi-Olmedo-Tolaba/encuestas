@@ -53,7 +53,7 @@ public class StatisticService extends GenericService<Statistic> {
 	
 	@Transactional
 	public Statistic newStatistic(Subject subject, List<OptionCounter> optionsCounter, AcademicOffer academicOffer) {
-		Statistic stat = new Statistic(subject, optionsCounter,academicOffer);
+		Statistic stat = new Statistic(subject, optionsCounter);
 		return this.save(stat);
 	}
 
@@ -66,7 +66,7 @@ public class StatisticService extends GenericService<Statistic> {
 	}
 
 	private StatisticDTO makeStatisticDTO(Statistic st) {
-		return new StatisticDTO(st.getId(),st.getAcademicOffer().getId(),
+		return new StatisticDTO(st.getId(),
 				st.getSubject().toSubjectDTO(),st.getOptionsCounter());
 	}
 

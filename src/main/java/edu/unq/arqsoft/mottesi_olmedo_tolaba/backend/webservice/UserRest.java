@@ -78,7 +78,7 @@ public class UserRest  extends GenericRest<UserCredential> {
 			return responseGenerator.buildErrorResponse(e);
 		}
 	}
-	
+	/*
 	@POST
 	@Path("/getOrCreateProfile")
 	public Response getOrCreateProfile(@Context HttpServletRequest request, UserAuthDTO user) {
@@ -97,7 +97,7 @@ public class UserRest  extends GenericRest<UserCredential> {
 			return responseGenerator.buildErrorResponse(e);
 		}
 	}
-	
+	*/
 	
 	@POST
 	@Path("/signin")

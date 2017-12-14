@@ -15,22 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AcademicOfferFactoryService {
 
 	@Autowired
-	private AcademicOfferService academicOfferService;
-		
-	@Autowired
-	private ProfessorService professorService;
-	
-	@Autowired
-	private CourseService courseService;
-	
-	@Autowired
-	private PeriodService periodService;
-	
-	@Autowired
 	private StudentService studentService;
-	
-	@Autowired
-	private TimelineService timelineService;
 	
 	@Autowired
 	private SurveyService surveyService;
@@ -38,78 +23,34 @@ public class AcademicOfferFactoryService {
 	@Autowired
 	private DegreeService degreeService;
 
-	public Offer createOrgaOffer(Subject subject){
-		Professor mara = new Professor("Mara Dalponte");
-		Timeline lunes = new Timeline("Lunes","18:00","22:00");
-		Timeline miercoles = new Timeline("Miercoles","18:00","22:00");
-		Course cursada = new Course("Comision 1", mara, Arrays.asList(lunes, miercoles),25);
+    @Autowired
+    private DegreeStudentService degreeStudentService;
 
-		return new Offer(subject, Arrays.asList(cursada));
-	}
 
-	public Offer createIntroOffer(Subject subject){
-		Professor eduardo = new Professor("Eduardo Bonelli");
-		Timeline lunes = new Timeline("Lunes","18:00","22:00");
-		Timeline miercoles = new Timeline("Miercoles","18:00","22:00");
-		Course cursada = new Course("Comision 1", eduardo, Arrays.asList(lunes, miercoles),25);
-
-		return new Offer(subject, Arrays.asList(cursada));
-	}
-
-	public Offer createMatematicaOffer(Subject subject){
-		Professor jano = new Professor("Jano");
-		Professor hortensia = new Professor("Hortensia");
-
-		Timeline lunes = new Timeline("Lunes","18:00","22:00");
-		Timeline miercoles = new Timeline("Miercoles","18:00","22:00");
-		Timeline lunes1 = new Timeline("Lunes","18:00","22:00");
-		Timeline miercoles1 = new Timeline("Miercoles","18:00","22:00");
-
-		Course cursada = new Course("Comision 1", hortensia, Arrays.asList(lunes, miercoles),25);
-		Course cursada1 = new Course("Comision 2", jano, Arrays.asList(lunes1, miercoles1),25);
-
-		return new Offer(subject, Arrays.asList(cursada, cursada1));
-	}
-	
 	@Transactional
-	public AcademicOffer initialize(String nameDegree, List<Subject> subjects) {
-/*
-		// TODO: SET DEGREE, STUDENT ??? EL NAME ES EL NOMBRE DEL DEGREE ...
-		Period period = new Period(2017, 1);
-				
-		Student student = new Student();
-		student.setName("Homero");
-		student.setLastName("Simpson");
-		studentService.save(student);
+	public void initialize() {
 
-		Offer offerMatematica = createMatematicaOffer(subjects.get(0));
-		Offer offerOrga = createOrgaOffer(subjects.get(1));
-		Offer offerIntro = createIntroOffer(subjects.get(2));
+        // Create degrees
+        FakeData fakeData = new FakeData();
+		Degree degreeTPI = degreeService.save(fakeData.degreeTPI());
+        Degree degreeLicBio = degreeService.save(fakeData.degreeLICBIO());
 
-		AcademicOffer academicOffer =
-				new AcademicOffer(Arrays.asList(offerMatematica, offerOrga, offerIntro), period, "2017-01-01", true);
+        // Create students
+        List<Student> studentsTpi = fakeData.studentsTPI();
+        studentsTpi.forEach(student -> studentService.save(student));
+        List<Student> studentsLicBio = fakeData.studentsLicBio();
+        studentsLicBio.forEach(student -> studentService.save(student));
 
-		academicOfferService.save(academicOffer);
-		
-		Survey survey = surveyService.createSurvey(student,academicOffer);
-				
-		System.out.println("---------------------");
-		System.out.println("---------------------");
-		System.out.println("---------------------");
-		System.out.println("---------------------");
-		System.out.println("---------------------");
-		System.out.println(survey.getCode());
-		System.out.println("---------------------");
-		System.out.println("---------------------");
-		System.out.println("---------------------");
-		System.out.println("---------------------");
-		System.out.println("---------------------");
-		
-		return academicOffer;
-		*/
-		Degree degree = new FakeData().degreeTPI();
-		degreeService.save(degree);
-		return degree.getAcademicOffers().get(1);
+        // Create degreeSturdents
+        List<DegreeStudent> degreeStudentsTpi = fakeData.getDegreeStudentsOf(degreeTPI, studentsTpi);
+        degreeStudentsTpi.forEach(degreeStudent -> degreeStudentService.save(degreeStudent));
+        List<DegreeStudent> degreeStudentsLicBio = fakeData.getDegreeStudentsOf(degreeLicBio, studentsLicBio);
+        degreeStudentsLicBio.forEach(degreeStudent -> degreeStudentService.save(degreeStudent));
+
+        // Create Surveys for active academicOffer
+        fakeData.surveysFor(degreeStudentsTpi).forEach(survey -> surveyService.save(survey));
+        fakeData.surveysFor(degreeStudentsLicBio).forEach(survey -> surveyService.save(survey));
+        
 	}
 	
 	

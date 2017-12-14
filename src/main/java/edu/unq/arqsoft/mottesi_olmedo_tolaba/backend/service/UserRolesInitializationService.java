@@ -40,52 +40,13 @@ public class UserRolesInitializationService {
 	
 	@PostConstruct
 	private void initialize() {
-		List<Role> roles = new LinkedList<Role>();
-		
-		//Role admin = roleService.save(new Role("ADMIN"));
-		Role directorRole = roleService.save(new Role("DIRECTOR"));
-		Role studentRole = roleService.save(new Role("STUDENT"));
-		
-		//roles.add(admin);
-		roles.add(directorRole);
-		//roles.add(student);
-		
-		UserCredential adminUser = new UserCredential("director", "director");
-		adminUser.addRoles(roles);
-		
-		String nameDegree = "Tecnicatura Universitaria en Programación Informática";
-		
-		adminUser = userService.save(adminUser);
-		
-		UserCredential student = new UserCredential("student", "student");
-		student.addRole(studentRole);
-		
-		student = userService.save(student);
-		
-		Subject mate1 = new Subject("Matematica 1");
-		mate1 = subjectService.save(mate1);
-		
-		Subject orga = new Subject("Organizaciòn de computadoras");
-		orga = subjectService.save(orga);
-		
-		Subject intro = new Subject("Introducciòn a la programacion");
-		intro = subjectService.save(intro);
-		
-		List<Subject> materias = Arrays.asList(mate1,orga,intro);
-		AcademicOffer academicOffer = academicOfferFactoryService.initialize(nameDegree, materias);
-		
-		statisticsFactoryService.initialize(nameDegree,materias,academicOffer);
-		
-		
-		
-		
-		/*
-		Degree degree = degreeFactoryService.initiliaze(nameDegree,materias);
-		
-				.save(new Degree(nameDegree, materias, Arrays.asList(academicOffer)));
-		
-		Director director = directorService.create(adminUser,degree);
-		*/
+		Role role = new Role("DIRECTOR");
+		role = roleService.save(role);
+		UserCredential directorUser =
+				new UserCredential("director", "director", "director@gmail.com" ,Arrays.asList(role));
+		userService.save(directorUser);
+		academicOfferFactoryService.initialize();
+
 	}
 	
 }

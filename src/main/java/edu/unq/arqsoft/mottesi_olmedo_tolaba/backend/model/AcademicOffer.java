@@ -1,7 +1,10 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,7 +25,6 @@ public class AcademicOffer extends PersistenceEntity {
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Offer> offers = new LinkedList<Offer>();
-		
 
 	@OneToOne(cascade = CascadeType.ALL)
     private Period period;
@@ -31,17 +33,50 @@ public class AcademicOffer extends PersistenceEntity {
 	
 	private boolean active;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+	private List<Statistic> statistics;
+
 	public AcademicOffer() {
     }
 
-	public AcademicOffer(List<Offer> offers, Period period, String endDate, boolean active) {
-		this.offers = offers;
-		this.period = period;
-		this.endDate = endDate;
-		this.active = active;
-	}
+    public AcademicOffer(List<Offer> offers, Period period, String endDate, boolean active, List<Statistic> statistics) {
+        this.offers = offers;
+        this.period = period;
+        this.endDate = endDate;
+        this.active = active;
+        this.statistics = statistics;
+    }
 
-	public List<Offer> getOffers() {
+    public AcademicOffer(List<Offer> offers, Period period, String endDate, boolean active) {
+        this.offers = offers;
+        this.period = period;
+        this.endDate = endDate;
+        this.active = active;
+        this.statistics = this.offers.stream()
+                .map(offer -> new Statistic(offer.getSubject(), this.createOptionCounter(offer)))
+                .collect(Collectors.toList());
+    }
+
+    private List<OptionCounter> createOptionCounter(Offer offer) {
+        List<OptionCounter> options = new ArrayList<OptionCounter>(Arrays.asList(
+                new OptionCounter("Todavia no la voy a cursar",0),
+                new OptionCounter("Ya la curse", 0),
+                new OptionCounter("Quisiera pero...", 0)
+        ));
+        offer.getCourses().forEach(course -> options.add(new OptionCounter(course.getName(), course.getQuantity(), 0)));
+        return options;
+    }
+
+    public List<Statistic> getStatistics() {
+        return statistics;
+    }
+
+    public void setStatistics(List<Statistic> statistics) {
+        this.statistics = statistics;
+    }
+
+    public List<Offer> getOffers() {
         return offers;
     }
 
