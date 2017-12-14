@@ -1,5 +1,6 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.webservice;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -11,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,12 +51,16 @@ public class AcademicOfferRest  extends GenericRest<AcademicOffer> {
 	@GET
 	@Path("/{id}")
 	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
+		
+		
 		try {
 			StudentSurveyDTO dto = this.academicOfferService.getAcademicOfferDTOById(id);
 			return responseGenerator.buildSuccessResponse(dto);
-		} catch (Exception e) {
-			return responseGenerator.buildErrorResponse(e);
-		}
+        } catch (RuntimeException e) {
+            return responseGenerator.buildCustomErrorResponse(e.getMessage(), Status.BAD_REQUEST);
+        } catch (Exception e) {
+            return responseGenerator.buildErrorResponse(e);
+        }
 	}
 	
 		

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.exceptions.EntityNotExistingException;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.AcademicOfferRepository;
@@ -60,6 +61,11 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 	
 	public StudentSurveyDTO getAcademicOfferDTOById(Long id){
 		AcademicOffer academicOffer = this.find(id);
+
+		if (academicOffer == null){
+			throw new EntityNotExistingException("No existe esa oferta academica");
+		}
+		
 		return this.AcademicOfferToDTO(academicOffer);
 	}
 	

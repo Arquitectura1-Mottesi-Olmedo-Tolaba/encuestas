@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResponseGenerator  {
 
-	private static final Logger LOGGER = Logger.getLogger("edu.unq.desapp.groupA.backend.error");
+	private static final Logger LOGGER = Logger.getLogger("edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.error");
 	
 	public Response responseOK(String message){
 		return buildResponse(new Message(message), Status.OK);
@@ -42,5 +42,15 @@ public class ResponseGenerator  {
 		}
 		return buildResponse(new Message("A problem has ocurred!"), Status.INTERNAL_SERVER_ERROR);
 	}
+
+    public Response buildCustomErrorResponse(String mensaje, Status status) {
+        return Response
+            .status(status)
+            .entity(new Message(mensaje))
+            .build();
+    }
+    
+    
+    
 
 }
