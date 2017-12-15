@@ -2,17 +2,18 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.IndexColumn;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -23,8 +24,9 @@ public class AcademicOffer extends PersistenceEntity {
 	private static final long serialVersionUID = 358926861833214321L;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Offer> offers = new LinkedList<Offer>();
+	@JoinColumn(name = "id_academic_offer")
+	@IndexColumn(name = "length")
+	private List<Offer> offers;
 
 	@OneToOne(cascade = CascadeType.ALL)
     private Period period;
@@ -34,7 +36,8 @@ public class AcademicOffer extends PersistenceEntity {
 	private boolean active;
 
     @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-    @LazyCollection(LazyCollectionOption.FALSE)
+	@JoinColumn(name = "id_academic_offer")
+	@IndexColumn(name = "length")
 	private List<Statistic> statistics;
 
 	public AcademicOffer() {
@@ -111,4 +114,46 @@ public class AcademicOffer extends PersistenceEntity {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
+	public AcademicOffer updateStatistics(Survey currentSurvey, List<SurveyMatch> surveyMatches) {
+		this.undoStatistics(currentSurvey);
+		this.doStatistics(surveyMatches);
+		return this;
+	}
+
+	private void doStatistics(List<SurveyMatch> surveyMatches) {
+		this.statistics.forEach(statistic -> {
+			SurveyMatch currentSurveyMatch = surveyMatches.stream()
+				.filter(surveyMatch -> surveyMatch.getSubject().getName().equals(statistic.getSubject().getName()))
+				.findFirst()
+				.orElseThrow(() -> new RuntimeException("No se encontro subject"));
+			OptionCounter currentOptionCounter = statistic.getOptionsCounter().stream()
+				.filter(optionCounter -> optionCounter.getDescription().equals(currentSurveyMatch.getOption().getDescription()))
+				.findFirst()
+				.orElseThrow(() -> new RuntimeException("No se encontro opcion"));
+			currentOptionCounter.increase();
+		});		
+	}
+
+	private void undoStatistics(Survey currentSurvey) {
+		if(currentSurvey.getWasAnswered()){
+			this.runUndoStatistics(currentSurvey);
+		}		
+	}
+
+	private void runUndoStatistics(Survey currentSurvey) {
+		this.statistics.forEach(statistic -> {
+			SurveyMatch currentSurveyMatch = currentSurvey.getSurveyMatches().stream()
+					.filter(surveyMatch -> surveyMatch.getSubject().getName().equals(statistic.getSubject().getName()))
+				.findFirst()
+				.orElseThrow(() -> new RuntimeException("No se encontro subject"));
+			OptionCounter currentOptionCounter = statistic.getOptionsCounter().stream()
+				.filter(optionCounter -> optionCounter.getDescription().equals(currentSurveyMatch.getOption().getDescription()))
+				.findFirst()
+				.orElseThrow(() -> new RuntimeException("No se encontro opcion"));
+			currentOptionCounter.decrease();
+		});		
+	}
+	
+	
 }

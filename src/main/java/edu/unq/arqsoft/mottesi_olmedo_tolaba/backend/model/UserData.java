@@ -12,23 +12,20 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.JSONDateDeserialize;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.JSONSimpleDateSerialize;
 
 @Entity
-@Table(name="users_data")
+@Table(name = "users_data")
 public class UserData extends PersistenceEntity {
 
 	private static final long serialVersionUID = 6374630332450175924L;
 
-	// Instance Variables
 	private String name;
-	
 	private String surname;
-	
+
 	@JsonDeserialize(using = JSONDateDeserialize.class)
-    @JsonSerialize(using = JSONSimpleDateSerialize.class)
+	@JsonSerialize(using = JSONSimpleDateSerialize.class)
 	private Date birthday;
-	
+
 	private String dni;
 
-	// Getters and Setters
 	public String getName() {
 		return name;
 	}
@@ -60,5 +57,5 @@ public class UserData extends PersistenceEntity {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	
+
 }

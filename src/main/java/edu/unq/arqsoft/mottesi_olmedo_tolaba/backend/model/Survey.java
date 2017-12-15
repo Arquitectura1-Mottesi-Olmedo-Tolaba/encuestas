@@ -1,40 +1,45 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
-
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.IndexColumn;
+
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurvey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "surveys")
 public class Survey extends PersistenceEntity {
 
 	private static final long serialVersionUID = 9159344780394535641L;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch= FetchType.EAGER)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<SurveyMatch> surveyMatches = new LinkedList<SurveyMatch>();
-	
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_survey")
+	@IndexColumn(name = "length")
+	private List<SurveyMatch> surveyMatches;
+
 	private String code;
-	
+
 	private Boolean wasAnswered;
-	
+
 	private String message;
-	
+
 	@OneToOne
 	private Student student;
-	
+
 	@OneToOne
 	private AcademicOffer academicOffer;
-	
 
 	public Student getStudent() {
 		return student;
@@ -57,8 +62,8 @@ public class Survey extends PersistenceEntity {
 	}
 
 	public Survey() {
-    }
-	
+	}
+
 	public Survey(Student student, AcademicOffer academicOffer) {
 		this.student = student;
 		this.academicOffer = academicOffer;
@@ -69,14 +74,13 @@ public class Survey extends PersistenceEntity {
 
 	public SurveyDTO toSurveyDTO() {
 		SurveyDTO dto = new SurveyDTO();
-		List<SurveyMatchDTO> surveyMatchesDTO = new LinkedList<SurveyMatchDTO>();
-		for (SurveyMatch surveyMatch : surveyMatches){
+		List<SurveyMatchDTO> surveyMatchesDTO = new ArrayList<SurveyMatchDTO>();
+		for (SurveyMatch surveyMatch : surveyMatches) {
 			surveyMatchesDTO.add(surveyMatch.toSurveyMatchDTO());
 		}
 		dto.surveyMatches = surveyMatchesDTO;
 		return dto;
-    } 
-	
+	}
 
 	public List<SurveyMatch> getSurveyMatches() {
 		return surveyMatches;
@@ -85,8 +89,8 @@ public class Survey extends PersistenceEntity {
 	public void setSurveyMatches(List<SurveyMatch> surveyMatches) {
 		this.surveyMatches = surveyMatches;
 	}
-	
-	public void addSurveyMatch(SurveyMatch surveyMatch){
+
+	public void addSurveyMatch(SurveyMatch surveyMatch) {
 		this.surveyMatches.add(surveyMatch);
 	}
 
@@ -112,5 +116,28 @@ public class Survey extends PersistenceEntity {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public Survey update(StudentSurvey studentSurvey) {
+		this.updateSurveyMatches(studentSurvey.getSurveyMatches());
+		this.setWasAnswered(true);
+		this.setMessage(studentSurvey.getMessage());
+		return this;
+	}
+
+	private void updateSurveyMatches(List<SurveyMatch> surveyMatches) {
+		if(this.surveyMatches.isEmpty()){ 
+			this.setSurveyMatches(surveyMatches);
+			return;
+		}
+		this.surveyMatches.forEach(currentSurveyMatch -> {
+			SurveyMatch updated = surveyMatches.stream()
+					.filter(updateSurveyMatch -> 
+						updateSurveyMatch.getSubject().getName().equals(currentSurveyMatch.getSubject().getName()))
+					.findFirst()
+					.orElseThrow(() -> new RuntimeException("No se encontro la materia"));
+			currentSurveyMatch.getOption().setDescription(updated.getOption().getDescription());
+		});
+		
 	}
 }

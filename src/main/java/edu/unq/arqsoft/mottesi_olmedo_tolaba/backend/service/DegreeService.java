@@ -39,8 +39,14 @@ public class DegreeService extends GenericService<Degree> {
 		return super.save(model);
 	}
 
+	@Transactional
 	public String getDegreeName(Long idDegree) {
 		return this.find(idDegree).getName();
+	}
+
+	@Transactional
+	public String getDegreeNameForAcademicOffer(Long idAcademicOffer){
+		return this.getRepository().findDegreeNameForAcademicOffer(idAcademicOffer);
 	}
 
 

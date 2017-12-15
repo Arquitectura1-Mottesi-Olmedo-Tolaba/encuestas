@@ -69,6 +69,8 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			<ref bean="directorRest" />
 			<ref bean="statisticRest" />
 			<ref bean="academicOfferStatisticsRest" />
+			<ref bean="degreeStudentRest" />
+			
 			
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>

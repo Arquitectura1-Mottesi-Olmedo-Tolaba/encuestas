@@ -7,37 +7,32 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users_profiles")
+@Table(name = "users_profiles")
 public class UserProfile extends PersistenceEntity {
 
 	private static final long serialVersionUID = -5227774846544481307L;
 
-	// Instance Variables
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private UserCredential user;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private UserData userData;
 
-
-	// Constructors
 	public UserProfile() {
 	}
-	
+
 	public UserProfile(UserCredential userCredential, UserData userData) {
 		this.user = userCredential;
 		this.setUserData(userData);
 	}
 
-	// Getters and Setters
 	public UserCredential getUser() {
 		return user;
 	}
-	
+
 	public void setUser(UserCredential user) {
 		this.user = user;
 	}
-
 
 	public UserData getUserData() {
 		return userData;

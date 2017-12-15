@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.IndexColumn;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.DegreeDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SubjectDTO;
@@ -20,9 +23,13 @@ public class Degree extends PersistenceEntity {
 	private String name;
         
     @OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "id_degree")
+	@IndexColumn(name = "length")
     private List<Subject> subjects;
     
     @OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "id_degree")
+	@IndexColumn(name = "length")
     private List<AcademicOffer> academicOffers;
 
     public Degree(String name, List<Subject> subjects, List<AcademicOffer> academicOffers) {

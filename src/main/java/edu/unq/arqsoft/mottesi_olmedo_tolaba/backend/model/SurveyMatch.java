@@ -1,5 +1,6 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -14,10 +15,10 @@ public class SurveyMatch extends PersistenceEntity {
 
 	@OneToOne
 	private Subject subject;
-	
-	@OneToOne
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private Option option;
-		
+
 	public Subject getSubject() {
 		return subject;
 	}
@@ -39,17 +40,17 @@ public class SurveyMatch extends PersistenceEntity {
 	}
 
 	public SurveyMatch() {
-    }
-	
+	}
+
 	public SurveyMatch(Option option, Subject subject) {
 		this.option = option;
 		this.subject = subject;
-    }
-	
+	}
+
 	public SurveyMatchDTO toSurveyMatchDTO() {
 		SurveyMatchDTO dto = new SurveyMatchDTO();
 		dto.option = this.option.toOptionDTO();
 		dto.subject = this.subject.toSubjectDTO();
 		return dto;
-    }
+	}
 }

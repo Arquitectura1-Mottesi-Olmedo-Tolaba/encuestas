@@ -7,11 +7,12 @@ import javax.persistence.Table;
 @Table(name = "timelines")
 public class Timeline extends PersistenceEntity {
 
-    private String dayTime;
-    private String startTime;
+	private static final long serialVersionUID = 5143900452863118731L;
+	private String dayTime;
+	private String startTime;
 	private String endTime;
-    
-    public String getStartTime() {
+
+	public String getStartTime() {
 		return startTime;
 	}
 
@@ -27,23 +28,21 @@ public class Timeline extends PersistenceEntity {
 		this.endTime = end;
 	}
 
+	public Timeline() {
+	}
 
-    public Timeline() {
-    }
+	public Timeline(String dayTime, String startTime, String endTime) {
+		this.dayTime = dayTime;
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
 
-    public Timeline(String dayTime, String startTime, String endTime) {
-        this.dayTime = dayTime;
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
+	public String getDayTime() {
+		return dayTime;
+	}
 
-    public String getDayTime() {
-        return dayTime;
-    }
-
-    public void setDayTime(String day) {
-        this.dayTime = day;
-    }
-
+	public void setDayTime(String day) {
+		this.dayTime = day;
+	}
 
 }

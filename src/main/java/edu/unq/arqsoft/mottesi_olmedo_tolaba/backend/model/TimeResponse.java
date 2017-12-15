@@ -8,13 +8,12 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.JSONDateDeserialize;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.JSONDateSerialize;
 
-
 public class TimeResponse {
 
 	@JsonSerialize(using = JSONDateSerialize.class)
 	@JsonDeserialize(using = JSONDateDeserialize.class)
 	private Date reservationTime;
-	
+
 	@JsonSerialize(using = JSONDateSerialize.class)
 	@JsonDeserialize(using = JSONDateDeserialize.class)
 	private Date responseTime;
@@ -39,8 +38,8 @@ public class TimeResponse {
 	public void setResponseTime(Date responseTime) {
 		this.responseTime = responseTime;
 	}
-	
-	public Date attentionTime(){
+
+	public Date attentionTime() {
 		return new Date();
 	}
 

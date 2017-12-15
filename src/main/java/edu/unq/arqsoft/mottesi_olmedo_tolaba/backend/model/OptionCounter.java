@@ -6,11 +6,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "options_counter")
 public class OptionCounter extends PersistenceEntity {
-	
+
+	private static final long serialVersionUID = 4878450736683941552L;
 	private String description;
 	private Integer capacity;
 	private Integer amount;
-	
+
 	public String getDescription() {
 		return description;
 	}
@@ -19,7 +20,8 @@ public class OptionCounter extends PersistenceEntity {
 		this.description = description;
 	}
 
-	public OptionCounter(){}
+	public OptionCounter() {
+	}
 
 	public OptionCounter(String description, Integer capacity, Integer amount) {
 		this.description = description;
@@ -46,6 +48,14 @@ public class OptionCounter extends PersistenceEntity {
 
 	public void setAmount(Integer amount) {
 		this.amount = amount;
+	}
+
+	public void decrease() {
+		this.amount -= 1;
+	}
+
+	public void increase() {
+		this.amount += 1;
 	}
 
 }

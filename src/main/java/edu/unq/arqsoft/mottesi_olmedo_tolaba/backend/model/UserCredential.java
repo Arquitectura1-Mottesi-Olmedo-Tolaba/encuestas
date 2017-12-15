@@ -1,7 +1,5 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 

@@ -23,11 +23,10 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.GenericService;
 @Produces("application/json")
 @Consumes("application/json")
 @Path("/directors")
-public class DirectorRest  extends GenericRest<Director> {
+public class DirectorRest extends GenericRest<Director> {
 
 	@Autowired
 	private DirectorService directorService;
-	
 
 	@Override
 	public GenericService<Director> getService() {
@@ -36,19 +35,19 @@ public class DirectorRest  extends GenericRest<Director> {
 
 	@GET
 	@Path("/degreesFor/{id}")
-	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long directorID){
+	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long directorID) {
 		Director director = directorService.find(directorID);
 		return this.getResponseGenerator().buildSuccessResponse(new DirectorDTO(director));
 	}
 
 	@POST
-    @Path("/login")
-    public Response login(@Context HttpServletRequest request, UserCredential credential){
-        Director director = this.directorService.findDirector(credential);
-        if(director == null){
-        	return this.getResponseGenerator().buildErrorResponse(new RuntimeException("Director inexistente"));
-        }
-        return this.getResponseGenerator().buildSuccessResponse(director.getId());
-    }
-	
+	@Path("/login")
+	public Response login(@Context HttpServletRequest request, UserCredential credential) {
+		Director director = this.directorService.findDirector(credential);
+		if (director == null) {
+			return this.getResponseGenerator().buildErrorResponse(new RuntimeException("Director inexistente"));
+		}
+		return this.getResponseGenerator().buildSuccessResponse(director.getId());
+	}
+
 }

@@ -66,13 +66,13 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 
 	public StudentSurveyDTO AcademicOfferToDTO(AcademicOffer academicOffer) {
 		StudentSurveyDTO academicOfferDTO = new StudentSurveyDTO();
-		academicOfferDTO.setId(academicOffer.getId());
+/*		academicOfferDTO.setId(academicOffer.getId());
 		academicOfferDTO.setEndDate(academicOffer.getEndDate());
 		academicOfferDTO.setActive(academicOffer.isActive());
 		academicOfferDTO.setPeriod(periodService.periodToDTO(academicOffer.getPeriod()));
 
 		// Ver como ponderar elecciones pasadas...
-		academicOfferDTO.setOffers(offerService.getOffersDTO(academicOffer.getOffers()));
+		academicOfferDTO.setOffers(offerService.getOffersDTO(academicOffer.getOffers())); */
 		return academicOfferDTO;
 	}
 
@@ -80,7 +80,7 @@ public class AcademicOfferService extends GenericService<AcademicOffer> {
 		AcademicOffer academicOffer = this.getRepository().findById(idAcademicOffer);
 		Student student = studentService.find(idStudent);
 		StudentSurveyDTO academicOfferDTO = this.AcademicOfferToDTO(academicOffer);
-		academicOfferDTO.setStudent(studentService.StudentToDTO(student));
+		/*academicOfferDTO.setStudent(studentService.StudentToDTO(student));*/
 		return academicOfferDTO;
 	}
 

@@ -42,17 +42,6 @@ public class DegreeStudentRest  extends GenericRest<DegreeStudent> {
 	}
 	
 	@GET
-	@Path("/all")
-	public Response findAll() {
-		try {
-			List<DegreeStudentDTO> dtos = this.degreeStudentService.findAllDTO();
-			return responseGenerator.buildSuccessResponse(dtos);
-		} catch (Exception e) {
-			return responseGenerator.buildErrorResponse(e);
-		}
-	}
-
-	@GET
 	@Path("/{id}")
 	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
 		try {

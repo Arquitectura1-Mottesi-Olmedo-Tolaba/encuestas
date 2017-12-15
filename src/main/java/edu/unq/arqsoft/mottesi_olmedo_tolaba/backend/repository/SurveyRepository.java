@@ -63,4 +63,10 @@ public class SurveyRepository extends HibernateGenericDAO<Survey> implements Gen
                 .setParameter("code", code);
         return  query.uniqueResult() != null;
     }
+
+	public List<String> findCodes() {
+		String hql = "SELECT survey.code FROM Survey as survey";
+        Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
+        return query.list();
+	}
 }

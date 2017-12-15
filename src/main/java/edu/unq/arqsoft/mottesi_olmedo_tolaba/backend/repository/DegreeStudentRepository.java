@@ -3,8 +3,10 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.DegreeStudent;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
@@ -54,6 +56,5 @@ public class DegreeStudentRepository extends HibernateGenericDAO<DegreeStudent> 
 			+ "WHERE degreeStudent.degree.id = ? ";
 		return (List<Student>) this.getHibernateTemplate().find(query, idDegree);
 	}
-
 
 }

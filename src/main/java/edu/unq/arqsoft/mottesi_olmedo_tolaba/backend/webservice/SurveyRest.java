@@ -11,12 +11,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.GenericService;
@@ -56,6 +54,12 @@ public class SurveyRest  extends GenericRest<Survey> {
 	@GET
 	public Response ok() {
 		return responseGenerator.responseOK("OK");
+	}
+	
+	@GET
+	@Path("/codes")
+	public Response findCodes() {
+		return responseGenerator.buildSuccessResponse(this.surveyService.findCodes());
 	}
 	
 	@POST
