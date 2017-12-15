@@ -3,6 +3,8 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,20 +22,12 @@ public class StudentService extends GenericService<Student> {
 	
 	@Autowired
 	private StudentRepository repository;
-	
-	@Autowired
-	private SubjectService subjectService;
-	
+
+    @Autowired
+    private SurveyService surveyService;
+
 	public StudentRepository getRepository() {
 		return repository;
-	}
-	
-	public SubjectService getSubjectService() {
-		return subjectService;
-	}
-
-	public void setSubjectService(SubjectService subjectService) {
-		this.subjectService = subjectService;
 	}
 
 	public void setRepository(StudentRepository repository) {
@@ -42,32 +36,10 @@ public class StudentService extends GenericService<Student> {
 
 	public StudentService() { }
 
-	public Student findByStudentId(Integer studentId) {
-		return this.repository.findByStudentId(studentId);
-	}
-
-	public Student newStudent(String name, String lastName, Integer studentID, String email) {
-		Student newStudent = new Student();
-		newStudent.setEmail(email);
-		newStudent.setName(name);
-		newStudent.setLastName(lastName);
-		return this.save(newStudent);
-	}
-	
-	public Student updateStudent(Long idStudent, String name, String lastName, Integer studentID, String email) {
-		Student studentToUpdate = this.getRepository().findById(idStudent);
-		studentToUpdate.setName(name);
-		studentToUpdate.setLastName(lastName);
-		studentToUpdate.setStudentID(studentID);
-		studentToUpdate.setEmail(email);
-		return this.update(studentToUpdate);
-	}
-	
-	
-	private List<SubjectDTO> getApprovedSubjectsDTO(Student student){
+    private List<SubjectDTO> getApprovedSubjectsDTO(Student student){
 		List<SubjectDTO> dtos = new ArrayList<SubjectDTO>();
 		for (Subject subject : student.getApprovedSubjects()){
-			dtos.add(this.subjectService.subjectToDTO(subject));
+			//dtos.add(this.subjectService.subjectToDTO(subject));
 		}
 		return dtos;
 	}
@@ -77,4 +49,12 @@ public class StudentService extends GenericService<Student> {
 		studentDTO.setApprovedSubjects(getApprovedSubjectsDTO(student));
 		return studentDTO;
 	}
+
+    public Boolean verifyCode(String code) {
+    	return surveyService.verifyCode(code);
+    }
+
+    public StudentSurveyDTO getSurveyByCode(String code) {
+        return surveyService.getSurveyByCode(code);
+    }
 }

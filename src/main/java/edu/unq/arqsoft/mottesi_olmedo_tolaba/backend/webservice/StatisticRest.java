@@ -41,45 +41,45 @@ public class StatisticRest  extends GenericRest<Statistic> {
 	public GenericService<Statistic> getService() {
 		return statisticService;
 	}
+//
+//	@GET
+//	@Path("/findByAcademicOffer/{id}")
+//	public Response findByAcademicOffer(@Context HttpServletRequest request, @PathParam("id") final Long id) {
+//		try {
+//			List<StatisticDTO> dtos = this.statisticService.findDTOByAcademicOffer(id);
+//			return responseGenerator.buildSuccessResponse(dtos);
+//		} 
+//		catch (RuntimeException e) {
+//            return responseGenerator.buildCustomErrorResponse(e.getMessage(), Status.BAD_REQUEST);
+//        }
+//		catch (Exception e) {
+//			return responseGenerator.buildErrorResponse(e);
+//		}
+//	}
+	
+//	@GET
+//	@Path("/all")
+//	public Response findAll() {
+//		try {
+//			List<StatisticDTO> dtos = this.statisticService.findAllDTO();
+//			return responseGenerator.buildSuccessResponse(dtos);
+//		} catch (Exception e) {
+//			return responseGenerator.buildErrorResponse(e);
+//		}
+//	}
 
-	@GET
-	@Path("/findByAcademicOffer/{id}")
-	public Response findByAcademicOffer(@Context HttpServletRequest request, @PathParam("id") final Long id) {
-		try {
-			List<StatisticDTO> dtos = this.statisticService.findDTOByAcademicOffer(id);
-			return responseGenerator.buildSuccessResponse(dtos);
-		} 
-		catch (RuntimeException e) {
-            return responseGenerator.buildCustomErrorResponse(e.getMessage(), Status.BAD_REQUEST);
-        }
-		catch (Exception e) {
-			return responseGenerator.buildErrorResponse(e);
-		}
-	}
-	
-	@GET
-	@Path("/all")
-	public Response findAll() {
-		try {
-			List<StatisticDTO> dtos = this.statisticService.findAllDTO();
-			return responseGenerator.buildSuccessResponse(dtos);
-		} catch (Exception e) {
-			return responseGenerator.buildErrorResponse(e);
-		}
-	}
-
-	
-	@GET
-	@Path("/{id}")
-	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
-		try {
-			StatisticDTO dto = this.statisticService.findDTO(id);
-			return responseGenerator.buildSuccessResponse(dto);
-		} catch (Exception e) {
-			return responseGenerator.buildErrorResponse(e);
-		}
-	}
-	
+//	
+//	@GET
+//	@Path("/{id}")
+//	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
+//		try {
+//			StatisticDTO dto = this.statisticService.findDTO(id);
+//			return responseGenerator.buildSuccessResponse(dto);
+//		} catch (Exception e) {
+//			return responseGenerator.buildErrorResponse(e);
+//		}
+//	}
+//	
 	@GET
 	public Response ok() {
 		return responseGenerator.responseOK("OK");

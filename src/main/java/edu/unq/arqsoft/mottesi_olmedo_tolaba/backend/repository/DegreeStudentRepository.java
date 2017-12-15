@@ -43,7 +43,7 @@ public class DegreeStudentRepository extends HibernateGenericDAO<DegreeStudent> 
 		//TODO: 
 		String query = "SELECT count(degreeStudent) FROM " + persistentClass.getName() + " degreeStudent "
 				+ "WHERE degreeStudent.degree.id = ? ";
-		return (Integer) this.getHibernateTemplate().find(query, idDegree).get(0);
+		return ((Long) this.getHibernateTemplate().find(query, idDegree).get(0)).intValue();
 		
 	}
 

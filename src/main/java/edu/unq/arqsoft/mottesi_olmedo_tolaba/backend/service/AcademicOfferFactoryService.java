@@ -1,6 +1,5 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,13 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class AcademicOfferFactoryService {
 
 	@Autowired
+	private DirectorService directorService;
+	
+	@Autowired
 	private StudentService studentService;
 	
 	@Autowired
 	private SurveyService surveyService;
-
-	@Autowired
-	private DegreeService degreeService;
 
     @Autowired
     private DegreeStudentService degreeStudentService;
@@ -29,11 +28,15 @@ public class AcademicOfferFactoryService {
 
 	@Transactional
 	public void initialize() {
-
+		FakeData fakeData = new FakeData();
+		
         // Create degrees
-        FakeData fakeData = new FakeData();
-		Degree degreeTPI = degreeService.save(fakeData.degreeTPI());
-        Degree degreeLicBio = degreeService.save(fakeData.degreeLICBIO());
+		Degree degreeTPI = fakeData.degreeTPI();
+        Degree degreeLicBio = fakeData.degreeLICBIO();
+        
+        // Create director
+        Director director = new Director(Arrays.asList(degreeTPI, degreeLicBio),new UserCredential("director@gmail.com", "director"));
+		directorService.save(director);
 
         // Create students
         List<Student> studentsTpi = fakeData.studentsTPI();
@@ -41,7 +44,7 @@ public class AcademicOfferFactoryService {
         List<Student> studentsLicBio = fakeData.studentsLicBio();
         studentsLicBio.forEach(student -> studentService.save(student));
 
-        // Create degreeSturdents
+        // Create degreeStudents
         List<DegreeStudent> degreeStudentsTpi = fakeData.getDegreeStudentsOf(degreeTPI, studentsTpi);
         degreeStudentsTpi.forEach(degreeStudent -> degreeStudentService.save(degreeStudent));
         List<DegreeStudent> degreeStudentsLicBio = fakeData.getDegreeStudentsOf(degreeLicBio, studentsLicBio);

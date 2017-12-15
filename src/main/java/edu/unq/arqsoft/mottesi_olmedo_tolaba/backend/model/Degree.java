@@ -8,9 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.DegreeDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SubjectDTO;
 
@@ -23,11 +20,9 @@ public class Degree extends PersistenceEntity {
 	private String name;
         
     @OneToMany(cascade=CascadeType.ALL)
-	@Fetch(FetchMode.JOIN)
     private List<Subject> subjects;
     
     @OneToMany(cascade=CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
     private List<AcademicOffer> academicOffers;
 
     public Degree(String name, List<Subject> subjects, List<AcademicOffer> academicOffers) {
@@ -71,7 +66,7 @@ public class Degree extends PersistenceEntity {
 			subjectsDTO.add(subject.toSubjectDTO());
 		}
 		
-		return new DegreeDTO(this.id,this.name,subjectsDTO);
+		return null; //new DegreeDTO(this.id,this.name,subjectsDTO);
 	}
 
 	public void addAcademicOffer(AcademicOffer academicOffer) {

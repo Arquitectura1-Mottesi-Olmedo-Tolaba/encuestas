@@ -1,24 +1,32 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserCredential;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Director;
 
 public class DirectorDTO implements Serializable{
 
 	private static final long serialVersionUID = -4655259408872462825L;
-	public List<DegreeDTO> degrees;
-	public UserCredential user;
+	private List<DegreeDTO> degrees;
 	
-	public DirectorDTO(){	
-		this.degrees = new ArrayList<DegreeDTO>();
+	public DirectorDTO(Director director){	
+		this.degrees = director.getDegrees().stream()
+				.map(degree -> new DegreeDTO(degree))
+				.collect(Collectors.toList());
+
 	}
-	
-	public DirectorDTO(List<DegreeDTO> degrees, UserCredential user){
+
+	public DirectorDTO(List<DegreeDTO> degrees) {
 		this.degrees = degrees;
-		this.user = user;
 	}
-	
+
+	public List<DegreeDTO> getDegrees() {
+		return degrees;
+	}
+
+	public void setDegrees(List<DegreeDTO> degrees) {
+		this.degrees = degrees;
+	}
 }

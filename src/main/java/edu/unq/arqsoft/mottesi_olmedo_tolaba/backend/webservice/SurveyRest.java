@@ -68,22 +68,22 @@ public class SurveyRest  extends GenericRest<Survey> {
 	public Response update(@Context HttpServletRequest request, Survey survey) {
 		return super.update(survey);
 	}
-	
-	@GET
-	@Path("/getByCode/{code}")
-	public Response getByCode(@Context HttpServletRequest request,@PathParam("code") String code) {
-		try {
-			StudentSurveyDTO surveyDTO = this.surveyService.makeDTOFrom(code);
-			return responseGenerator.buildSuccessResponse(surveyDTO);
-		} 
-		catch (RuntimeException e) {
-            return responseGenerator.buildCustomErrorResponse(e.getMessage(), Status.BAD_REQUEST);
-        }
-		catch (Exception e) {
-			return responseGenerator.buildErrorResponse(e);
-		}
-	}
-	
+//	
+//	@GET
+//	@Path("/getByCode/{code}")
+//	public Response getByCode(@Context HttpServletRequest request,@PathParam("code") String code) {
+//		try {
+//			StudentSurveyDTO surveyDTO = this.surveyService.makeDTOFrom(code);
+//			return responseGenerator.buildSuccessResponse(surveyDTO);
+//		} 
+//		catch (RuntimeException e) {
+//            return responseGenerator.buildCustomErrorResponse(e.getMessage(), Status.BAD_REQUEST);
+//        }
+//		catch (Exception e) {
+//			return responseGenerator.buildErrorResponse(e);
+//		}
+//	}
+//	
 	
 	@POST
 	@Path("/save")

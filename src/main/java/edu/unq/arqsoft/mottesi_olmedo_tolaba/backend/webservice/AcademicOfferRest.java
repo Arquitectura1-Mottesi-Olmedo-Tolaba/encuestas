@@ -46,23 +46,6 @@ public class AcademicOfferRest  extends GenericRest<AcademicOffer> {
 	public Response findAll() {
 		return super.findAll();
 	}
-	
-	
-	@GET
-	@Path("/{id}")
-	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
-		
-		
-		try {
-			StudentSurveyDTO dto = this.academicOfferService.getAcademicOfferDTOById(id);
-			return responseGenerator.buildSuccessResponse(dto);
-        } catch (RuntimeException e) {
-            return responseGenerator.buildCustomErrorResponse(e.getMessage(), Status.BAD_REQUEST);
-        } catch (Exception e) {
-            return responseGenerator.buildErrorResponse(e);
-        }
-	}
-	
 		
 	@GET
 	public Response ok() {

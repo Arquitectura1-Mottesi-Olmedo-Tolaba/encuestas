@@ -27,49 +27,24 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.ResponseGenerator;
 public class StudentRest  extends GenericRest<Student> {
 
 	@Autowired
-	private ResponseGenerator responseGenerator;
-	
-	@Autowired
 	private StudentService studentService;
-	
 
 	@Override
 	public GenericService<Student> getService() {
 		return studentService;
 	}
 
+
 	@GET
-	@Path("/all")
-	public Response findAll() {
-		return super.findAll();
+	@Path("/verify/{code}")
+	public Response verifyCode(@Context HttpServletRequest request, @PathParam("code") final String code) {
+		return this.getResponseGenerator().buildSuccessResponse(studentService.verifyCode(code));
 	}
 
 	@GET
-	@Path("/{id}")
-	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
-		return super.find(id);
-	}
-	
-	@GET
-	public Response ok() {
-		return responseGenerator.responseOK("OK");
-	}
-	
-	@POST
-	public Response create(@Context HttpServletRequest request, Student user) {
-		return super.create(user);
-	}
-
-
-	@PUT
-	public Response update(@Context HttpServletRequest request, Student user) {
-		return super.update(user);
-	}
-	
-	@DELETE
-	@Path("/{id}")
-	public Response delete(@Context HttpServletRequest request, @PathParam("id") final Long id) {
-		return super.delete(id);
-	}
+    @Path("/getByCode/{code}")
+    public Response getByCode(@Context HttpServletRequest request, @PathParam("code") final String code) {
+        return this.getResponseGenerator().buildSuccessResponse(studentService.getSurveyByCode(code));
+    }
 
 }

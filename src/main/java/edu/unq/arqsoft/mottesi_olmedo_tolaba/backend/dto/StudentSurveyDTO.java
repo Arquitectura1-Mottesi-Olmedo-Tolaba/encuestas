@@ -4,78 +4,64 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.google.gson.Gson;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 
 public class StudentSurveyDTO implements Serializable{
-	
-	private Long id;
+
     private String name;
     private String endDate;
-    private boolean active;
-    private PeriodDTO period;
-    private StudentDTO student;
-    private List<OfferDTO> offers;
+    private Period period;
+    private Student student;
+    private List<StudentOfferDTO> offers;
 
     public StudentSurveyDTO(){}
-    
-    public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public StudentSurveyDTO(String name, String endDate, Period period, Student student, List<StudentOfferDTO> offers) {
+        this.name = name;
+        this.endDate = endDate;
+        this.period = period;
+        this.student = student;
+        this.offers = offers;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getEndDate() {
-		return endDate;
-	}
+    public String getEndDate() {
+        return endDate;
+    }
 
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
-	public PeriodDTO getPeriod() {
-		return period;
-	}
+    public Period getPeriod() {
+        return period;
+    }
 
-	public void setPeriod(PeriodDTO period) {
-		this.period = period;
-	}
+    public void setPeriod(Period period) {
+        this.period = period;
+    }
 
-	public StudentDTO getStudent() {
-		return student;
-	}
+    public Student getStudent() {
+        return student;
+    }
 
-	public void setStudent(StudentDTO student) {
-		this.student = student;
-	}
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
-	public List<OfferDTO> getOffers() {
-		return offers;
-	}
+    public List<StudentOfferDTO> getOffers() {
+        return offers;
+    }
 
-	public void setOffers(List<OfferDTO> offers) {
-		this.offers = offers;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public String prettyPrint() {
-		Gson gson = new Gson();
-		return gson.toJson(this).toString();
-	}
-
+    public void setOffers(List<StudentOfferDTO> offers) {
+        this.offers = offers;
+    }
 }

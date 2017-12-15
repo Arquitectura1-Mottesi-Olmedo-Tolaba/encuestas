@@ -1,19 +1,11 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.StringValidator;
 
@@ -24,89 +16,41 @@ public class UserCredential extends PersistenceEntity {
 
 	private static final long serialVersionUID = -5002653969322746767L;
 
-	// Instance Variables
-	private String username;	
-	private String password;
 	private String email;
-	
-	
-	@ManyToMany(cascade = CascadeType.MERGE)
-	@JoinTable(name="users_roles", 
-		joinColumns={@JoinColumn(name="user_id")}, 
-		inverseJoinColumns={@JoinColumn(name="role_id")})
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Role> roles;
+	private String password;
 
-	// Constructors
+	
 	public UserCredential() {
-		this.roles = new LinkedList<Role>();
+		super();
 	}
 
-	public UserCredential(String username, String password, String email, List<Role> roles) {
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.roles = roles;
-	}
+    public UserCredential(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
-	// Getters and Setters
-	public String getUsername() {
-		return username;
-	}
-	
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public boolean isSameUser(UserCredential otherUser){
-		return this.username.equals(otherUser.getUsername());
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public List<Role> getRoles() {
-		return roles;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-	
-	// Logic
-	/**
-	 * Adds the given Role to the Entity if not already added previously.
-	 * @param student : The Role to add.
-	 */
-	
-	public void addRole(Role studentRole) {
-		this.roles.add(studentRole);
-		
-	}
-	
-	public void addRoles(Collection<Role> roles) {
-		for (Role role : roles) {
-			this.addRole(role);
-		}
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isSameUser(UserCredential otherUser){
+		return this.getEmail().equals(otherUser.getEmail());
 	}
 	
 	public Boolean isWellFormed() {
-		return StringValidator.isValidString(username) && StringValidator.isValidString(password);
+		return StringValidator.isValidString(email) && StringValidator.isValidString(password);
 	}
-
-	
 
 }

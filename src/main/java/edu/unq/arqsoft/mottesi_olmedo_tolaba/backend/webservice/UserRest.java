@@ -99,15 +99,15 @@ public class UserRest  extends GenericRest<UserCredential> {
 	}
 	*/
 	
-	@POST
-	@Path("/signin")
-	public Response signin(@Context HttpServletRequest request, UserCredential user) {
-		try {
-			return responseGenerator.buildSuccessResponse(userService.signin(user));
-		} catch( Exception e) {
-			return responseGenerator.buildErrorResponse(e);
-		}
-	}
+//	@POST
+//	@Path("/signin")
+//	public Response signin(@Context HttpServletRequest request, UserCredential user) {
+//		try {
+//			return responseGenerator.buildSuccessResponse(userService.signin(user));
+//		} catch( Exception e) {
+//			return responseGenerator.buildErrorResponse(e);
+//		}
+//	}
 
 	@PUT
 	public Response update(@Context HttpServletRequest request, UserCredential user) {

@@ -65,4 +65,8 @@ public abstract class GenericRest <T extends PersistenceEntity> {
 		} 
 	}
 
+	public ResponseGenerator getResponseGenerator() {
+		return responseGenerator;
+	}
+
 }

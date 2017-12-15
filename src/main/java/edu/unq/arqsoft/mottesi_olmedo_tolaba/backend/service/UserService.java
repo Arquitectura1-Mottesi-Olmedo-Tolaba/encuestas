@@ -38,7 +38,6 @@ public class UserService extends GenericService<UserCredential> {
 		UserCredential user = new UserCredential();
 		user.setEmail(email);
 		user.setPassword(password);
-		user.setUsername(username);
 		this.repository.save(user);
 		return user;
 	}
@@ -100,16 +99,16 @@ public class UserService extends GenericService<UserCredential> {
 		*/		
 		return null;
 	}
-
-	@Transactional
-	public UserDTO signin(UserCredential user) {
-		validateIncompleteFields(user);
-		UserCredential fetchedUser = this.findByUsername(user.getUsername());
-		if (fetchedUser != null && fetchedUser.getPassword().equals(user.getPassword())) {
-			return new UserDTO(fetchedUser);
-		} else {
-			throw new RuntimeException("Incorrect username or password");
-		}
-	}
+//
+//	@Transactional
+//	public UserDTO signin(UserCredential user) {
+//		validateIncompleteFields(user);
+//		UserCredential fetchedUser = this.findByUsername(user.getUsername());
+//		if (fetchedUser != null && fetchedUser.getPassword().equals(user.getPassword())) {
+//			return new UserDTO(fetchedUser);
+//		} else {
+//			throw new RuntimeException("Incorrect username or password");
+//		}
+//	}
 
 }

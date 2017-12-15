@@ -19,8 +19,7 @@ public class Course extends PersistenceEntity {
 	@OneToOne(cascade = CascadeType.ALL)
     private Professor professor;
         
-    @OneToMany(cascade = CascadeType.ALL) //cascade = CascadeType.MERGE, orphanRemoval = true
-	@LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER) //cascade = CascadeType.MERGE, orphanRemoval = true
     private List<Timeline> timelines;
     
     private Integer quantity;

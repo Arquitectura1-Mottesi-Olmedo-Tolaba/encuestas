@@ -4,12 +4,10 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "directors")
@@ -17,41 +15,38 @@ public class Director extends PersistenceEntity {
 
 	private static final long serialVersionUID = 6591632026675920348L;
 
-	@OneToOne(cascade=CascadeType.ALL)
-	private Degree degree;
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<Degree> degrees;
         
     @OneToOne(cascade=CascadeType.ALL)
-	private UserCredential user;
+	private UserCredential credential;
 
     public Director() {        
     }
-    
-	public Director(Degree degree, UserCredential user) {
+
+	public Director(List<Degree> degrees, UserCredential credential) {
 		super();
-		this.degree = degree;
-		this.user = user;
+		this.degrees = degrees;
+		this.credential = credential;
 	}
 
-
-
-	public Degree getDegree() {
-		return degree;
+	public List<Degree> getDegrees() {
+		return degrees;
 	}
 
-	public void setDegree(Degree degree) {
-		this.degree = degree;
+	public void setDegrees(List<Degree> degrees) {
+		this.degrees = degrees;
 	}
 
-	public UserCredential getUser() {
-		return user;
+	public UserCredential getCredential() {
+		return credential;
 	}
 
-	public void setUser(UserCredential user) {
-		this.user = user;
+	public void setCredential(UserCredential credential) {
+		this.credential = credential;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
+    
+    
+    
+    
 }

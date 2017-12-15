@@ -3,32 +3,32 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.OptionCounter;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject;
 
 public class StatisticDTO implements Serializable{
 	
 	private static final long serialVersionUID = 6398518148191713691L;
-	public Long id;
-    public SubjectDTO subject;
-    public List<OptionCounter> optionsCounter;
+    private Subject subject;
+	private List<OptionCounterDTO> info;
 
-    public StatisticDTO(){}
-    
-
-	public StatisticDTO(Long id, SubjectDTO subject, List<OptionCounter> optionsCounter) {
-		this.id = id;
+	public StatisticDTO(Subject subject, List<OptionCounterDTO> info) {
 		this.subject = subject;
-		this.optionsCounter = optionsCounter;
+		this.info = info;
 	}
 
-
-	public Long getId() {
-		return id;
+	public Subject getSubject() {
+		return subject;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 
-	
+	public List<OptionCounterDTO> getInfo() {
+		return info;
+	}
+
+	public void setInfo(List<OptionCounterDTO> info) {
+		this.info = info;
+	}
 }

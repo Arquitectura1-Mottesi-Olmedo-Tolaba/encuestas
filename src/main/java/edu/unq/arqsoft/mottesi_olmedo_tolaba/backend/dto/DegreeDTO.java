@@ -1,20 +1,37 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto;
 
-import java.util.List;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree;
 
 public class DegreeDTO {
 
-	public String name;
-	public List<SubjectDTO> subjectsDTO;
-	public Long id;
+	private String name;
+	private Long id;
 
 	public DegreeDTO() {
 	}
-	
-	public DegreeDTO(Long id,String name, List<SubjectDTO> subjectsDTO) {
-		this.id = id;
+
+	public DegreeDTO(String name, Long id) {
 		this.name = name;
-		this.subjectsDTO = subjectsDTO;
+		this.id = id;
 	}
 
+	public DegreeDTO(Degree degree){
+		this(degree.getName(), degree.getId());
+	}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

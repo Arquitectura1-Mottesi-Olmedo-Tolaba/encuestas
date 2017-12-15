@@ -1,6 +1,5 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -23,7 +22,6 @@ public class UserDTO {
 	
 	public UserDTO(UserCredential userCredential) {
 		this.userId = userCredential.getId();
-		this.roles = new HashSet<Role>(userCredential.getRoles());
 	}
 	
 	// Getters and Setters

@@ -39,5 +39,9 @@ public class DegreeService extends GenericService<Degree> {
 		return super.save(model);
 	}
 
+	public String getDegreeName(Long idDegree) {
+		return this.find(idDegree).getName();
+	}
+
 
 }

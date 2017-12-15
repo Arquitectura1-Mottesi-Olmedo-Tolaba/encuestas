@@ -1,6 +1,7 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -63,6 +64,7 @@ public class Survey extends PersistenceEntity {
 		this.academicOffer = academicOffer;
 		this.code = UUID.randomUUID().toString();
 		this.wasAnswered = false;
+		this.surveyMatches = new ArrayList<>();
 	}
 
 	public SurveyDTO toSurveyDTO() {

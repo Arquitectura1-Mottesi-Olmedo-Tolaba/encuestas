@@ -2,18 +2,12 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 
 import java.util.List;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.*;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.exceptions.EntityNotExistingException;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.SurveyMatch;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.SurveyRepository;
 
 
@@ -25,7 +19,7 @@ public class SurveyService extends GenericService<Survey> {
 	private SurveyRepository repository;
 	
 	@Autowired
-	private PeriodService periodService;
+	private DegreeService degreeService;
 		
 	@Autowired
 	private StudentService studentService;
@@ -97,29 +91,32 @@ public class SurveyService extends GenericService<Survey> {
 	public StudentSurveyDTO getDTO(AcademicOffer academicOffer) {
 		StudentSurveyDTO academicOfferDTO = new StudentSurveyDTO();
 		academicOfferDTO.setName("TPI");
-		academicOfferDTO.setId(academicOffer.getId());
+
 		academicOfferDTO.setEndDate(academicOffer.getEndDate());
-		academicOfferDTO.setActive(academicOffer.isActive());
-		academicOfferDTO.setPeriod(periodService.periodToDTO(academicOffer.getPeriod()));
+
+
 		
 		//Ver como ponderar elecciones pasadas...
-		academicOfferDTO.setOffers(offerService.getOffersDTO(academicOffer.getOffers()));
+		//academicOfferDTO.setOffers(offerService.getOffersDTO(academicOffer.getOffers()));
 		return academicOfferDTO;
 	}
-	
-	
-	public StudentSurveyDTO makeDTO(Survey survey) {
-		StudentSurveyDTO dto = this.getDTO(survey.getAcademicOffer());
-		dto.setStudent(studentService.StudentToDTO(survey.getStudent()));
-		return dto;
+
+
+	public Integer surveysCompletedOf(Long academicOfferId) {
+		return this.repository.surveysCompletedOf(academicOfferId);
 	}
-	
-	public StudentSurveyDTO makeDTOFrom(String code) {
-		Survey survey = getByCode(code);
-		if (survey == null){
-			throw new EntityNotExistingException("No existe esa encuesta");
-		}		
-		return makeDTO(survey);
-	}
-	
+
+    public Boolean verifyCode(String code) {
+        return this.getRepository().verifyCode(code);
+    }
+
+    public StudentSurveyDTO getSurveyByCode(String code) {
+        Survey survey = this.getByCode(code);
+        String degreeName = degreeService.getDegreeNameForAcademicOffer(survey.getAcademicOffer().getId());
+        String endDate = survey.getAcademicOffer().getEndDate();
+        Period period = survey.getAcademicOffer().getPeriod();
+
+        return new StudentSurveyDTO(degreeName, endDate, period, survey.getStudent(), studentOffersDTO);
+    }
+
 }

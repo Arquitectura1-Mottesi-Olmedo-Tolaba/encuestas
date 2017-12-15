@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StatisticDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.exceptions.EntityNotExistingException;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.OptionCounter;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic;
@@ -57,34 +56,34 @@ public class StatisticService extends GenericService<Statistic> {
 		return this.save(stat);
 	}
 
-	public List<StatisticDTO> findAllDTO() {
-		List<StatisticDTO> res = new ArrayList<StatisticDTO>();
-		for (Statistic st : this.findAll()){
-			res.add(makeStatisticDTO(st));
-		}
-		return res;
-	}
+//	public List<StatisticDTO> findAllDTO() {
+//		List<StatisticDTO> res = new ArrayList<StatisticDTO>();
+//		for (Statistic st : this.findAll()){
+//			res.add(makeStatisticDTO(st));
+//		}
+//		return res;
+//	}
 
-	private StatisticDTO makeStatisticDTO(Statistic st) {
-		return new StatisticDTO(st.getId(),
-				st.getSubject().toSubjectDTO(),st.getOptionsCounter());
-	}
+//	private StatisticDTO makeStatisticDTO(Statistic st) {
+//		return new StatisticDTO(st.getId(),
+//				st.getSubject().toSubjectDTO(),st.getOptionsCounter());
+//	}
 
-	public StatisticDTO findDTO(Long id) {
-		return makeStatisticDTO(this.find(id));
-	}
+//	public StatisticDTO findDTO(Long id) {
+//		return makeStatisticDTO(this.find(id));
+//	}
 
-	public List<StatisticDTO> findDTOByAcademicOffer(Long id) {
-		List<StatisticDTO> res = new ArrayList<StatisticDTO>();
-		List<Statistic> stats = findByAcademicOffer(id);
-		if (stats == null){
-			throw new EntityNotExistingException("No existen estadisticas asociadas a esa oferta academica");
-		}
-		for (Statistic st : stats){
-			res.add(makeStatisticDTO(st));
-		}
-		return res;
-	}
+//	public List<StatisticDTO> findDTOByAcademicOffer(Long id) {
+//		List<StatisticDTO> res = new ArrayList<StatisticDTO>();
+//		List<Statistic> stats = findByAcademicOffer(id);
+//		if (stats == null){
+//			throw new EntityNotExistingException("No existen estadisticas asociadas a esa oferta academica");
+//		}
+//		for (Statistic st : stats){
+//			res.add(makeStatisticDTO(st));
+//		}
+//		return res;
+//	}
 
 	public List<Statistic> findByAcademicOffer(Long id) {
 		return this.getRepository().findByAcademicOffer(id);
