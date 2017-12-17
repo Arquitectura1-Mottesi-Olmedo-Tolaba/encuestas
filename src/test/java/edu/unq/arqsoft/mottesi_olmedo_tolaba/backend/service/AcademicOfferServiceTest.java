@@ -21,7 +21,7 @@ public class AcademicOfferServiceTest {
 	
 	@Test
 	public void testGetCurrentAcademicOfferFor(){
-		AcademicOffer academicOffer = academicOfferService.getCurrentAcademicOfferFor(2l);
+		AcademicOffer academicOffer = academicOfferService.getCurrentAcademicOfferFor(1l);
 		assertTrue(academicOffer.isActive());
         assertEquals(academicOffer.getPeriod().getYear(), 2017, 0);
         assertEquals(academicOffer.getPeriod().getQuarter(), 2, 0);

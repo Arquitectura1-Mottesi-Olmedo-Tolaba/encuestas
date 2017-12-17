@@ -50,10 +50,10 @@ public class StudentServiceTest {
     
     @Test
     public void testCompleteSurvey(){
-    	String code = surveyService.findCodes().get(1);
+    	String code = surveyService.findCodes().get(198);
     	
     	StudentSurveyDTO studentSurveyDTO = service.getSurveyByCode(code);
-    	assertEquals(studentSurveyDTO.getName(), "Tecnicatura Universitaria en Programacion Informatica");
+    	assertEquals(studentSurveyDTO.getName(), "Licenciatura en Biotecnología");
     	assertEquals(studentSurveyDTO.getOffers().size(), 31, 0);
     	assertEquals(studentSurveyDTO.getMessage(), "");
     	assertEquals(studentSurveyDTO.getPeriod().getYear(), 2017, 0);
@@ -64,7 +64,7 @@ public class StudentServiceTest {
     	service.completeSurvey(studentSurvey);
     	
     	studentSurveyDTO = service.getSurveyByCode(code);
-    	assertEquals(studentSurveyDTO.getName(), "Tecnicatura Universitaria en Programacion Informatica");
+    	assertEquals(studentSurveyDTO.getName(), "Licenciatura en Biotecnología");
     	assertEquals(studentSurveyDTO.getOffers().size(), 31, 0);
     	assertEquals(studentSurveyDTO.getMessage(), "hello");
     	assertEquals(studentSurveyDTO.getPeriod().getYear(), 2017, 0);
