@@ -7,16 +7,16 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.DegreeRepository;
 
-
 @Transactional
 @Service
 public class DegreeService extends GenericService<Degree> {
 
 	@Autowired
 	private DegreeRepository repository;
-	
-	public DegreeService() {}
-	
+
+	public DegreeService() {
+	}
+
 	public DegreeService(DegreeRepository repo) {
 		this.setRepository(repo);
 	}
@@ -28,16 +28,6 @@ public class DegreeService extends GenericService<Degree> {
 	public void setRepository(DegreeRepository repository) {
 		this.repository = repository;
 	}
-	
-	@Transactional
-	public Degree update(Degree model) {
-		return super.update(model);
-	}
-	
-	@Transactional
-	public Degree save(Degree model) {
-		return super.save(model);
-	}
 
 	@Transactional
 	public String getDegreeName(Long idDegree) {
@@ -45,9 +35,8 @@ public class DegreeService extends GenericService<Degree> {
 	}
 
 	@Transactional
-	public String getDegreeNameForAcademicOffer(Long idAcademicOffer){
+	public String getDegreeNameForAcademicOffer(Long idAcademicOffer) {
 		return this.getRepository().findDegreeNameForAcademicOffer(idAcademicOffer);
 	}
-
 
 }

@@ -56,8 +56,7 @@ public class SurveyService extends GenericService<Survey> {
 
 	@Transactional
 	public Survey getByCode(String code) {
-		Survey survey = this.getRepository().getByCode(code);
-		return survey;
+		return this.getRepository().getByCode(code);
 	}
 
 	@Transactional

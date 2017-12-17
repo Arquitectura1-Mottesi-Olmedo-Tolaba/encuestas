@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurvey;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.StudentSurvey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.GenericService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.StudentService;

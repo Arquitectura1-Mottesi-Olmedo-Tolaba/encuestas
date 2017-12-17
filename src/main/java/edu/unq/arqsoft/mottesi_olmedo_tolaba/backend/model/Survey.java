@@ -13,8 +13,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.IndexColumn;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurvey;
-
 @Entity
 @Table(name = "surveys")
 public class Survey extends PersistenceEntity {

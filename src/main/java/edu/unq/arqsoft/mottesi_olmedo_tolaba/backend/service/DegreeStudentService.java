@@ -30,15 +30,6 @@ public class DegreeStudentService extends GenericService<DegreeStudent> {
 	}
 	
 	@Transactional
-	public DegreeStudent update(DegreeStudent model) {
-		return super.update(model);
-	}
-	
-	@Transactional
-	public DegreeStudent save(DegreeStudent model) {
-		return super.save(model);
-	}
-
 	public Integer studentsForDegree(Long idDegree) {
 		return this.repository.studentsForDegree(idDegree);
 	}

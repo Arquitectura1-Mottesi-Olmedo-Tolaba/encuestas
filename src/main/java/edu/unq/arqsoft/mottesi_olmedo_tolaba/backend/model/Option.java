@@ -4,8 +4,6 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.OptionDTO;
-
 @Entity
 @Table(name = "options")
 public class Option extends PersistenceEntity {

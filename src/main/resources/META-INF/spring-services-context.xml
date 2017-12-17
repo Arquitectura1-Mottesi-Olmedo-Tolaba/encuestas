@@ -26,7 +26,6 @@
 	
 	<context:component-scan base-package="edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service
 	, edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository
-	, edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.beans
 	, edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.webservice">
    </context:component-scan>
 	
