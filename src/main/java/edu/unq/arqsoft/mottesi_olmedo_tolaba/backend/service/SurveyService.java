@@ -11,14 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentOfferDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Option;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.SurveyMatch;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.SurveyRepository;
@@ -33,19 +29,7 @@ public class SurveyService extends GenericService<Survey> {
 	
 	@Autowired
 	private DegreeService degreeService;
-		
-	@Autowired
-	private StudentService studentService;
-	
-	@Autowired
-	private OfferService offerService;
-	
-	@Autowired
-	private SurveyMatchService surveyMatchService;
-	
-	@Autowired
-	private StatisticService statisticService;
-	
+
 	public SurveyService() {}
 	
 	public SurveyService(SurveyRepository repo) {
@@ -69,66 +53,30 @@ public class SurveyService extends GenericService<Survey> {
 	public Survey save(Survey model) {
 		return super.save(model);
 	}
-	
-	public Survey newSurvey(List<SurveyMatch> surveyMatches) {
-		Survey elem = new Survey();
-		elem.setSurveyMatches(surveyMatches);
-		return this.save(elem);
-	}
 
-	public Survey updateSurveyFromDTO(SurveyDTO surveyDTO) {
-		
-		Survey survey = this.getByCode(surveyDTO.code);
-		for (SurveyMatchDTO smDTO : surveyDTO.surveyMatches){
-			SurveyMatch sm = surveyMatchService.createSurveyMatchFromDTO(smDTO);
-			survey.addSurveyMatch(sm);
-			
-			//Podria ser el mismo survey pero como no fue persistido ...
-			statisticService.updateFromSurvey(smDTO, survey.getAcademicOffer());
-		}		
-		survey.setMessage(surveyDTO.message);
-		
-		return this.update(survey);
-	}
-
-	public Survey createSurvey(Student student, AcademicOffer academicOffer) {
-		Survey survey = new Survey(student,academicOffer);
-		return this.save(survey);
-	}
-	
+	@Transactional
 	public Survey getByCode(String code) {
-		Survey survey = this.repository.getByCode(code);
+		Survey survey = this.getRepository().getByCode(code);
 		return survey;
 	}
 
-	public StudentSurveyDTO getDTO(AcademicOffer academicOffer) {
-		StudentSurveyDTO academicOfferDTO = new StudentSurveyDTO();
-		academicOfferDTO.setName("TPI");
-
-		//academicOfferDTO.setEndDate(academicOffer.getEndDate());
-
-
-		
-		//Ver como ponderar elecciones pasadas...
-		//academicOfferDTO.setOffers(offerService.getOffersDTO(academicOffer.getOffers()));
-		return academicOfferDTO;
-	}
-
-
+	@Transactional
 	public Integer surveysCompletedOf(Long academicOfferId) {
-		return this.repository.surveysCompletedOf(academicOfferId);
+		return this.getRepository().surveysCompletedOf(academicOfferId);
 	}
 
+	@Transactional
     public Boolean verifyCode(String code) {
         return this.getRepository().verifyCode(code);
     }
 
+	@Transactional
     public StudentSurveyDTO getSurveyByCode(String code) {
         Survey survey = this.getByCode(code);
         String degreeName = degreeService.getDegreeNameForAcademicOffer(survey.getAcademicOffer().getId());
         Period period = survey.getAcademicOffer().getPeriod();
 		List<StudentOfferDTO> studentOfferDTOs = this.createStudentOfferDTOs(survey);
-        return new StudentSurveyDTO(degreeName, period, survey.getStudent(), studentOfferDTOs);
+        return new StudentSurveyDTO(degreeName, period, survey.getStudent(), studentOfferDTOs, survey.getMessage());
     }
 
 	private List<StudentOfferDTO> createStudentOfferDTOs(Survey survey) {

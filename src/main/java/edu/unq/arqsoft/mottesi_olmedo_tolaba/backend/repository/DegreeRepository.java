@@ -1,15 +1,10 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree;
 
 @Repository
-@SuppressWarnings("unchecked")
 public class DegreeRepository extends HibernateGenericDAO<Degree> implements GenericRepository<Degree> {
 
 	private static final long serialVersionUID = -4425722631916607857L;

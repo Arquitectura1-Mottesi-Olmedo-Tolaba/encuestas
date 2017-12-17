@@ -1,6 +1,5 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,11 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.IndexColumn;
-
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.DegreeDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SubjectDTO;
 
 @Entity
 @Table(name = "degrees")
@@ -65,18 +60,4 @@ public class Degree extends PersistenceEntity {
         this.academicOffers = academicOffers;
     }
 
-	public DegreeDTO toDTO() {
-		// TODO Auto-generated method stub
-		
-		List<SubjectDTO> subjectsDTO = new ArrayList<SubjectDTO>();
-		for(Subject subject : this.subjects ){
-			subjectsDTO.add(subject.toSubjectDTO());
-		}
-		
-		return null; //new DegreeDTO(this.id,this.name,subjectsDTO);
-	}
-
-	public void addAcademicOffer(AcademicOffer academicOffer) {
-		this.academicOffers.add(academicOffer);		
-	}
 }

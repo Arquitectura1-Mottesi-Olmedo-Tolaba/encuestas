@@ -1,7 +1,6 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.test;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Timeline;
-import org.joda.time.LocalTime;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

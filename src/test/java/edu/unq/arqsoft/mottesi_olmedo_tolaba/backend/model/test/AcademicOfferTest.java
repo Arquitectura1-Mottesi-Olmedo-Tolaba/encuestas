@@ -1,8 +1,6 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.test;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.*;
 
 import java.util.List;
 
@@ -14,7 +12,15 @@ public class AcademicOfferTest {
 
     @Test
     public void testAccessing(){
-        Period period = mock(Period.class);
-        List<Course> courses = mock(List.class);
+        List<Offer> mockOffers = mock(List.class);
+        List<Statistic> mockStatistics = mock(List.class);
+        Period mockPeriod = mock(Period.class);
+        AcademicOffer academicOffer = new AcademicOffer(mockOffers, mockPeriod, "2017-01-03",true, mockStatistics);
+        assertEquals(academicOffer.getOffers(), mockOffers);
+        assertEquals(academicOffer.getPeriod(), mockPeriod);
+        assertEquals(academicOffer.getEndDate(), "2017-01-03");
+        assertTrue(academicOffer.isActive());
+        assertEquals(academicOffer.getStatistics(), mockStatistics);
     }
+
 }

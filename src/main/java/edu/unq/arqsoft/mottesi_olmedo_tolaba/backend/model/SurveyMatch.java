@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
-
 @Entity
 @Table(name = "survey_matches")
 public class SurveyMatch extends PersistenceEntity {
@@ -18,6 +16,14 @@ public class SurveyMatch extends PersistenceEntity {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Option option;
+
+	public SurveyMatch() {
+	}
+
+	public SurveyMatch(Option option, Subject subject) {
+		this.option = option;
+		this.subject = subject;
+	}
 
 	public Subject getSubject() {
 		return subject;
@@ -39,18 +45,4 @@ public class SurveyMatch extends PersistenceEntity {
 		return serialVersionUID;
 	}
 
-	public SurveyMatch() {
-	}
-
-	public SurveyMatch(Option option, Subject subject) {
-		this.option = option;
-		this.subject = subject;
-	}
-
-	public SurveyMatchDTO toSurveyMatchDTO() {
-		SurveyMatchDTO dto = new SurveyMatchDTO();
-		dto.option = this.option.toOptionDTO();
-		dto.subject = this.subject.toSubjectDTO();
-		return dto;
-	}
 }

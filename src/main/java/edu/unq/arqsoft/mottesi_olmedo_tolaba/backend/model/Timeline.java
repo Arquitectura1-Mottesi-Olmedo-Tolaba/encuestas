@@ -12,6 +12,15 @@ public class Timeline extends PersistenceEntity {
 	private String startTime;
 	private String endTime;
 
+	public Timeline() {
+	}
+
+	public Timeline(String dayTime, String startTime, String endTime) {
+		this.dayTime = dayTime;
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
+
 	public String getStartTime() {
 		return startTime;
 	}
@@ -26,15 +35,6 @@ public class Timeline extends PersistenceEntity {
 
 	public void setEndTime(String end) {
 		this.endTime = end;
-	}
-
-	public Timeline() {
-	}
-
-	public Timeline(String dayTime, String startTime, String endTime) {
-		this.dayTime = dayTime;
-		this.startTime = startTime;
-		this.endTime = endTime;
 	}
 
 	public String getDayTime() {

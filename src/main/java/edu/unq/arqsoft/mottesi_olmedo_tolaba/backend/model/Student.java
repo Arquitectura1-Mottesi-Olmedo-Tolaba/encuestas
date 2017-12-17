@@ -87,11 +87,4 @@ public class Student extends PersistenceEntity {
 		this.approvedSubjects.add(subject);
 	}
 
-	public StudentDTO minimumStudentToDTO() {
-		StudentDTO studentDTO = new StudentDTO();
-		studentDTO.setId(this.getId());
-		studentDTO.setName(this.getName());
-		return studentDTO;
-	}
-
 }

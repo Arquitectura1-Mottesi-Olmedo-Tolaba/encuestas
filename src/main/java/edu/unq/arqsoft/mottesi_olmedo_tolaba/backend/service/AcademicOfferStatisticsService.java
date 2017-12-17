@@ -3,7 +3,6 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.OptionCounterDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StatisticDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.OptionCounter;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

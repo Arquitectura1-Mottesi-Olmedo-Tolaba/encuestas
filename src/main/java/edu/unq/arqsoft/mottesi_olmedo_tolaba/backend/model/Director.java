@@ -50,8 +50,5 @@ public class Director extends PersistenceEntity {
 	public void setCredential(UserCredential credential) {
 		this.credential = credential;
 	}
-    
-    
-    
-    
+
 }

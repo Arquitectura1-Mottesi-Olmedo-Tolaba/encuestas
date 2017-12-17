@@ -35,7 +35,9 @@ public class StudentRest extends GenericRest<Student> {
 	@GET
 	@Path("/verify/{code}")
 	public Response verifyCode(@Context HttpServletRequest request, @PathParam("code") final String code) {
-		return this.getResponseGenerator().buildSuccessResponse(studentService.verifyCode(code));
+		return studentService.verifyCode(code) ? 
+				this.getResponseGenerator().buildSuccessResponse(true) 
+				: this.getResponseGenerator().buildErrorResponse(new RuntimeException("Codigo inexistente"));
 	}
 
 	@GET

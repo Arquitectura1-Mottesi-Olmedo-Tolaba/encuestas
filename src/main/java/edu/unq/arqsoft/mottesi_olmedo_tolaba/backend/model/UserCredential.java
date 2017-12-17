@@ -5,8 +5,6 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.StringValidator;
-
 @Entity
 @Table(name="users")
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -18,9 +16,7 @@ public class UserCredential extends PersistenceEntity {
 	private String password;
 
 	
-	public UserCredential() {
-		super();
-	}
+	public UserCredential() { }
 
     public UserCredential(String email, String password) {
         this.email = email;
@@ -45,10 +41,6 @@ public class UserCredential extends PersistenceEntity {
 
     public boolean isSameUser(UserCredential otherUser){
 		return this.getEmail().equals(otherUser.getEmail());
-	}
-	
-	public Boolean isWellFormed() {
-		return StringValidator.isValidString(email) && StringValidator.isValidString(password);
 	}
 
 }

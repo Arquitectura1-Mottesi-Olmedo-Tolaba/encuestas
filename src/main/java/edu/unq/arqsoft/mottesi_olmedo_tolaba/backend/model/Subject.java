@@ -16,19 +16,6 @@ public class Subject extends PersistenceEntity {
 	public Subject() {
 	}
 
-	public SubjectDTO toSubjectDTO() {
-		SubjectDTO dto = new SubjectDTO();
-		dto.setId(this.id);
-		dto.setName(this.name);
-		return dto;
-	}
-
-	public static Subject fromSubjectDTO(SubjectDTO dto) {
-		Subject subject = new Subject();
-		subject.setName(dto.getName());
-		return subject;
-	}
-
 	public Subject(String name) {
 		this.name = name;
 	}

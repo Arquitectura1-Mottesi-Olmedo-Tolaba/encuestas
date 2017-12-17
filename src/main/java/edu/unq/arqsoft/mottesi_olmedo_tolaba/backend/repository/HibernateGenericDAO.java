@@ -13,9 +13,6 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.pagination.PageRequest;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.pagination.PageResponse;
-
 @SuppressWarnings("unchecked")
 public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport implements GenericRepository<T>, Serializable {
 
@@ -111,22 +108,6 @@ public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport impleme
                return query.list();
            }
        });
-    }
-
-	/**
-	* Returns a page of items depending on the page size, the page number and a query.
-    * @param pageSize the total record in one page.
-    * @param pageNumber the page number starts from 0.
-    * @param hQuery the query to filter the entities.
-    */
-    public PageResponse<T> findByPage(PageRequest<T> pageRequest) {
-    	if (pageRequest.getQuery() != null) {
-    		List<T> result = (List<T>) this.findByPage(pageRequest.getPageNumber(), pageRequest.getPageSize(), pageRequest.getQuery());
-    		return new PageResponse<T>(result, count(pageRequest.getCountQuery()));
-    	} else {
-    		List<T> result = (List<T>) this.findByPage(pageRequest.getPageNumber(), pageRequest.getPageSize());
-    		return new PageResponse<T>(result, count());
-    	}
     }
 
 }

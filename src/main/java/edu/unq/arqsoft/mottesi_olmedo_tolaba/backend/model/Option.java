@@ -16,20 +16,6 @@ public class Option extends PersistenceEntity {
 	public String getDescription() {
 		return description;
 	}
-	
-	public OptionDTO toOptionDTO(){
-		OptionDTO dto = new OptionDTO();
-		dto.setId(this.getDescription());
-		dto.setDescription(this.getDescription());
-		return dto;
-	}
-	
-	public static Option fromOptionDTO(OptionDTO dto){
-		Option option = new Option();		
-		option.setDescription(dto.getDescription());
-		return option;
-	}
-	
 
 	public void setDescription(String description) {
 		this.description = description;

@@ -10,37 +10,39 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.JSONDateSerialize;
 
 public class TimeResponse {
 
-	@JsonSerialize(using = JSONDateSerialize.class)
-	@JsonDeserialize(using = JSONDateDeserialize.class)
-	private Date reservationTime;
+    @JsonSerialize(using = JSONDateSerialize.class)
+    @JsonDeserialize(using = JSONDateDeserialize.class)
+    private Date reservationTime;
 
-	@JsonSerialize(using = JSONDateSerialize.class)
-	@JsonDeserialize(using = JSONDateDeserialize.class)
-	private Date responseTime;
+    @JsonSerialize(using = JSONDateSerialize.class)
+    @JsonDeserialize(using = JSONDateDeserialize.class)
+    private Date responseTime;
 
-	public TimeResponse(Date reservationTime, Date responseTime) {
-		this.setReservationTime(reservationTime);
-		this.setResponseTime(responseTime);
-	}
+    public TimeResponse() { }
 
-	public Date getReservationTime() {
-		return reservationTime;
-	}
+    public TimeResponse(Date reservationTime, Date responseTime) {
+        this.setReservationTime(reservationTime);
+        this.setResponseTime(responseTime);
+    }
 
-	public void setReservationTime(Date reservationTime) {
-		this.reservationTime = reservationTime;
-	}
+    public Date getReservationTime() {
+        return reservationTime;
+    }
 
-	public Date getResponseTime() {
-		return responseTime;
-	}
+    public void setReservationTime(Date reservationTime) {
+        this.reservationTime = reservationTime;
+    }
 
-	public void setResponseTime(Date responseTime) {
-		this.responseTime = responseTime;
-	}
+    public Date getResponseTime() {
+        return responseTime;
+    }
 
-	public Date attentionTime() {
-		return new Date();
-	}
+    public void setResponseTime(Date responseTime) {
+        this.responseTime = responseTime;
+    }
+
+    public Date attentionTime() {
+        return new Date();
+    }
 
 }

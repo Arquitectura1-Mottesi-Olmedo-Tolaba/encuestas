@@ -20,13 +20,6 @@ public class StudentRepository extends HibernateGenericDAO<Student> implements G
 		this.setStudents(new LinkedList<Student>());
 	}
 	
-	@Transactional
-	public Student findByStudentId(Integer studentId) {
-		String query = "SELECT student FROM " + this.persistentClass.getName() + " student WHERE student.studentID = '" + studentId + "'";
-		List<Student> elems = (List<Student>) this.getHibernateTemplate().find(query);
-		return elems.isEmpty() ? null : elems.get(0);
-	}
-
 	@Override
 	public Class<Student> getDomainClass() {
 		return Student.class;

@@ -10,22 +10,11 @@
        
     <tx:annotation-driven transaction-manager="persistence.transactionManager"	proxy-target-class="true" />
 
-<!--
-		========================= GENERAL DEFINITIONS
-		=========================
-	-->
-	<!--
-		Configurer that replaces ${...} placeholders with values from
-		properties files
-	-->
-	<!-- (in this case, mail and JDBC related properties) -->
-	<bean id="persistence.propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean id="persistence.propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
 				<value>classpath*:META-INF/hibernate.properties</value>
 				<value>classpath*:META-INF/jdbc.properties</value>
-				<!-- <value>classpath*:META-INF/jdbc.MYSQL.properties</value> -->
 			</list>
 		</property>
 	</bean>
@@ -43,14 +32,9 @@
 
 	</bean>
 
-	<!--
-		Defines a global session factory that will be used by all modules.
-	-->
-<!-- 	<bean id="persistence.sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> -->
-		
-		<bean id="persistence.sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
+	<!-- Defines a global session factory that will be used by all modules. -->
+
+    <bean id="persistence.sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
 
 		<property name="dataSource" ref="persistence.dataSource" />
 <!--  
@@ -60,71 +44,55 @@
 
 		<property name="hibernateProperties">
 			<props>
-				<!--
-					Configuration generic properties. They are loaded from file
-					hibernate.properties
-				-->
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-
 				<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
-				<!-- Propiedades para la configuración de la cache de segundo nivel
-				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
-				<prop key="hibernate.cache.use_second_level_cache">false</prop>
-				<prop key="hibernate.cache.use_query_cache">true</prop> -->
+
+				<!-- Propiedades para la configuración de la cache de segundo nivel -->
+<!--
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                <prop key="hibernate.cache.use_second_level_cache">false</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+-->
 				<prop key="hibernate.connection.autocommit">false</prop>
-<!-- 				<prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop> -->
+<!--
+                <prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop>
+-->
 			</props>
 		</property>
 		
 		<property name="annotatedClasses">
-	     <list>
-
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student</value>
-	       
-	       
-	       
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Timeline</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.TimeResponse</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Role</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserCredential</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserData</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserProfile</value>
-	       
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Option</value>
-	       
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.SurveyMatch</value>
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey</value>
-	       
-     	   <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.OptionCounter</value>
-     
-    	   <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic</value>
-	       
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Director</value>
-	       
-	       <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.DegreeStudent</value>
-	       
-	       
-	     </list>
+            <list>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.TimeResponse</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Professor</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Subject</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Timeline</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserCredential</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Option</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.SurveyMatch</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.OptionCounter</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Statistic</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Director</value>
+                <value>edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.DegreeStudent</value>
+            </list>
 	   </property>
-		
 
 	</bean>
 
-
-<!-- Transaction manager for a single JDBC DataSource -->
 	<bean id="persistence.transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
-<!-- 		<property name="jdbcExceptionTranslator" ref="persistence.jdbcExceptionTranslator" /> -->
+<!--
+ 		<property name="jdbcExceptionTranslator" ref="persistence.jdbcExceptionTranslator" />
+-->
 	</bean>
 
 	<bean name="persistence.jdbcExceptionTranslator"
@@ -133,17 +101,5 @@
 			<ref bean="persistence.dataSource" />
 		</constructor-arg>
 	</bean>
-
-	
-	<!-- ________________________________________ -->
-	<!-- ________________________________________ -->
-	<!-- ___________ Beans  de negocio___________ -->
-	<!-- ________________________________________ -->
-	<!-- ________________________________________ -->
-	
-	<!-- bean id="persistence.brandRepository" class="edu.unq.desapp.groupA.backend.repository.BrandRepository" >
-		<property name="sessionFactory" ref="persistence.sessionFactory" />
-	</bean -->
-	
 
 </beans>

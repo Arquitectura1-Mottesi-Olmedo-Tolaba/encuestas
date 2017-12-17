@@ -9,7 +9,7 @@ import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.PersistenceEntity;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service.GenericService;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.utils.ResponseGenerator;
 
-public abstract class GenericRest <T extends PersistenceEntity> {
+public abstract class GenericRest<T extends PersistenceEntity> {
 
 	@Autowired
 	private ResponseGenerator responseGenerator;
@@ -17,13 +17,13 @@ public abstract class GenericRest <T extends PersistenceEntity> {
 	public abstract GenericService<T> getService();
 
 	public Response find(Long id) {
-		try{
+		try {
 			return responseGenerator.buildSuccessResponse(this.getService().find(id));
 		} catch (Exception e) {
 			return responseGenerator.buildErrorResponse(e);
 		}
 	}
-	
+
 	public Response findAll() {
 		try {
 			return responseGenerator.buildSuccessResponse(this.getService().findAll());
@@ -39,7 +39,7 @@ public abstract class GenericRest <T extends PersistenceEntity> {
 			return responseGenerator.buildErrorResponse(e);
 		}
 	}
-	
+
 	public Response update(T entity) {
 		try {
 			return responseGenerator.buildSuccessResponse(this.getService().update(entity));
@@ -55,14 +55,6 @@ public abstract class GenericRest <T extends PersistenceEntity> {
 		} catch (Exception e) {
 			return responseGenerator.buildErrorResponse(e);
 		}
-	}
-
-	public Response findByPage(Integer pageNumber, Integer pageSize) {
-		try {
-			return responseGenerator.buildSuccessResponse(getService().findByPage(pageNumber, pageSize));
-		} catch (Exception e) {
-			return responseGenerator.buildErrorResponse(e);
-		} 
 	}
 
 	public ResponseGenerator getResponseGenerator() {

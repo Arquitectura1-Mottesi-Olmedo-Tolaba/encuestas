@@ -11,12 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.IndexColumn;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurvey;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.SurveyMatchDTO;
 
 @Entity
 @Table(name = "surveys")
@@ -41,48 +38,27 @@ public class Survey extends PersistenceEntity {
 	@OneToOne
 	private AcademicOffer academicOffer;
 
-	public Student getStudent() {
-		return student;
-	}
+	public Survey() {}
 
-	public void setStudent(Student student) {
-		this.student = student;
-	}
-
-	public AcademicOffer getAcademicOffer() {
-		return academicOffer;
-	}
-
-	public void setAcademicOffer(AcademicOffer academicOffer) {
-		this.academicOffer = academicOffer;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public Survey() {
-	}
+    public Survey(List<SurveyMatch> surveyMatches, String code, Boolean wasAnswered, String message, Student student, AcademicOffer academicOffer) {
+        this();
+        this.surveyMatches = surveyMatches;
+        this.code = code;
+        this.wasAnswered = wasAnswered;
+        this.message = message;
+        this.student = student;
+        this.academicOffer = academicOffer;
+    }
 
 	public Survey(Student student, AcademicOffer academicOffer) {
-		this.student = student;
-		this.academicOffer = academicOffer;
-		this.code = UUID.randomUUID().toString();
-		this.wasAnswered = false;
-		this.surveyMatches = new ArrayList<>();
+	    this(new ArrayList<>(), generateSurveyCode(), false, "", student, academicOffer);
 	}
 
-	public SurveyDTO toSurveyDTO() {
-		SurveyDTO dto = new SurveyDTO();
-		List<SurveyMatchDTO> surveyMatchesDTO = new ArrayList<SurveyMatchDTO>();
-		for (SurveyMatch surveyMatch : surveyMatches) {
-			surveyMatchesDTO.add(surveyMatch.toSurveyMatchDTO());
-		}
-		dto.surveyMatches = surveyMatchesDTO;
-		return dto;
-	}
+    private static String generateSurveyCode() {
+        return UUID.randomUUID().toString();
+    }
 
-	public List<SurveyMatch> getSurveyMatches() {
+    public List<SurveyMatch> getSurveyMatches() {
 		return surveyMatches;
 	}
 
@@ -118,6 +94,22 @@ public class Survey extends PersistenceEntity {
 		this.message = message;
 	}
 
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public AcademicOffer getAcademicOffer() {
+        return academicOffer;
+    }
+
+    public void setAcademicOffer(AcademicOffer academicOffer) {
+        this.academicOffer = academicOffer;
+    }
+
 	public Survey update(StudentSurvey studentSurvey) {
 		this.updateSurveyMatches(studentSurvey.getSurveyMatches());
 		this.setWasAnswered(true);
@@ -140,4 +132,5 @@ public class Survey extends PersistenceEntity {
 		});
 		
 	}
+
 }

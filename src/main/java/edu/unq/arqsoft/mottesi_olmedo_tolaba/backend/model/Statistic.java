@@ -28,6 +28,13 @@ public class Statistic extends PersistenceEntity {
 	@IndexColumn(name = "length")
 	private List<OptionCounter> optionsCounter;
 
+	public Statistic() { }
+
+	public Statistic(Subject subject, List<OptionCounter> optionsCounter) {
+		this.subject = subject;
+		this.optionsCounter = optionsCounter;
+	}
+
 	public Subject getSubject() {
 		return subject;
 	}
@@ -48,12 +55,5 @@ public class Statistic extends PersistenceEntity {
 		return serialVersionUID;
 	}
 
-	public Statistic() {
-	}
-
-	public Statistic(Subject subject, List<OptionCounter> optionsCounter) {
-		this.subject = subject;
-		this.optionsCounter = optionsCounter;
-	}
 
 }
