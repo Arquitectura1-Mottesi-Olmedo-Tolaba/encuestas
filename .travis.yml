@@ -3,15 +3,15 @@ sudo: required
 jdk:
 - oraclejdk8
 script:
-- mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8 && mvn  test -B
+- mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8 && mvn  test
+  -B
 deploy:
   provider: heroku
   api_key:
-    secure: dHQqhxRNhD/I89EFAsibwaFAFjzjP1DmCJF9RNwm38ag76x9HujuOki5xVXpm3a9h7tu6rI1mcd8ZrE3u041IInHcztsg17mBdNcOsahp5j5yKrsEQUP0sX99o2x5SHZIqYa9AP7SRG9XkAZGn+Ye7VGB9rbwcYWMbcHmVUs5ducltm3IeHZbqcjLkMZOiWr/FitetaRqzIkSoDFmx3tYhEE2diX12SmquKx1WusqF8J8V+axreWWok5JWX85JF/gads4tsUZbTk60vvfSf3Fn5CEUYVe1PIPD8W6C7CWiJQOCTopitHRlvemKYR7qG1TB0DrkACGii8uvRjty30oc/vR9WssEb5C1YeL7zCRRRIkICy1YoQy1A26KD9Y2B7CKk3mI2I4dbl9qeHVTb/yZlvH6wEi+QNw0o6sAUUA1+tlUuuFUHvo6jeeuDM0Gu2QIkYS5OGyBJntrsV8rpWnJ+IWpTROT4P0JprXjUN7+ijPDOQW7OfugtR/l9QwQ4hE4Dpky7aK7JJLRSN2Gs4FzjaWccGKT8JUTWdQRqgLYC0pzZ07nAv3Cuo8rKnIqrsbD56BEPMQBzmoZtu7Oq9WgDZoP3S3wk/lgXSNGxgEU0TwiBw/UexJUlZxWzV+WQ5Na+txQaP1MhN3XF647vtJQ4Roc/kR/p7IAZL3dY3wE0=
+    secure: CCzp/1j/3pDIJDO9mQlGxA7rOPEw607RzKZnpLPFxvA88fHoHgj+c3PRiLO1+14Rq9/K+kPWFn9o7SD8/+4a5cUvOQcgth3p4FWV1OEotZGcS/Y9e6i5fm8oD4VAn3EjRLKq8xacZN6NudLn16HPeRsYAcdodpzpJitmidKFCGFZEL27t3DN4IDcpn2TKQLmWPxVCR8JHx1JJPHtI8lQ6DkVqQxuFpeqlKAqUKzP0VX+WM1Yb17GOe3gG6IQi4UZUvEHWxTSyyFI0v70+Z9wK1B6DMMsx7FIIud0KzmnZASAvi/4bggbF80pyLfTpxVrmqH8kPNa3BWL5kap9XjA6nmz9bI3DV1oMcioykBYNa/jGeMjQ7om6lDCGcpHPlzG+OFH0Hhx5xwNuKP6r8sjDJ9Nz9zXGhSldNyUCKAtMMgmNhCZeTfKm4EhWSzy3mm/vU/wUgH3bc3XfU1h9k44LyaeqyfA+L+TpgRObml+LTc2Bj68u5lb5Ypv6df/bXRLdwPw11Z92tIAslEzNUBm+VphRRP8UWpi9uQYoG9408/dmbgO3Nfqo3PoDJoORp8/U4t7ob2kzUx9bfEplvEAnvcq0NGo1cbzreIQbfIuvvaO2etvd9zwDNmfpj+hx2gR5gxza1Srd6fP/7X38MtKdb2P8lMKwuGj98dpMJT2KYQ=
   app: arq-soft-unq
   on:
     repo: Arquitectura1-Mottesi-Olmedo-Tolaba/encuestas-backend
 repo: Arquitectura1-Mottesi-Olmedo-Tolaba/encuestas-backend
-
 after_success:
 - mvn clean test jacoco:report coveralls:report
