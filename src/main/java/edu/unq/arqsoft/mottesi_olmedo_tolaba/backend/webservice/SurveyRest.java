@@ -1,9 +1,12 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.webservice;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +32,9 @@ public class SurveyRest  extends GenericRest<Survey> {
 	}
 
 	@GET
-	@Path("/codes")
-	public Response findCodes() {
-		return this.getResponseGenerator().buildSuccessResponse(this.surveyService.findCodes());
+	@Path("/codes/{idDegree}")
+	public Response findCodes(@Context HttpServletRequest request, @PathParam("idDegree") final Long idDegree) {
+		return this.getResponseGenerator().buildSuccessResponse(this.surveyService.findCodes(idDegree));
 	}
 
 }

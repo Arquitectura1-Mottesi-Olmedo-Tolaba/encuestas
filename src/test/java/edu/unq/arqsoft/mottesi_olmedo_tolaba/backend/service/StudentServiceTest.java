@@ -32,14 +32,14 @@ public class StudentServiceTest {
     
     @Test
     public void testVerifyCode(){
-    	String code = surveyService.findCodes().get(0);
+    	String code = surveyService.findCodes(1l).get(0);
     	assertTrue(service.verifyCode(code));
     	assertFalse(service.verifyCode("CODE"));
     }
     
     @Test
     public void testGetSurveyByCode(){
-    	String code = surveyService.findCodes().get(0);
+    	String code = surveyService.findCodes(1l).get(0);
     	StudentSurveyDTO studentSurveyDTO = service.getSurveyByCode(code);
     	assertEquals(studentSurveyDTO.getName(), "Tecnicatura Universitaria en Programacion Informatica");
     	assertEquals(studentSurveyDTO.getOffers().size(), 31, 0);
@@ -50,7 +50,7 @@ public class StudentServiceTest {
     
     @Test
     public void testCompleteSurvey(){
-    	String code = surveyService.findCodes().get(198);
+    	String code = surveyService.findCodes(2l).get(1);
     	
     	StudentSurveyDTO studentSurveyDTO = service.getSurveyByCode(code);
     	assertEquals(studentSurveyDTO.getName(), "Licenciatura en Biotecnología");

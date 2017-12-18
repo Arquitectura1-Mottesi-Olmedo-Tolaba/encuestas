@@ -109,8 +109,8 @@ public class SurveyService extends GenericService<Survey> {
         return options;
     }
 
-	public List<String> findCodes() {
-		return this.repository.findCodes();
+	public List<String> findCodes(Long idDegree) {
+		return this.repository.findCodes(idDegree);
 	}
 
 }

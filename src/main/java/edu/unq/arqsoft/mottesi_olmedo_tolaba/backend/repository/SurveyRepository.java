@@ -64,9 +64,20 @@ public class SurveyRepository extends HibernateGenericDAO<Survey> implements Gen
         return  query.uniqueResult() != null;
     }
 
-	public List<String> findCodes() {
-		String hql = "SELECT survey.code FROM Survey as survey";
-        Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
-        return query.list();
+	public List<String> findCodes(Long idDegree) {
+		String hql1 = "SELECT academicOffer.id FROM Degree as degree"
+				+ " inner join degree.academicOffers as academicOffer"
+				+ " where degree.id = :idDegree";
+		Query query1 = this.getSessionFactory().getCurrentSession().createQuery(hql1)
+        		.setParameter("idDegree", idDegree);
+		List<Long> academicOffers = query1.list();
+		String hql2 = "SELECT survey.code FROM Survey as survey"
+				+ " inner join survey.academicOffer as academicOffer"
+				+ " where academicOffer.active = :active"
+				+ " and academicOffer.id in (:academicOffers)";
+        Query query2 = this.getSessionFactory().getCurrentSession().createQuery(hql2)
+        		.setParameter("active", true)
+        		.setParameterList("academicOffers", academicOffers);
+        return query2.list();
 	}
 }

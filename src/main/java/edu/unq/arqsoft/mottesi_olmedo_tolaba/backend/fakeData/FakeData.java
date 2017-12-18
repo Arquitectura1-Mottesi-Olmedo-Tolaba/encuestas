@@ -1,5 +1,7 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.fakeData;
 
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentOfferDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.*;
 
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.stream.Collectors;
 public class FakeData {
 
     private  Integer studentIndex = 1000;
+    private Random random = new Random();
 
     public Degree degreeTPI(){
         List<Subject> subjects = this.subjects(this.subjectStringTpi());
@@ -27,6 +30,14 @@ public class FakeData {
         Degree degree = new Degree("Licenciatura en Biotecnología", subjects, academicOffers);
         return degree;
     }
+    
+    public Degree degreeArqNaval(){
+    	List<Subject> subjects = this.subjects(this.subjectStringArqNaval());
+        List<Professor> professors = this.professors();
+        List<AcademicOffer> academicOffers = this.academicOffers(subjects, professors);
+        Degree degree = new Degree("Arquitectura Naval", subjects, academicOffers);
+        return degree;
+    }
 
     /** STUDENTS **/
 
@@ -36,6 +47,10 @@ public class FakeData {
 
     public List<Student> studentsLicBio(){
         return this.students(this.studentsStringLICBIO());
+    }
+    
+    public List<Student> studentsArqNaval(){
+    	return this.students(this.studentsStringArqNaval());
     }
 
     private List<Student> students(List<String> studentsString) {
@@ -73,6 +88,18 @@ public class FakeData {
             "Ilene","Vallie","Kallie","Johnetta","Bobbye","Micaela","Tamar","Moon","Laurel","Delisa","Viva","Elza",
             "Devorah","Timothy","Arlette","Dominque","Lettie","Myra","Stephaine","Lai","Stephen","Tyra","Tammara",
             "Cory","Danica","Wilda","Elvera","Carma","Malinda","Natalie","Lisha");
+    }
+    
+    private List<String> studentsStringArqNaval(){
+    	return Arrays.asList("Jack", "Lewis", "Ryan", "Cameron", "James", "Andrew", "Liam", "Matthew", "Jamie",
+			"Callum", "Ross", "Jordan", "Daniel", "Kieran", "Connor", "Scott", "Kyle", "David", "Adam", "Dylan",
+			"Michael", "Ben", "Thomas", "Craig", "Nathan", "Sean", "John", "Aaron", "Calum", "Christopher", "Alexander",
+			"Robert", "Euan", "Joshua", "Declan", "Aidan", "Mark", "Robbie", "Luke", "Fraser", "Reece", "William", "Ewan",
+			"Joseph", "Paul", "Brandon", "Lee", "Owen", "Josh", "Samuel", "Finlay", "Stuart", "Rhys", "Stephen", "Rory",
+			"Jake", "Steven", "Sam", "Jay", "Benjamin", "Ethan", "Harry", "Shaun", "Aiden", "Darren", "Blair", "Marc", 
+			"Dean", "Taylor", "Angus", "Gregor", "Conor", "Jonathan", "Patrick", "Ciaran", "Greg", "Jason", "George", 
+			"Logan", "Peter", "Bradley", "Max", "Arran", "Mohammed", "Morgan", "Oliver", "Gary", "Murray", "Louis", 
+			"Martin", "Alan", "Alistair", "Grant", "Joe", "Keir", "Duncan", "Leon", "Mitchell", "Nicholas");
     }
 
     /** PROFESSORS **/
@@ -124,6 +151,15 @@ public class FakeData {
             "Ética y Legislación","Bioquímica II","Biología Molecular y Celular","Biofísica","Fundamentos de Inmunología",
             "Ingeniería Genética I","Bioinformática","Fisiología y Genética de Bacterias","Bases de Datos",
             "Orientación Genómica Funcional","Orientación Bases de Datos de Macromoléculas");
+    }
+    
+    private List<String> subjectStringArqNaval(){
+    	return Arrays.asList("Lectura y Escritura Académica", "Matemática", "Introducción al Conocimiento de la Física y la Química", "Álgebra y Geometría Analítica", "Química I",
+			"Análisis Matemático I", "Física I", "Intr. al Conoc. de la Física y la Química", "Estabilidad I", "Diseño Asistido", "Mecánica de Fluidos",
+			"Arquitectura Naval I", "Análisis Matemático II", "Análisis Matemático III", "Dibujo Naval", "Sistema de Representación", "Física II",
+			"Análisis Matemático II", "Química II", "Métodos Numéricos", "Geometría Descriptiva", "Taller de Dibujo y Maquetería", "Sistemas de Representación",
+			"Electrotecnia General", "Taller de Arquitectura Naval", "Arquitectura Naval I", "Análisis Matemático IV", "Álgebra Lineal", "Probabilidad y Estadística",
+			"Matemática Avanzada", "Física III");
     }
 
     /** ACADEMIC OFFERS **/
@@ -192,4 +228,18 @@ public class FakeData {
                             .orElseThrow(() -> new RuntimeException("No se encontro ninguna activa"));
         return new Survey(degreeStudent.getStudent(), currentAcademicOffer);
     }
+
+	public StudentSurvey createStudentSurvey(String code, StudentSurveyDTO surveyByCode) {
+		return new StudentSurvey(code, this.createSurveyMatches(surveyByCode.getOffers()), surveyByCode.getMessage());
+	}
+
+	private List<SurveyMatch> createSurveyMatches(List<StudentOfferDTO> offers) {
+		return offers.stream()
+				.map(offer -> new SurveyMatch(this.getRandomOption(offer.getOptions()), offer.getSubject()))
+				.collect(Collectors.toList());
+	}
+
+	private Option getRandomOption(List<Option> options) {
+		return options.get(random.nextInt(options.size()));
+	}
 }

@@ -33,9 +33,10 @@ public class AcademicOfferFactoryService {
         // Create degrees
 		Degree degreeTPI = fakeData.degreeTPI();
         Degree degreeLicBio = fakeData.degreeLICBIO();
+        Degree degreeArqNaval = fakeData.degreeArqNaval();
         
         // Create director
-        Director director = new Director(Arrays.asList(degreeTPI, degreeLicBio),new UserCredential("director@gmail.com", "director"));
+        Director director = new Director(Arrays.asList(degreeTPI, degreeLicBio, degreeArqNaval),new UserCredential("director@gmail.com", "director"));
 		directorService.save(director);
 
         // Create students
@@ -43,16 +44,28 @@ public class AcademicOfferFactoryService {
         studentsTpi.forEach(student -> studentService.save(student));
         List<Student> studentsLicBio = fakeData.studentsLicBio();
         studentsLicBio.forEach(student -> studentService.save(student));
-
+        List<Student> studentsArqNaval = fakeData.studentsArqNaval();
+        studentsTpi.forEach(student -> studentService.save(student));
+        
         // Create degreeStudents
         List<DegreeStudent> degreeStudentsTpi = fakeData.getDegreeStudentsOf(degreeTPI, studentsTpi);
         degreeStudentsTpi.forEach(degreeStudent -> degreeStudentService.save(degreeStudent));
         List<DegreeStudent> degreeStudentsLicBio = fakeData.getDegreeStudentsOf(degreeLicBio, studentsLicBio);
         degreeStudentsLicBio.forEach(degreeStudent -> degreeStudentService.save(degreeStudent));
+        List<DegreeStudent> degreeStudentsArqNaval = fakeData.getDegreeStudentsOf(degreeArqNaval, studentsArqNaval);
+        degreeStudentsArqNaval.forEach(degreeStudent -> degreeStudentService.save(degreeStudent));
 
         // Create Surveys for active academicOffer
         fakeData.surveysFor(degreeStudentsTpi).forEach(survey -> surveyService.save(survey));
         fakeData.surveysFor(degreeStudentsLicBio).forEach(survey -> surveyService.save(survey));
+        fakeData.surveysFor(degreeStudentsArqNaval).forEach(survey -> surveyService.save(survey));
+        
+        // Create StudentSurveys for ArqNaval
+        List<String> codesOfArqNaval = surveyService.findCodes(3l);
+        codesOfArqNaval.forEach(code -> {
+        	StudentSurvey studentSurvey = fakeData.createStudentSurvey(code, studentService.getSurveyByCode(code));
+        	studentService.completeSurvey(studentSurvey);
+        });
         
 	}
 	
