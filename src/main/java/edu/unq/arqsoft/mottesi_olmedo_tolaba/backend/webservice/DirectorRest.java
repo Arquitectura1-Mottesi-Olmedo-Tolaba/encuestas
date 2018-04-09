@@ -36,8 +36,15 @@ public class DirectorRest extends GenericRest<Director> {
 	@GET
 	@Path("/degreesFor/{id}")
 	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long directorID) {
-		Director director = directorService.find(directorID);
-		return this.getResponseGenerator().buildSuccessResponse(new DirectorDTO(director));
+		try {
+			Director director = directorService.find(directorID);
+			return this.getResponseGenerator().buildSuccessResponse(
+					new DirectorDTO(director));
+		} catch (Exception e) {
+			return this.getResponseGenerator().buildErrorResponse(
+					new RuntimeException(e.getMessage())
+				);
+		}
 	}
 
 	@POST

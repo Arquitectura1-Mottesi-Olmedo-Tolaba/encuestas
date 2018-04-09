@@ -36,5 +36,6 @@ public class SurveyRest  extends GenericRest<Survey> {
 	public Response findCodes(@Context HttpServletRequest request, @PathParam("idDegree") final Long idDegree) {
 		return this.getResponseGenerator().buildSuccessResponse(this.surveyService.findCodes(idDegree));
 	}
-
+		
+	
 }
