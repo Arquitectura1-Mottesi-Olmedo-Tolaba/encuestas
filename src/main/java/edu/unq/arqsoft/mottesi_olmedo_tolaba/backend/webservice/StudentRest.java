@@ -72,5 +72,6 @@ public class StudentRest extends GenericRest<Student> {
 			return this.getResponseGenerator().buildErrorResponse(new RuntimeException(e.getMessage()));
 		}
 	}
+	
 
 }

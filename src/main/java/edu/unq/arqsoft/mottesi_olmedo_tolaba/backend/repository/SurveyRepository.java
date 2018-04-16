@@ -80,4 +80,11 @@ public class SurveyRepository extends HibernateGenericDAO<Survey> implements Gen
         		.setParameterList("academicOffers", academicOffers);
         return query2.list();
 	}
+
+	public List<Survey> findByUser(Long userId) {
+		String query = "SELECT survey FROM Survey as survey " +
+				"WHERE survey.student = ? "; 
+		return (List<Survey>) this.getHibernateTemplate().find(query, userId );
+
+	}
 }

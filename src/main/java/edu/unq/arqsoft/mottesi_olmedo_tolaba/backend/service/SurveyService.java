@@ -26,7 +26,7 @@ public class SurveyService extends GenericService<Survey> {
 
 	@Autowired
 	private SurveyRepository repository;
-	
+		
 	@Autowired
 	private DegreeService degreeService;
 
@@ -72,12 +72,17 @@ public class SurveyService extends GenericService<Survey> {
 	@Transactional
     public StudentSurveyDTO getSurveyByCode(String code) {
         Survey survey = this.getByCode(code);
-        String degreeName = degreeService.getDegreeNameForAcademicOffer(survey.getAcademicOffer().getId());
-        Period period = survey.getAcademicOffer().getPeriod();
-		List<StudentOfferDTO> studentOfferDTOs = this.createStudentOfferDTOs(survey);
-        return new StudentSurveyDTO(degreeName, period, survey.getStudent(), studentOfferDTOs, survey.getMessage());
+        return this.surveyToDto(survey);
     }
-
+	
+	public StudentSurveyDTO surveyToDto(Survey survey){
+		String degreeName = degreeService.getDegreeNameForAcademicOffer(survey.getAcademicOffer().getId());
+	    Period period = survey.getAcademicOffer().getPeriod();
+		List<StudentOfferDTO> studentOfferDTOs = this.createStudentOfferDTOs(survey);
+	    return new StudentSurveyDTO(degreeName, period, survey.getStudent(), studentOfferDTOs, survey.getMessage());
+	}
+	
+	
 	private List<StudentOfferDTO> createStudentOfferDTOs(Survey survey) {
 		return survey.getAcademicOffer().getOffers().stream()
 				.map(offer -> this.createStudentOfferDTO(offer, survey))
@@ -111,6 +116,15 @@ public class SurveyService extends GenericService<Survey> {
 
 	public List<String> findCodes(Long idDegree) {
 		return this.repository.findCodes(idDegree);
+	}
+
+	public List<StudentSurveyDTO> findByUser(Long userId) {
+		List<Survey> surveys = this.repository.findByUser(userId);
+		List<StudentSurveyDTO> dtos = new ArrayList<StudentSurveyDTO>();
+		for (Survey survey : surveys){
+			dtos.add(this.surveyToDto(survey));
+		}
+		return null;
 	}
 
 }
