@@ -16,25 +16,26 @@ Repo para arquitectura de software Mottessi - Olmedo -Tobala
 	- login
 	- DirectorRest
 
-* GET -> /directors/degreesFor/{idDirector}
+* GET -> /directors/{idDirector}/degrees
 	- degrees para el director
 	- DirectorRest
 
-# Rest API Studnent
+# Rest API Survey
 
-* GET -> /students/verify/{studentSurveyCode}
+
+* GET -> surveys/verify/{studentSurveyCode}
 	- verifica la existencia del codigo
-	- StudentRest
+	- SurveyRest
 
-* GET -> /students/getSurveyByCode/{studentSurveyCode}
+* GET -> /surveys/{studentSurveyCode}
 	- trae la oferta para ese codigo
-	- StudentRest
+	- SurveyRest
 
-* POST -> /services/students/save
+* POST -> /services/surveys
 	- envia la oferta completada por el estudiante
-	- StudentRest
+	- SurveyRest
 
-# Rest API Studnent codes
+# Rest API Student codes
 
 * GET -> /surveys/codes/{idDegree}
 	- para ver los codigos de los estudiantes de la carrera pasado como parametro
