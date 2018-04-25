@@ -11,10 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentOfferDTO;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.AcademicOffer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Course;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Offer;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Option;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Period;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.StudentSurvey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Survey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.SurveyMatch;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.repository.SurveyRepository;
@@ -29,6 +31,9 @@ public class SurveyService extends GenericService<Survey> {
 		
 	@Autowired
 	private DegreeService degreeService;
+	
+	@Autowired
+	private AcademicOfferService academicOfferService;
 
 	public SurveyService() {}
 	
@@ -125,6 +130,15 @@ public class SurveyService extends GenericService<Survey> {
 			dtos.add(this.surveyToDto(survey));
 		}
 		return null;
+	}
+	
+	@Transactional
+	public void completeSurvey(StudentSurvey studentSurvey) {
+		Survey currentSurvey = this.getByCode(studentSurvey.getCode());
+		AcademicOffer academicOffer = currentSurvey.getAcademicOffer().updateStatistics(currentSurvey, studentSurvey.getSurveyMatches());
+		academicOfferService.update(academicOffer);
+		Survey updatedSurvey = currentSurvey.update(studentSurvey);
+		this.update(updatedSurvey);
 	}
 
 }

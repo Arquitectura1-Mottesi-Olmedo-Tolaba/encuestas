@@ -15,17 +15,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentOfferDTO;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.StudentSurvey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.dto.StudentSurveyDTO;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.StudentSurvey;
 import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.SurveyMatch;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "test")
 @ContextConfiguration({ "/META-INF/spring-persistence-context.xml", "/META-INF/spring-services-context.xml" })
 public class StudentServiceTest {
-	
-    @Autowired
-    private StudentService service;
     
     @Autowired
 	private SurveyService surveyService;
@@ -33,14 +30,14 @@ public class StudentServiceTest {
     @Test
     public void testVerifyCode(){
     	String code = surveyService.findCodes(1l).get(0);
-    	assertTrue(service.verifyCode(code));
-    	assertFalse(service.verifyCode("CODE"));
+    	assertTrue(surveyService.verifyCode(code));
+    	assertFalse(surveyService.verifyCode("CODE"));
     }
     
     @Test
     public void testGetSurveyByCode(){
     	String code = surveyService.findCodes(1l).get(0);
-    	StudentSurveyDTO studentSurveyDTO = service.getSurveyByCode(code);
+    	StudentSurveyDTO studentSurveyDTO = surveyService.getSurveyByCode(code);
     	assertEquals(studentSurveyDTO.getName(), "Tecnicatura Universitaria en Programacion Informatica");
     	assertEquals(studentSurveyDTO.getOffers().size(), 31, 0);
     	assertEquals(studentSurveyDTO.getMessage(), "");
@@ -52,7 +49,7 @@ public class StudentServiceTest {
     public void testCompleteSurvey(){
     	String code = surveyService.findCodes(2l).get(1);
     	
-    	StudentSurveyDTO studentSurveyDTO = service.getSurveyByCode(code);
+    	StudentSurveyDTO studentSurveyDTO = surveyService.getSurveyByCode(code);
     	assertEquals(studentSurveyDTO.getName(), "Licenciatura en Biotecnología");
     	assertEquals(studentSurveyDTO.getOffers().size(), 31, 0);
     	assertEquals(studentSurveyDTO.getMessage(), "");
@@ -61,9 +58,9 @@ public class StudentServiceTest {
     	
     	StudentSurvey studentSurvey = new StudentSurvey(code, this.generateSurveyMatches(studentSurveyDTO.getOffers()), "hello");
     	
-    	service.completeSurvey(studentSurvey);
+    	surveyService.completeSurvey(studentSurvey);
     	
-    	studentSurveyDTO = service.getSurveyByCode(code);
+    	studentSurveyDTO = surveyService.getSurveyByCode(code);
     	assertEquals(studentSurveyDTO.getName(), "Licenciatura en Biotecnología");
     	assertEquals(studentSurveyDTO.getOffers().size(), 31, 0);
     	assertEquals(studentSurveyDTO.getMessage(), "hello");

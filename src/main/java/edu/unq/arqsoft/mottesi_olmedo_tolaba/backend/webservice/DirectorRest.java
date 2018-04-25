@@ -33,8 +33,9 @@ public class DirectorRest extends GenericRest<Director> {
 		return directorService;
 	}
 
+	///degreesFor/
 	@GET
-	@Path("/degreesFor/{id}")
+	@Path("/{id}/degrees")
 	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long directorID) {
 		try {
 			Director director = directorService.find(directorID);

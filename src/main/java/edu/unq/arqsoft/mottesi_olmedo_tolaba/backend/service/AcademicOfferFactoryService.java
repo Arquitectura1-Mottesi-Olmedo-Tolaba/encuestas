@@ -3,11 +3,17 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.service;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.fakeData.FakeData;
-import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.fakeData.FakeData;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Degree;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.DegreeStudent;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Director;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.Student;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.StudentSurvey;
+import edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model.UserCredential;
 
 @Transactional
 @Service
@@ -63,8 +69,8 @@ public class AcademicOfferFactoryService {
         // Create StudentSurveys for ArqNaval
         List<String> codesOfArqNaval = surveyService.findCodes(3l);
         codesOfArqNaval.forEach(code -> {
-        	StudentSurvey studentSurvey = fakeData.createStudentSurvey(code, studentService.getSurveyByCode(code));
-        	studentService.completeSurvey(studentSurvey);
+        	StudentSurvey studentSurvey = fakeData.createStudentSurvey(code, surveyService.getSurveyByCode(code));
+        	surveyService.completeSurvey(studentSurvey);
         });
         
 	}
