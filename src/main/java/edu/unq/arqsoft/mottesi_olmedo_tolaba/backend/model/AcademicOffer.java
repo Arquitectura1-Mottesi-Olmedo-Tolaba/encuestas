@@ -119,18 +119,18 @@ public class AcademicOffer extends PersistenceEntity {
 	}
 
 	private void doStatistics(List<SurveyMatch> surveyMatches) {
-		this.statistics.forEach(statistic -> {
-			SurveyMatch currentSurveyMatch = surveyMatches.stream()
-				.filter(surveyMatch -> surveyMatch.getSubject().getName().equals(statistic.getSubject().getName()))
-				.findFirst()
-				.orElseThrow(() -> new RuntimeException("No se encontro subject"));
+		surveyMatches.forEach(surveyMatch -> {
+			Statistic statistic = this.statistics.stream().filter(sta -> sta.getSubject().getName().equals(surveyMatch.getSubject().getName()))
+					.findFirst()
+					.orElseThrow(() -> new RuntimeException("No se encontro materia"));
 			OptionCounter currentOptionCounter = statistic.getOptionsCounter().stream()
-				.filter(optionCounter -> optionCounter.getDescription().equals(currentSurveyMatch.getOption().getDescription()))
-				.findFirst()
-				.orElseThrow(() -> new RuntimeException("No se encontro opcion"));
+					.filter(optionCounter -> optionCounter.getDescription().equals(surveyMatch.getOption().getDescription()))
+					.findFirst()
+					.orElseThrow(() -> new RuntimeException("No se encontro opcion"));
 			currentOptionCounter.increase();
-		});		
+		});
 	}
+
 
 	private void undoStatistics(Survey currentSurvey) {
 		if(currentSurvey.getWasAnswered()){
@@ -139,17 +139,16 @@ public class AcademicOffer extends PersistenceEntity {
 	}
 
 	private void runUndoStatistics(Survey currentSurvey) {
-		this.statistics.forEach(statistic -> {
-			SurveyMatch currentSurveyMatch = currentSurvey.getSurveyMatches().stream()
-					.filter(surveyMatch -> surveyMatch.getSubject().getName().equals(statistic.getSubject().getName()))
-				.findFirst()
-				.orElseThrow(() -> new RuntimeException("No se encontro subject"));
+		currentSurvey.getSurveyMatches().stream().forEach(surveyMatch -> {
+			Statistic statistic = this.statistics.stream().filter(sta -> sta.getSubject().getName().equals(surveyMatch.getSubject().getName()))
+					.findFirst()
+					.orElseThrow(() -> new RuntimeException("No se encontro materia"));
 			OptionCounter currentOptionCounter = statistic.getOptionsCounter().stream()
-				.filter(optionCounter -> optionCounter.getDescription().equals(currentSurveyMatch.getOption().getDescription()))
-				.findFirst()
-				.orElseThrow(() -> new RuntimeException("No se encontro opcion"));
+					.filter(optionCounter -> optionCounter.getDescription().equals(surveyMatch.getOption().getDescription()))
+					.findFirst()
+					.orElseThrow(() -> new RuntimeException("No se encontro opcion"));
 			currentOptionCounter.decrease();
-		});		
+		});
 	}
 	
 	
