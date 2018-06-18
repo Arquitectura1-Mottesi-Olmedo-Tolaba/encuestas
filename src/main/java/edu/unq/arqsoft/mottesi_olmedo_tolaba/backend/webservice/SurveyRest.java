@@ -49,24 +49,6 @@ public class SurveyRest  extends GenericRest<Survey> {
 		}
 	
 	}
-
-	
-	@GET
-	@Path("/{id}")
-	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
-		return super.find(id);
-		/*
-		try {
-			StudentSurveyDTO dto = surveyService.getSurveyByCode(code);
-			return this.getResponseGenerator().buildSuccessResponse(dto);
-		} catch (Exception e) {
-			return this.getResponseGenerator().buildErrorResponse(
-					new RuntimeException(e.getMessage())
-				);
-		}
-		*/
-	
-	}
 	
 	@GET
 	@Path("/verify/{code}")
