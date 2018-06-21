@@ -135,8 +135,8 @@ public class SurveyService extends GenericService<Survey> {
 	@Transactional
 	public void completeSurvey(StudentSurvey studentSurvey) {
 		Survey currentSurvey = this.getByCode(studentSurvey.getCode());
-		AcademicOffer academicOffer = currentSurvey.getAcademicOffer().updateStatistics(currentSurvey, studentSurvey.getSurveyMatches());
-		academicOfferService.update(academicOffer);
+		//AcademicOffer academicOffer = currentSurvey.getAcademicOffer().updateStatistics(currentSurvey, studentSurvey.getSurveyMatches());
+		//academicOfferService.update(academicOffer);
 		Survey updatedSurvey = currentSurvey.update(studentSurvey);
 		this.update(updatedSurvey);
 	}

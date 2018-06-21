@@ -27,7 +27,7 @@ public class FakeData {
         List<Subject> subjects = this.subjects(this.subjectStringLICBIO());
         List<Professor> professors = this.professors();
         List<AcademicOffer> academicOffers = this.academicOffers(subjects, professors);
-        Degree degree = new Degree("Licenciatura en Biotecnología", subjects, academicOffers);
+        Degree degree = new Degree("Licenciatura en Biotecnologia", subjects, academicOffers);
         return degree;
     }
     
@@ -111,14 +111,14 @@ public class FakeData {
     }
 
     private List<String> professorsString() {
-        return Arrays.asList("ACEVEDO JHONG, DANIEL", "AGURTO RONDOY, MIGUELVICENTE", "ALCALÁ NEGRÓN, CHRISTIAN NELSON",
+        return Arrays.asList("ACEVEDO JHONG, DANIEL", "AGURTO RONDOY, MIGUELVICENTE", "ALCALa NEGRoN, CHRISTIAN NELSON",
             "ALMORA HERNANDEZ, RAUL EDUARDO", "ALOSILLA VELAZCO VERA, JORGE ", "ALVA CAMPOS, VICTOR",
-            "AREVALO LOPEZ, JAVIER", "ARIAS HERNANDEZ, ROSARIO", "ARROYO RAMÍREZ, EFRAÍN ",
-            "ALOCEN BARRERA, MARCO TULIO", "BAIOCCHI URETA, CESAR", "BAYLÓN ROJAS, ISELA FLOR",
+            "AREVALO LOPEZ, JAVIER", "ARIAS HERNANDEZ, ROSARIO", "ARROYO RAMiREZ, EFRAiN ",
+            "ALOCEN BARRERA, MARCO TULIO", "BAIOCCHI URETA, CESAR", "BAYLoN ROJAS, ISELA FLOR",
             "BEDOYA CASTILLO, LEONCIA", "BEDREGAL CANALES, LUZ MARINA", "BEJAR TORRES, RAMIRO ALBERTO",
             "BENAVIDES ESPEJO, JAVIER", "BOZA SOLIS, NELSON", "CALLE BETANCOURT, CIELITO MERCEDES",
             "CARAZA VILLEGAS, ISABEL FLORISA", "CARRERA ABANTO, GIZELLA", "CARRILLO SEGURA, ESTALINS",
-            "CARRIÓN NEIRA, JORGE AUGUSTO", "CASAPIA VALDIVIA, GUILLERMO", "CHANCOS MENDOZA, ZARITA",
+            "CARRIoN NEIRA, JORGE AUGUSTO", "CASAPIA VALDIVIA, GUILLERMO", "CHANCOS MENDOZA, ZARITA",
             "CHIRINOS LACOTERA, CARLOS", "CORES MORENO, DORIS", "CORTEZ LOZANO, MARIBEL CORINA",
             "CRISPIN QUISPE, ANGEL", "DE LOAYZA CONTERNO, ANTONIO");
     }
@@ -130,36 +130,36 @@ public class FakeData {
     }
 
     private List<String> subjectStringTpi() {
-        return Arrays.asList("Lectura y escritura académica", "Matemática", "Elementos de programación y lógica",
-            "Introducción a la Programación", "Organización de Computadoras", "Matemática I",
-            "Programación con Objetos I", "Bases de Datos", "Estructuras de Datos", "Programación con Objetos II",
-            "Redes de Computadoras", "Sistemas Operativos", "Programación Concurrente", "Matemática II",
-            "Elementos de Ingeniería de Software", "Construcción de Interfaces de Usuario", "Estrategias de Persistencia",
-            "Programación Funcional", "Desarrollo de Aplicaciones", "Laboratorio de Sistemas Operativos y Redes",
-            "Seguridad Informática", "Bases de Datos II", "Participación y Gestión en Proyectos de Software Libre",
-            "Introducción a las Arquitecturas de Software", "Programación con Objetos III",
-            "Introducción a la Bioinformática", "Políticas Públicas en la Sociedad de la Información y la Era Digital",
-            "Sistemas de Información Geográfica", "Herramientas Declarativas en Programación",
-            "Introducción al Desarrollo de Videojuegos", "Derechos de Autor y Derechos de Copia en la Era Digital");
+        return Arrays.asList("Lectura y escritura academica", "Matematica", "Elementos de programacion y logica",
+            "Introduccion a la Programacion", "Organizacion de Computadoras", "Matematica I",
+            "Programacion con Objetos I", "Bases de Datos", "Estructuras de Datos", "Programacion con Objetos II",
+            "Redes de Computadoras", "Sistemas Operativos", "Programacion Concurrente", "Matematica II",
+            "Elementos de Ingenieria de Software", "Construccion de Interfaces de Usuario", "Estrategias de Persistencia",
+            "Programacion Funcional", "Desarrollo de Aplicaciones", "Laboratorio de Sistemas Operativos y Redes",
+            "Seguridad Informatica", "Bases de Datos II", "Participacion y Gestion en Proyectos de Software Libre",
+            "Introduccion a las Arquitecturas de Software", "Programacion con Objetos III",
+            "Introduccion a la Bioinformatica", "Politicas Publicas en la Sociedad de la Informacion y la Era Digital",
+            "Sistemas de Informacion Geografica", "Herramientas Declarativas en Programacion",
+            "Introduccion al Desarrollo de Videojuegos", "Derechos de Autor y Derechos de Copia en la Era Digital");
     }
 
     private List<String> subjectStringLICBIO(){
-        return Arrays.asList("Lectura y escritura académica","Matemática","Elementos de programación y lógica","Análisis Matemático I",
-            "Algebra y Geometría Analítica","Biología General","Química I","Análisis Matemático II" ,"Química Orgánica I",
-            "Introducción a la programación","Inglés","Cálculo Avanzado","Estructura de Datos","Bioquímica I","Probabilidad y Estadística",
-            "Taller de Trabajo Intelectual","Elementos de Física","Algoritmos","Taller de Trabajo Universitario","Estadística Avanzada",
-            "Ética y Legislación","Bioquímica II","Biología Molecular y Celular","Biofísica","Fundamentos de Inmunología",
-            "Ingeniería Genética I","Bioinformática","Fisiología y Genética de Bacterias","Bases de Datos",
-            "Orientación Genómica Funcional","Orientación Bases de Datos de Macromoléculas");
+        return Arrays.asList("Lectura y escritura academica","Matematica","Elementos de programacion y logica","Analisis Matematico I",
+            "Algebra y Geometria Analitica","Biologia General","Quimica I","Analisis Matematico II" ,"Quimica Organica I",
+            "Introduccion a la programacion","Ingles","Calculo Avanzado","Estructura de Datos","Bioquimica I","Probabilidad y Estadistica",
+            "Taller de Trabajo Intelectual","Elementos de Fisica","Algoritmos","Taller de Trabajo Universitario","Estadistica Avanzada",
+            "etica y Legislacion","Bioquimica II","Biologia Molecular y Celular","Biofisica","Fundamentos de Inmunologia",
+            "Ingenieria Genetica I","Bioinformatica","Fisiologia y Genetica de Bacterias","Bases de Datos",
+            "Orientacion Genomica Funcional","Orientacion Bases de Datos de Macromoleculas");
     }
     
     private List<String> subjectStringArqNaval(){
-    	return Arrays.asList("Lectura y Escritura Académica", "Matemática", "Introducción al Conocimiento de la Física y la Química", "Álgebra y Geometría Analítica", "Química I",
-			"Análisis Matemático I", "Física I", "Intr. al Conoc. de la Física y la Química", "Estabilidad I", "Diseño Asistido", "Mecánica de Fluidos",
-			"Arquitectura Naval I", "Análisis Matemático II", "Análisis Matemático III", "Dibujo Naval", "Sistema de Representación", "Física II",
-			"Análisis Matemático II", "Química II", "Métodos Numéricos", "Geometría Descriptiva", "Taller de Dibujo y Maquetería", "Sistemas de Representación",
-			"Electrotecnia General", "Taller de Arquitectura Naval", "Arquitectura Naval I", "Análisis Matemático IV", "Álgebra Lineal", "Probabilidad y Estadística",
-			"Matemática Avanzada", "Física III");
+    	return Arrays.asList("Lectura y Escritura Academica", "Matematica", "Introduccion al Conocimiento de la Fisica y la Quimica", "algebra y Geometria Analitica", "Quimica I",
+			"Analisis Matematico I", "Fisica I", "Intr. al Conoc. de la Fisica y la Quimica", "Estabilidad I", "Diseño Asistido", "Mecanica de Fluidos",
+			"Arquitectura Naval I", "Analisis Matematico II", "Analisis Matematico III", "Dibujo Naval", "Sistema de Representacion", "Fisica II",
+			"Analisis Matematico II", "Quimica II", "Metodos Numericos", "Geometria Descriptiva", "Taller de Dibujo y Maqueteria", "Sistemas de Representacion",
+			"Electrotecnia General", "Taller de Arquitectura Naval", "Arquitectura Naval I", "Analisis Matematico IV", "algebra Lineal", "Probabilidad y Estadistica",
+			"Matematica Avanzada", "Fisica III");
     }
 
     /** ACADEMIC OFFERS **/
