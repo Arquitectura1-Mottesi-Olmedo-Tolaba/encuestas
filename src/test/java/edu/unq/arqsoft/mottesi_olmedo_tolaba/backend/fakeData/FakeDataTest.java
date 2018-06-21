@@ -32,7 +32,7 @@ public class FakeDataTest {
     @Test
     public void testDegreeLICBIO(){
         Degree degree = new FakeData().degreeLICBIO();
-        assertEquals(degree.getName(), "Licenciatura en Biotecnología");
+        assertEquals(degree.getName(), "Licenciatura en Biotecnologia");
         assertEquals(degree.getSubjects().size(), 31);
         assertEquals(degree.getAcademicOffers().size(), 2);
 
