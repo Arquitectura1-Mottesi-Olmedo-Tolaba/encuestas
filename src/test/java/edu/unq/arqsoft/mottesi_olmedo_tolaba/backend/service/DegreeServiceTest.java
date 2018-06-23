@@ -20,15 +20,15 @@ public class DegreeServiceTest {
     @Test
     public void testGetDegreeName(){
     	assertEquals(degreeService.getDegreeName(1l), "Tecnicatura Universitaria en Programacion Informatica");
-    	assertEquals(degreeService.getDegreeName(2l), "Licenciatura en Biotecnología");
+    	assertEquals(degreeService.getDegreeName(2l), "Licenciatura en Biotecnologia");
     }
     
     @Test
     public void testGetDegreeNameForAcademicOffer(){
     	assertEquals(degreeService.getDegreeNameForAcademicOffer(1l), "Tecnicatura Universitaria en Programacion Informatica");
     	assertEquals(degreeService.getDegreeNameForAcademicOffer(2l), "Tecnicatura Universitaria en Programacion Informatica");
-    	assertEquals(degreeService.getDegreeNameForAcademicOffer(3l), "Licenciatura en Biotecnología");
-    	assertEquals(degreeService.getDegreeNameForAcademicOffer(4l), "Licenciatura en Biotecnología");
+    	assertEquals(degreeService.getDegreeNameForAcademicOffer(3l), "Licenciatura en Biotecnologia");
+    	assertEquals(degreeService.getDegreeNameForAcademicOffer(4l), "Licenciatura en Biotecnologia");
     }
 
 }

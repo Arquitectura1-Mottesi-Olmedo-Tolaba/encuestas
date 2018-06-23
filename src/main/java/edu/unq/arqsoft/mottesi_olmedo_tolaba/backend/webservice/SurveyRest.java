@@ -1,5 +1,11 @@
 package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.webservice;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -8,9 +14,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.StreamingOutput;
 
+import org.hsqldb.util.CSVWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,6 +84,33 @@ public class SurveyRest  extends GenericRest<Survey> {
 		return this.getResponseGenerator().buildSuccessResponse(
 				this.surveyService.findCodes(idDegree));
 	}
+	
+	@GET
+	@Path("/codesCSV")
+	@Produces({"text/csv"})
+	public Response retrieveCSV(@Context HttpServletRequest request) throws FileNotFoundException {
+		File file = new File("codes.csv");
+        PrintWriter pw = new PrintWriter(file);
+        StringBuilder sb = new StringBuilder();
+        sb.append("codes");        
+        sb.append('\n');
+        List <String> codes = this.surveyService.findCodes(new Long(1));
+        for (String elem: codes) {
+        	sb.append(elem);
+        	sb.append('\n');
+        }
+        pw.write(sb.toString());
+        pw.close();
+        
+        ResponseBuilder response = Response.ok((Object) file);
+        //response("application/x-msexcel"); 
+        response.header("Content-Disposition","attachment; filename=codes.csv");      
+        return response.build();
+        
+        
+	}
+	
+	
 		
 	@GET
 	@Path("/byUser/{userId}")

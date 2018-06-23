@@ -2,6 +2,7 @@ package edu.unq.arqsoft.mottesi_olmedo_tolaba.backend.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -115,21 +116,41 @@ public class Survey extends PersistenceEntity {
 		this.setMessage(studentSurvey.getMessage());
 		return this;
 	}
+	
+	private Optional<SurveyMatch> getMatchForSubject(SurveyMatch sm, List<SurveyMatch> surveyMatchList){
+		return surveyMatches.stream()
+		.filter(surveyMatch -> 
+			surveyMatch.hasSameSubject(sm)).findFirst();
+	}
 
 	private void updateSurveyMatches(List<SurveyMatch> surveyMatches) {
-		if(this.surveyMatches.isEmpty()){ 
+		if(! this.surveyMatches.isEmpty()){ 
 			this.setSurveyMatches(surveyMatches);
 			return;
 		}
+		/*
+		List<SurveyMatch> toRemove = new ArrayList<SurveyMatch>();
+		List<SurveyMatch> toAdd = new ArrayList<SurveyMatch>();
+		
+		for (SurveyMatch currentSurveyMatch : this.surveyMatches){
+			Optional<SurveyMatch> opSurvetMatch = this.getMatchForSubject(currentSurveyMatch, surveyMatches);
+			if (opSurvetMatch.isPresent()){
+				currentSurveyMatch.setOption(opSurvetMatch.get().getOption())
+				currentSurveyMatch
+			}
+			
+		}
+		
 		this.surveyMatches.forEach(currentSurveyMatch -> {
 			SurveyMatch updated = surveyMatches.stream()
 					.filter(updateSurveyMatch -> 
-						updateSurveyMatch.getSubject().getName().equals(currentSurveyMatch.getSubject().getName()))
+						updateSurveyMatch.getSubject().getName().equals
+						(currentSurveyMatch.getSubject().getName()))
 					.findFirst()
 					.orElseThrow(() -> new RuntimeException("No se encontro la materia"));
 			currentSurveyMatch.getOption().setDescription(updated.getOption().getDescription());
 		});
-		
+		*/
 	}
 
 }

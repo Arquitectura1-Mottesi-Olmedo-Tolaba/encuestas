@@ -44,5 +44,9 @@ public class SurveyMatch extends PersistenceEntity {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	public Boolean hasSameSubject(SurveyMatch other){
+		return this.subject.getName().equals(other.subject.getName());
+	}
 
 }
