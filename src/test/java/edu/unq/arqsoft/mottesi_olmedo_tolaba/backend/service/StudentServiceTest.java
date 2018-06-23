@@ -61,7 +61,7 @@ public class StudentServiceTest {
     	surveyService.completeSurvey(studentSurvey);
     	
     	studentSurveyDTO = surveyService.getSurveyByCode(code);
-    	assertEquals(studentSurveyDTO.getName(), "Licenciatura en Biotecnología");
+    	assertEquals(studentSurveyDTO.getName(), "Licenciatura en Biotecnologia");
     	assertEquals(studentSurveyDTO.getOffers().size(), 31, 0);
     	assertEquals(studentSurveyDTO.getMessage(), "hello");
     	assertEquals(studentSurveyDTO.getPeriod().getYear(), 2017, 0);
