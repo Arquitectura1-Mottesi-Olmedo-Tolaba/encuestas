@@ -26,6 +26,7 @@ public class Survey extends PersistenceEntity {
 	@IndexColumn(name = "length")
 	private List<SurveyMatch> surveyMatches;
 
+	@IndexColumn(name = "code")
 	private String code;
 
 	private Boolean wasAnswered;
